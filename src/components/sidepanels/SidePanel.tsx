@@ -6,10 +6,13 @@ type Props = {
     angle: number
     setAngle: (val: number) => void
     colors: ColorStop[]
-    setColors: (colors: ColorStop[]) => void;
+    setColors: (colors: ColorStop[]) => void
+    selectedLayout: number
+    setSelectedLayout: (index: number) => void
+    layoutIcons: string[]
 }
 
-export default function Sidebar({ angle, setAngle, colors }: Props) {
+export default function SidePanel({ angle, setAngle, colors, selectedLayout, layoutIcons }: Props) {
     return (
         <div className="w-[400px] h-full bg-panel-bg-color p-5 flex flex-col gap-3 border-none">
             <SettingPanel 
@@ -20,7 +23,9 @@ export default function Sidebar({ angle, setAngle, colors }: Props) {
                     throw new Error('Function not implemented.')
                 } }
             />
-            <LayoutPanel />
+            <LayoutPanel 
+                layoutIcons={layoutIcons}
+            />
         </div>
     )
 }

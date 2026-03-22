@@ -1,12 +1,21 @@
 import { useState } from 'react'
-import Sidebar from './components/sidepanels/SidePanel'
 import PreviewCanvas from './components/PreviewCanvas'
+import SidePanel from './components/sidepanels/SidePanel'
 
 export type ColorStop = {
   id: string
   color: string
   ratio: number
 }
+
+// レイアウトのアイコンのパスを定義
+const layoutIcons = Object.values(
+  import.meta.glob<{ default: string }>(
+      './assets/layouts/layout*.svg',
+      { eager: true}
+  )
+).map((mod) => mod.default)
+
 
 function App() {
   const [angle, setAngle] = useState(0)
@@ -16,15 +25,25 @@ function App() {
     { id: '3', color: '#c984c0', ratio: 20 },
   ])
 
+  const [selectedLayout, setSelectedLayout] = useState(0)
+
   return (
     <div className="flex h-screen w-screen bg-app-bg-color text-text-color font-sans overflow-hidden">
-      <Sidebar
+      <SidePanel
         angle={angle}
         setAngle={setAngle}
         colors={colors}
         setColors={setColors}
+        selectedLayout={selectedLayout}
+        setSelectedLayout={setSelectedLayout}
+        layoutIcons={layoutIcons}
       />
-      <PreviewCanvas angle={angle} colors={colors}/>
+      <PreviewCanvas
+        angle={angle}
+        colors={colors}
+        selectedLayout={selectedLayout}
+        layoutIcons={layoutIcons}
+      />
     </div>
   )
 }

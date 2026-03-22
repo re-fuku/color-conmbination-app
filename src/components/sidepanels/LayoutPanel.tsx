@@ -1,17 +1,16 @@
 
-const layoutImages = import.meta.glob<{ default: string }>(
-    '../../assets/layouts/layout*.svg',
-    { eager: true}
-)
+type Props = {
+    selectedLayout: number
+    setSelectedLayout: (index: number) => void
+    layoutIcons: string[]
+}
 
 const menuImages = import.meta.glob<{ default: string }>(
     '../../assets/menus/*svg',
     { eager: true}
 )
 
-export default function LayoutPanel() {
-    // グリッドで表示するアイコンのURL配列を生成
-    const layoutIcons = Object.values(layoutImages).map((mod) => mod.default);
+export default function LayoutPanel({selectedLayout, setSelectedLayout, layoutIcons}: Props) {
 
     // ファイル名から特定のアイコンを取り出す関数
     const getMenuIcon = (name: string) => {
@@ -21,7 +20,6 @@ export default function LayoutPanel() {
 
     // hover時のスタイル
     const hoverStyle = "hover:border-white hover:border-2"
-
     // メニューアイコンのスタイル
     const menuIconStyle = `w-10 h-10 rounded-sm ${hoverStyle}`
 
@@ -33,6 +31,7 @@ export default function LayoutPanel() {
                     <button
                         key={index}
                         className="flex items-start aspect-square bg-item-bg w-20 h-20"
+                        onClick={() => setSelectedLayout(index)}
                     >   
                         <img
                             src={icon}

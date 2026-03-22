@@ -13,6 +13,21 @@ export default function SettingPanel({ angle, setAngle, colors, setColors}: Prop
     const labelStyle = "text-sm text-text-color"
     const inputStyle = "bt-transparent bg-input-bg-color text-right w-10 outline-none font-mono rounded-lg"
 
+    // ratioを変更した際の処理
+    const handleRatioChange = (id: string, newRatio: number) => {
+        const updatedColors = colors.map((c) => {
+            if (c.id == id) {
+                // IDが一致する要素のratioを書き換えて返す
+                return { ...c, ratio: newRatio}
+            }
+            // それ以外の要素はそのまま返す
+            return c
+        })
+
+        // 新しい配列で状態を更新
+        setColors(updatedColors)
+    }
+
     return (
         <div className="h-1/2 gap-3 flex flex-col rounded-3x">
             {/* 角度入力部分 */}
@@ -38,6 +53,7 @@ export default function SettingPanel({ angle, setAngle, colors, setColors}: Prop
                             <input 
                                 className={inputStyle}
                                 value={c.ratio}
+                                onChange={(e) => handleRatioChange(c.id, Number(e.target.value)) }
                             />
                             <span className="text-xs align-bottom">%</span>
                             <div 
