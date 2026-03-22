@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  /* 背景関連 */
+  --color-app-bg-color: #121212;
+  --color-panel-bg-color: #1a1c1e;
+  --color-item-bg-color: #2a2d30;
+  --color-input-bg-color: #39393B;
+
+  /* テキスト関連 */
+  --color-text-color: white;
+}
+
+@layer utilities {
+  /* スクロールバーを非表示にするカスタムクラス */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
