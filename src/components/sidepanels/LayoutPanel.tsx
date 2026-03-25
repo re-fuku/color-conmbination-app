@@ -1,7 +1,7 @@
 
 type Props = {
-    selectedLayout: number
-    setSelectedLayout: (index: number) => void
+    selectedLayout: string
+    setSelectedLayout: (index: string) => void
     layoutIcons: string[]
 }
 
@@ -30,8 +30,12 @@ export default function LayoutPanel({selectedLayout, setSelectedLayout, layoutIc
                 {layoutIcons.map((icon, index) => (
                     <button
                         key={index}
-                        className="flex items-start aspect-square bg-item-bg w-20 h-20"
-                        onClick={() => setSelectedLayout(index)}
+                        className={`
+                            flex items-start aspect-square bg-item-bg w-20 h-20
+                            ${selectedLayout === icon ? 'border-4 border-sky-600 rounded-xl': ''}
+                            `
+                        }
+                        onClick={() => setSelectedLayout(icon)}
                     >   
                         <img
                             src={icon}

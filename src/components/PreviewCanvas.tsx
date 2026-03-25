@@ -3,7 +3,7 @@ import type { ColorStop } from '../App'
 type Props = {
     angle: number
     colors: ColorStop[]
-    selectedLayout: number
+    selectedLayout: string
     layoutIcons: string[]
 }
 
@@ -19,8 +19,8 @@ export default function PreviewCanvas({ angle, colors, selectedLayout, layoutIco
     // maskのためのスタイルオブジェクト
     const maskStyle = {
         background: `linear-gradient(${angle}deg, ${stops})`, // 背景はグラデーション
-        WebkitMaskImage: `url(${layoutIcons[selectedLayout]})`, // マスク画像として、選択されたアイコン指定
-        maskImage: `url(${layoutIcons[selectedLayout]})`, 
+        WebkitMaskImage: `url(${selectedLayout})`, // マスク画像として、選択されたアイコン指定
+        maskImage: `url(${selectedLayout})`, 
         WebkitMaskRepeat: 'no-repeat', // イメージを繰り返さない
         WebkitMaskPosition: 'center', // 中央に寄せる
         WebkitMaskSize: 'contain', // 枠内に収める
