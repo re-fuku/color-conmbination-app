@@ -1,17 +1,16 @@
 import type { ColorStop } from "../../../App"
+import type { CommonStyles } from "../SettingPanel"
+import DeleteButton from "./DeleteButton"
 
 type Props = {
     colors: ColorStop[]
     setColors: (c:ColorStop[]) => void
-    styles: {
-        card: string
-        label: string
-        input: string
-        unit: string
-    }
+    styles: CommonStyles
+    activeSlideIndex: number | null
+    slideItem: (index: number) => void
 }
 
-export default function ColorPersent({colors, setColors, styles}: Props) {
+export default function ColorPersent({colors, setColors, styles, activeSlideIndex, slideItem}: Props) {
 
     // ratioを変更した際の処理
     const handleRatioChange = (id: string, newRatio: number) => {
@@ -28,25 +27,48 @@ export default function ColorPersent({colors, setColors, styles}: Props) {
         setColors(updatedColors)
     }
 
+    // 変動のスタイル
+    
+
     return (
-        <div className="flex flex-col gap-3">
+        <>
             {colors.map((c, i) =>(
-                <div key={c.id} className={styles.card}>
-                    <span className="text-sm text-text-color font-mono">色{i + 1}</span>
-                    <div className="flex items-center gap-1">
-                        <input 
-                            className={styles.input}
-                            value={c.ratio}
-                            onChange={(e) => handleRatioChange(c.id, Number(e.target.value)) }
-                        />
-                        <span className={styles.unit}>%</span>
-                        <div 
-                            className="w-6 h-6 rounded-full border-white border-2"
-                            style={{ backgroundColor: c.color }}
-                        />
+                <div
+                    className="relative flex flex-col gap-3"
+                    key={c.id}
+                >
+                    <DeleteButton
+                    colors={colors}
+                    setColors={setColors}
+                    slideItem={slideItem}
+                    index={i}
+                    />
+
+                    <div
+                        className={`${styles.card} ${activeSlideIndex === i ? "-translate-x-10" : "-translate-x-0"}`}
+                        onContextMenu={(e) => {
+                            e.preventDefault()
+                            slideItem(i)
+                        }}
+                    >
+                        
+                        <div className={styles.clip}/>
+                        <span className="text-sm text-text-color font-mono">色{i + 1}</span>
+                        <div className="flex items-center gap-1">
+                            <input 
+                                className={styles.input}
+                                value={c.ratio}
+                                onChange={(e) => handleRatioChange(c.id, Number(e.target.value)) }
+                            />
+                            <span className={styles.unit}>%</span>
+                            <div 
+                                className="w-6 h-6 rounded-full border-white border-2"
+                                style={{ backgroundColor: c.color }}
+                            />
+                        </div>
                     </div>
                 </div>
             ))}
-        </div>
+        </>
     )
 }

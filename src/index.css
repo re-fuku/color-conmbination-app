@@ -6,6 +6,8 @@
   --color-panel-bg-color: #1a1c1e;
   --color-item-bg-color: #2a2d30;
   --color-input-bg-color: #39393B;
+  --color-clip-color: #646465;
+  --color-delete-color: #A84B66;
 
   /* テキスト関連 */
   --color-text-color: white;

@@ -21,13 +21,12 @@ function App() {
   const [angle, setAngle] = useState(0)
   const [colors, setColors] = useState<ColorStop[]>([
     // 仮の初期値
-    { id: '1', color: '#66c2b2', ratio: 50 },
-    { id: '2', color: '#4d8dbd', ratio: 30 },
-    { id: '3', color: '#c984c0', ratio: 20 },
+    { id: "1", color: '#66c2b2', ratio: 50 },
+    { id: "2", color: '#4d8dbd', ratio: 30 },
+    { id: "3", color: '#c984c0', ratio: 20 },
   ])
 
   const [selectedLayout, setSelectedLayout] = useState<string>('')
-  console.log(selectedLayout)
 
   return (
     <div className="flex h-screen w-screen bg-app-bg-color text-text-color font-sans overflow-hidden">

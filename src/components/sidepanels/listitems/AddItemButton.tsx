@@ -1,29 +1,39 @@
 import type { ColorStop } from "../../../App"
+import type { CommonStyles } from "../SettingPanel"
 
 type Props = {
     colors: ColorStop[]
     setColors: (c:ColorStop[]) => void
-    styles: {
-        card: string
-        label: string
-        input: string
-        unit: string
-    }
+    styles: CommonStyles
 }
 
-export default function AddItemButon(colors, setColors, styles) {
+export default function AddItemButton({colors, setColors}: Props) {
 
-    const addItem = () => {
-        
+    const addColor = () => {
+        // 既存のIDの中から最大値を探して+1する
+        const maxId = colors.length > 0 
+            ? Math.max(...colors.map(c => Number(c.id))) : -1
+
+        const newId = (maxId + 1).toString()
+
+        const newColor: ColorStop = {
+            id: newId,
+            color: "#ffffff",
+            ratio: 0
+        }
+
+        setColors([...colors, newColor])
     }
 
 
     return (
-        <button 
-            className="w-full bg-transparent font-text-color flex justify-center justify-items-center"
-            onClick={() => addItem()}
-        >
-            <span className="bg-blue-500 w-10 h-10 rounded-full text-3xl font-bold flex justify-items-center justify-center">+</span>
-        </button>
+        <div className="w-full flex justify-center">
+            <button 
+                className="w-10 bg-transparent font-text-color flex justify-center justify-items-center"
+                onClick={() => addColor()}
+            >
+                <span className="leading-none bg-blue-500 w-10 h-10 rounded-full text-3xl font-bold flex justify-items-center justify-center hover:border-white hover:border-2">+</span>
+            </button>
+        </div>
     )
 }

@@ -1,13 +1,11 @@
+import type { CommonStyles } from "../SettingPanel"
+
 type Props = {
     angle: number;
     setAngle: (val: number) => void
-    styles: {
-        card: string
-        label: string
-        input: string
-        unit: string
-    }
+    styles: CommonStyles
 }
+
 
 // 単一数値設定
 export default function InputAngle({angle, setAngle, styles}: Props) {
