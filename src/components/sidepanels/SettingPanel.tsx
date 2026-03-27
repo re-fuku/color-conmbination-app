@@ -29,11 +29,11 @@ export default function SettingPanel({ angle, setAngle, colors, setColors, selec
 
     // 共通のスタイルを定義
     const commonStyles = {
-        card: " bg-item-bg-color p-3 rounded-xl relative flex justify-between items-center overflow-hidden transition-transform duration-300 ease-in-out",
-        label: "text-sm text-text-color",
+        card: " bg-item-bg-color p-3 rounded-xl relative flex justify-between items-center transition-transform duration-300 ease-in-out",
+        label: "text-sm text-text-color cursor-default",
         input: "bt-transparent bg-input-bg-color text-right w-10 outline-none font-mono rounded-lg",
         unit: "text-xs text-text-color font-mono",
-        clip: "absolute -top-0 -left-0 h-5 w-5 bg-clip-color rounded-tl-sm [clip-path:polygon(0%_0%,100%_0%,0%_100%)]",
+        clip: "absolute -top-0 -left-0 h-5 w-5 bg-clip-color rounded-tl-xl [clip-path:polygon(0%_0%,100%_0%,0%_100%)]",
     }
 
     // アイテムをスライドをする処理

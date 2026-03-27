@@ -26,10 +26,10 @@ function App() {
     { id: "3", color: '#c984c0', ratio: 20 },
   ])
 
-  const [selectedLayout, setSelectedLayout] = useState<string>('')
+  const [selectedLayout, setSelectedLayout] = useState<string>('src\assets\layouts\linear-base.svg')
 
   return (
-    <div className="flex h-screen w-screen bg-app-bg-color text-text-color font-sans overflow-hidden">
+    <div className="flex h-screen w-screen p-5 bg-app-bg-color text-text-color font-sans overflow-hidden">
       <SidePanel
         angle={angle}
         setAngle={setAngle}

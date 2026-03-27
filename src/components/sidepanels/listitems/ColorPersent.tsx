@@ -1,6 +1,8 @@
 import type { ColorStop } from "../../../App"
 import type { CommonStyles } from "../SettingPanel"
 import DeleteButton from "./DeleteButton"
+import { ItemNameRegister } from "../../../hooks/useItemNameRegister"
+import ColorChangeButton from "./ColorChangeButton"
 
 type Props = {
     colors: ColorStop[]
@@ -10,11 +12,8 @@ type Props = {
     slideItem: (index: number) => void
 }
 
-const nameRegistry = new Map<string, string>()
-let nextColorNumber = 1
-
 export default function ColorPersent({colors, setColors, styles, activeSlideIndex, slideItem}: Props) {
-
+    const { getDisplayName } = ItemNameRegister("色")
     // ratioを変更した際の処理
     const handleRatioChange = (id: string, newRatio: number) => {
         const updatedColors = colors.map((c) => {
@@ -33,13 +32,7 @@ export default function ColorPersent({colors, setColors, styles, activeSlideInde
     return (
         <>
             {colors.map((c, i) =>{
-
-                // 名簿の処理
-                if (!nameRegistry.has(c.id)) {
-                    nameRegistry.set(c.id, `色 ${nextColorNumber++}`)
-                }
-
-                const displayName = nameRegistry.get(c.id)!
+                const displayName = getDisplayName(c.id)
 
                 return (
                     <div
@@ -62,7 +55,7 @@ export default function ColorPersent({colors, setColors, styles, activeSlideInde
                         >
                             
                             <div className={styles.clip}/>
-                            <span className="text-sm text-text-color font-mono">{displayName}</span>
+                            <span className={styles.label}>{displayName}</span>
                             <div className="flex items-center gap-1">
                                 <input 
                                     className={styles.input}
@@ -70,9 +63,11 @@ export default function ColorPersent({colors, setColors, styles, activeSlideInde
                                     onChange={(e) => handleRatioChange(c.id, Number(e.target.value)) }
                                 />
                                 <span className={styles.unit}>%</span>
-                                <div 
-                                    className="w-6 h-6 rounded-full border-white border-2"
-                                    style={{ backgroundColor: c.color }}
+                                <ColorChangeButton
+                                    styles={styles}
+                                    colors={colors}
+                                    color={c}
+                                    setColors={setColors}
                                 />
                             </div>
                         </div>

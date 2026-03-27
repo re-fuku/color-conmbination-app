@@ -28,11 +28,11 @@ export default function PreviewCanvas({ angle, colors, selectedLayout, layoutIco
     }
 
     return (
-        <div className="flex-1 h-full p-10 bg-app-bg-color flex items-center justify-center">
-            <div
+        <div className="flex-1 h-full p-2.5 p-l-7.5 bg-app-bg-color flex items-center justify-center">
+            {/* <div
                 className="w-full h-full rounded-[40px] shadow-2xl transition-all duration-500 ease-in-out"
                 style={maskStyle}
-            />
+            /> */}
         </div>
     )
 }
