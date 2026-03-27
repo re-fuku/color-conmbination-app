@@ -5,7 +5,7 @@ import type { ColorStop } from "../../../App";
 import type { CommonStyles } from "../SettingPanel";
 
 type Props = {
-    displayName: string
+    displayName: string | undefined
     styles: CommonStyles
     colors: ColorStop[]
     color: ColorStop
