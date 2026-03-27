@@ -6,7 +6,6 @@ import type { ColorStop } from "../../App";
 import InputAngle from "./listitems/InputAngle";
 import ColorPersent from "./listitems/ColorPersent";
 import AddItemButton from "./listitems/AddItemButton";
-import SingleNumberInput from './listitems/SingleNumberInput'
 
 type Props = {
     angle: number;
@@ -31,7 +30,7 @@ export default function SettingPanel({ angle, setAngle, colors, setColors, selec
     const commonStyles = {
         card: " bg-item-bg-color p-3 rounded-xl relative flex justify-between items-center transition-transform duration-300 ease-in-out",
         label: "text-sm text-text-color cursor-default",
-        input: "bt-transparent bg-input-bg-color text-right w-10 outline-none font-mono rounded-lg",
+        input: "bt-transparent bg-input-bg-color text-right w-10 outline-none font-mono rounded-lg text-text-color",
         unit: "text-xs text-text-color font-mono",
         clip: "absolute -top-0 -left-0 h-5 w-5 bg-clip-color rounded-tl-xl [clip-path:polygon(0%_0%,100%_0%,0%_100%)]",
     }

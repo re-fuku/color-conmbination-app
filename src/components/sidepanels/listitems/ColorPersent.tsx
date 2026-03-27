@@ -64,6 +64,7 @@ export default function ColorPersent({colors, setColors, styles, activeSlideInde
                                 />
                                 <span className={styles.unit}>%</span>
                                 <ColorChangeButton
+                                    displayName={displayName}
                                     styles={styles}
                                     colors={colors}
                                     color={c}

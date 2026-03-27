@@ -11,6 +11,7 @@
     "tailwind-init": "tailwindcss init -p"
   },
   "dependencies": {
+    "@radix-ui/react-popover": "^1.1.15",
     "@tailwindcss/vite": "^4.2.2",
     "colord": "^2.9.3",
     "react": "^19.2.4",

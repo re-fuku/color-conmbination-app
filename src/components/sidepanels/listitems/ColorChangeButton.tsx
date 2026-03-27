@@ -1,19 +1,19 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { HexColorPicker } from "react-colorful"
+import * as Popover from '@radix-ui/react-popover'
 import type { ColorStop } from "../../../App";
 import type { CommonStyles } from "../SettingPanel";
 
 type Props = {
+    displayName: string
     styles: CommonStyles
     colors: ColorStop[]
     color: ColorStop
     setColors: (c:ColorStop[]) => void
 }
 
-export default function ColorChangeButton({styles, colors, color, setColors}: Props) {
-    const [isOpen, setIsOpen] = useState(false)
+export default function ColorChangeButton({displayName, styles, colors, color, setColors}: Props) {
     const [inputColorCode, setInputColorCode] = useState(color.color)
-    const popover = useRef<HTMLDivElement>(null)
 
     // 色を変更をテキストで行う場合の処理
     const handleTextInput = (e: React.ChangeEvent<HTMLInputElement>) =>{
@@ -46,32 +46,24 @@ export default function ColorChangeButton({styles, colors, color, setColors}: Pr
         setColors(newColors)
     }
 
-    // ピッカーの外側をクリックしたら閉じる処理
-    useEffect(() => {
-        const close = (e: MouseEvent) => {
-            if (isOpen && !popover.current?.contains(e.target as Node)) {
-                setIsOpen(false)
-            }
-        }
-        document.addEventListener("mousedown", close)
-        return () => document.removeEventListener("mousedown", close)
-    },[isOpen])
-
     return (
-        <div className="relative cursor-pointer">
-            <button
-                className="w-6 h-6 rounded-full border-white border-2"
-                style={{ backgroundColor: color.color }}
-                onClick={() => setIsOpen(!isOpen)}
-            />
+        <Popover.Root>
+            <Popover.Trigger asChild>
+                <button
+                    className="w-6 h-6 rounded-full border-white border-2 cursor-pointer"
+                    style={{ backgroundColor: color.color }}
+                />
+            </Popover.Trigger>
 
             {/* カラーピッカー部分 */}
-            {isOpen && (
-                <div
-                    ref={popover}
-                    className="absolute top-[-50px] left-15 bg-item-bg-color p-t-3"
+            <Popover.Portal>
+                <Popover.Content
+                    side="right"
+                    sideOffset={20}
+                    align="start"
+                    alignOffset={-50}
                 >
-                    <span className={styles.label}>色コード: </span>
+                    <span className={styles.label}>{displayName}_コード: </span>
                     <input
                         className={`${styles.input} w-18`}
                         type="text"
@@ -79,11 +71,11 @@ export default function ColorChangeButton({styles, colors, color, setColors}: Pr
                         onChange={handleTextInput}
                     />   
                     <HexColorPicker
-                    color={color.color}
-                    onChange={handleColorChange}
+                        color={color.color}
+                        onChange={handleColorChange}
                     />
-                </div>
-            )}
-        </div>
+                </Popover.Content>
+            </Popover.Portal>
+        </Popover.Root>
     )
 }
