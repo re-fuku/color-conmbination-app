@@ -21,7 +21,7 @@ export default function SidePanel({ angle, setAngle, colors, setColors,selectedL
     return (
         <div className="w-100 h-full bg-panel-bg-color flex flex-col gap-3 border-none">
             <Group orientation="vertical" className="h-full">
-                <Panel className="relative scrollbar-hide" defaultSize={50} minSize={20} collapsible={true}>
+                <Panel className="relative scrollbar-hide rounded-2xl bg-panel-bg-color" defaultSize={50} minSize={20} collapsible={true}>
                     <SettingPanel 
                         angle={angle}
                         setAngle={setAngle}
@@ -31,7 +31,7 @@ export default function SidePanel({ angle, setAngle, colors, setColors,selectedL
                     />
                 </Panel>
                 <Separator className="h-1 hover:bg-blue-500 transition-colors" />
-                <Panel className="scrollbar-hide" defaultSize={50} minSize={20} collapsible={true}>
+                <Panel className="scrollbar-hide rounded-xl bg-layout-bg-color" defaultSize={50} minSize={20} collapsible={true}>
                     <LayoutPanel
                         selectedLayout={selectedLayout}
                         setSelectedLayout={setSelectedLayout}

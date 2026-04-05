@@ -9,12 +9,14 @@ type Props = {
 
 // 単一数値設定
 export default function InputAngle({angle, setAngle, styles}: Props) {
+
     return (
         <div className={styles.card}>
             <span className={styles.label}>角度</span>
             <div className="flex items-center">
                 <input
                     type="number"
+                    inputMode="numeric"
                     value={angle}
                     onChange={(e) => setAngle(Number(e.target.value))}
                     className={styles.input}

@@ -47,7 +47,7 @@ export default function ColorPersent({colors, setColors, styles, activeSlideInde
                         />
 
                         <div
-                            className={`${styles.card} ${activeSlideIndex === i ? "-translate-x-10" : "-translate-x-0"}`}
+                            className={`${styles.card} ${activeSlideIndex === i ? "-translate-x-10" : ""}`}
                             onContextMenu={(e) => {
                                 e.preventDefault()
                                 slideItem(i)

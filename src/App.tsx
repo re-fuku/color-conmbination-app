@@ -1,5 +1,5 @@
 import { useState } from 'react'
-// import PreviewCanvas from './components/PreviewCanvas'
+import PreviewCanvas from './components/previews/PreviewCanvas'
 import SidePanel from './components/sidepanels/SidePanel'
 
 export type ColorStop = {
@@ -39,7 +39,11 @@ function App() {
         setSelectedLayout={setSelectedLayout}
         layoutIcons={layoutIcons}
       />
-      {/* <PreviewCanvas/> */}
+      <PreviewCanvas
+        selectedLayout={selectedLayout}
+        colors={colors}
+        angle={angle}
+      />
     </div>
   )
 }
