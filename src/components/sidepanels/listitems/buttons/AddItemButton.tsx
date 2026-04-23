@@ -1,5 +1,5 @@
-import type { ColorStop } from "../../../App"
-import type { CommonStyles } from "../SettingPanel"
+import type { ColorStop } from "../../../../App"
+import type { CommonStyles } from "../../SettingPanel"
 
 type Props = {
     colors: ColorStop[]

@@ -5,7 +5,7 @@ import type { ColorStop } from "../../App";
 // 各アイテムリスト
 import InputAngle from "./listitems/InputAngle";
 import ColorPersent from "./listitems/ColorPersent";
-import AddItemButton from "./listitems/AddItemButton";
+import AddItemButton from "./listitems/buttons/AddItemButton";
 
 type Props = {
     angle: number;
