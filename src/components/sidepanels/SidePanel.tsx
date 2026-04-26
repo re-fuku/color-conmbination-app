@@ -1,7 +1,7 @@
 import type { ColorStop } from '../../App'
 import LayoutPanel from './LayoutPanel'
 import MeenuPanel from './MenuPanel'
-import SettingPanel from './SettingPanel'
+import SettingPanel from './settings/SettingPanel'
 import { Group, Panel, Separator } from 'react-resizable-panels'
 
 type Props = {

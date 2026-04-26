@@ -1,75 +1,71 @@
-# React + TypeScript + Vite
+## 要件
+* レイアウトごとに色を設定できるようにする
+* レイアウトごとに設定できるパラメータは異なる
+* 色の数は増加または減少させることが出来る
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## 技術スタック
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TypeScript](https://img.shields.io/badge/typescript-%23007acc.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## React Compiler
+## 構成図
+```mermaid
+graph TD
+  app[App.tsx]
+  main[main.tsx]
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+  main --> app
+  app --> sidepanel & previewcanvas
 
-Note: This will impact Vite dev & build performances.
+  subgraph components[components]
+    previews
+    sidepanels
+  end
 
-## Expanding the ESLint configuration
+  subgraph sidepanels[sidepanels]
+    sidepanel[SidePanel.tsx]
+    layoutpanel[LayoutPanels.tsx]
+    menupanel[MenuPanels.tsx]
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+    subgraph settings[settings]
+      settingpanel[SettingPanels.tsx]
+      linearbasesetting[LinearBaseSetting.tsx]
+      
+      subgraph listitems
+      subgraph buttons[bottuns]
+          additembutton[AddItemButton.tsx]
+          colorchangebutton[ColorChangeButton.tsx]
+          deletebutton[DeleteButton.tsx]
+        end
+        
+        colorpersent[ColorPersent.tsx]
+        inputangle[InputAngle.tsx]
+      end
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+    end
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+    sidepanel --> settingpanel & layoutpanel & menupanel
+    settingpanel -.-> linearbasesetting ---> listitems
+    colorpersent --> deletebutton & colorchangebutton
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+  end
+
+  subgraph previews[previews]
+    previewcanvas[PreviewCanvas.tsx]
+    linearbase[LinearBase.tsx]
+    lineargradation[LinearGradation.tsx]
+
+    previewcanvas -.-> linearbase & lineargradation
+  end
+
+  %% 作業状況をわかり役するための色の定義
+  classDef active fill:#ffefd5
+
+  %% 作業箇所
+  class settings active
+
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```

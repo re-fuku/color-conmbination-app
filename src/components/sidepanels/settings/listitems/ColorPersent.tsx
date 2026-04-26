@@ -1,7 +1,7 @@
-import type { ColorStop } from "../../../App"
+import type { ColorStop } from "../../../../App"
 import type { CommonStyles } from "../SettingPanel"
 import DeleteButton from "./buttons/DeleteButton"
-import { ItemNameRegister } from "../../../hooks/useItemNameRegister"
+import { ItemNameRegister } from "../../../../hooks/useItemNameRegister"
 import ColorChangeButton from "./buttons/ColorChangeButton"
 
 type Props = {

@@ -1,15 +1,18 @@
 import { useState } from "react";
 
-import type { ColorStop } from "../../App";
+import type { ColorStop } from "../../../App";
 
 // 各アイテムリスト
-import InputAngle from "./listitems/InputAngle";
-import ColorPersent from "./listitems/ColorPersent";
-import AddItemButton from "./listitems/buttons/AddItemButton";
+import LinearBaseSetting from "./LinearBaseSetting"
+
 
 type Props = {
     angle: number;
     setAngle: (v: number) => void;
+    wSize: number;
+    setWSize: (wSize: number) => void;
+    hSize: number;
+    setHSize: (hSize: number) => void;
     colors: ColorStop[];
     setColors: (c: ColorStop[]) => void;
     selectedLayout: string
@@ -23,12 +26,12 @@ export type CommonStyles = {
   clip: string
 }
 
-export default function SettingPanel({ angle, setAngle, colors, setColors, selectedLayout}: Props) {
+export default function SettingPanel(props : Props) {
     const [activeSlideIndex, setActiveSlideIndex] = useState<number | null>(null)
 
     // 共通のスタイルを定義
     const commonStyles = {
-        card: " bg-item-bg-color p-3 rounded-xl relative flex justify-between items-center transition-transform duration-300 ease-in-out",
+        card: "bg-item-bg-color p-3 rounded-xl relative flex justify-between items-center transition-transform duration-300 ease-in-out",
         label: "text-sm text-text-color cursor-default",
         input: "bt-transparent bg-input-bg-color text-right w-10 outline-none font-mono rounded-lg text-text-color",
         unit: "text-xs text-text-color font-mono",
@@ -42,47 +45,40 @@ export default function SettingPanel({ angle, setAngle, colors, setColors, selec
 
     // アイテムリストを生成する
     const renderItemList = () => {
-        
+        console.log(props.selectedLayout)
         switch (true) {
             // ➀線形色表示
-            case selectedLayout.includes('linear-base'):
+            case props.selectedLayout.includes('linear-base'):
                 return (
-                    <>
-                        <InputAngle
-                            angle={angle}
-                            setAngle={setAngle}
-                            styles={commonStyles}
-                        />
-
-                        <ColorPersent
-                            colors={colors}
-                            setColors={setColors}
-                            styles={commonStyles}
-                            activeSlideIndex={activeSlideIndex}
-                            slideItem={slideItem}
-                        />
-
-                        <AddItemButton
-                            colors={colors}
-                            setColors={setColors}
-                            styles={commonStyles}
-                        />
-                    </>
+                    <LinearBaseSetting
+                        {...props}
+                        activeSlideIndex={activeSlideIndex}
+                        slideItem={slideItem}
+                        commonStyles={commonStyles}
+                    />
                 )
             // ➁線形グラデーション
-            case selectedLayout.includes(''):
+            case props.selectedLayout.includes(''):
                 return ''
             // ➂放射グラデーション
-            case selectedLayout.includes(''):
+            case props.selectedLayout.includes(''):
                 return ''
             // ➃扇形グラデーション
-            case selectedLayout.includes(''):
+            case props.selectedLayout.includes(''):
                 return ''
             // ➄円並び
-            case selectedLayout.includes(''):
-                return ''
+            case props.selectedLayout.includes('circles'):
+                return (
+                    <CirclesSetting
+                        {...props}
+                        activeSlideIndex={activeSlideIndex}
+                        setAciveSlideIndex={setActiveSlideIndex}
+                        slideItem={slideItem}
+                        commonStyles={commonStyles}
+                    />
+                )
             // ➅角丸四角形並び
-            case selectedLayout.includes(''):
+            case props.selectedLayout.includes(''):
                 return ''
         }
     }

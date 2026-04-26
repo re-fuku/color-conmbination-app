@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { HexColorPicker } from "react-colorful"
 import * as Popover from '@radix-ui/react-popover'
-import type { ColorStop } from "../../../../App";
+import type { ColorStop } from "../../../../../App";
 import type { CommonStyles } from "../../SettingPanel";
 
 type Props = {
