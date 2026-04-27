@@ -1,34 +1,38 @@
-import InputAngle from "./listitems/InputAngle"
-import ColorPersent from "./listitems/ColorPersent"
-import AddItemButton from "./listitems/buttons/AddItemButton"
-import type { CommonStyles } from "./SettingPanel"
-import type { ColorStop } from "../../../App"
+import SingleValue from "./ui/SingleValue"
+import ColorParcent from "./ui/ColorParcent"
+import AddItemButton from "./ui/AddItemButton"
+import type { SidePanelProps } from "../../../App"
+import type { AddProps } from "./SettingPanel"
 
-type Props = {
-    angle: number
-    setAngle: (angle: number) => void
-    colors: ColorStop[]
-    setColors: (colors: ColorStop[]) => void
-    activeSlideIndex: number | null
-    slideItem: (index: number) => void
-    commonStyles: CommonStyles
-}
+export default function LinearBaseSetting(props: SidePanelProps & AddProps) {
 
-export default function LinearBaseSetting({angle, setAngle, commonStyles, colors, setColors, activeSlideIndex, slideItem}: Props) {
+    // propsの分割代入で必要なものを抽出する
+    const {
+        angle,
+        setAngle,
+        commonStyles,
+        colors,
+        setColors,
+        activeSlideIndex,
+        slideItem
+    } = props
+
     return (
         <div>
-            <InputAngle
-                angle={angle}
-                setAngle={setAngle}
+            <SingleValue
+                label="角度"
+                value={angle}
+                setValue={setAngle}
                 styles={commonStyles}
             />
 
-            <ColorPersent
+            <ColorParcent
                 colors={colors}
                 setColors={setColors}
                 styles={commonStyles}
                 activeSlideIndex={activeSlideIndex}
                 slideItem={slideItem}
+                parcent={true}
             />
 
             <AddItemButton

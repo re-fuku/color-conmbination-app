@@ -1,8 +1,8 @@
 import type { ColorStop } from "../../../../App"
 import type { CommonStyles } from "../SettingPanel"
-import DeleteButton from "./buttons/DeleteButton"
+import DeleteButton from "./DeleteButton"
 import { ItemNameRegister } from "../../../../hooks/useItemNameRegister"
-import ColorChangeButton from "./buttons/ColorChangeButton"
+import ColorChangeButton from "./ColorChangeButton"
 
 type Props = {
     colors: ColorStop[]
@@ -10,9 +10,10 @@ type Props = {
     styles: CommonStyles
     activeSlideIndex: number | null
     slideItem: (index: number) => void
+    parcent: false | true 
 }
 
-export default function ColorPersent({colors, setColors, styles, activeSlideIndex, slideItem}: Props) {
+export default function ColorPersent({colors, setColors, styles, activeSlideIndex, slideItem, parcent}: Props) {
     const { getDisplayName } = ItemNameRegister("色")
     // ratioを変更した際の処理
     const handleRatioChange = (id: string, newRatio: number) => {
@@ -39,6 +40,7 @@ export default function ColorPersent({colors, setColors, styles, activeSlideInde
                         className="relative flex flex-col gap-3"
                         key={c.id}
                     >
+                        {/* 削除ボタン裏に隠れている */}
                         <DeleteButton
                         colors={colors}
                         setColors={setColors}
@@ -57,12 +59,16 @@ export default function ColorPersent({colors, setColors, styles, activeSlideInde
                             <div className={styles.clip}/>
                             <span className={styles.label}>{displayName}</span>
                             <div className="flex items-center gap-1">
-                                <input 
-                                    className={styles.input}
-                                    value={c.ratio}
-                                    onChange={(e) => handleRatioChange(c.id, Number(e.target.value)) }
-                                />
-                                <span className={styles.unit}>%</span>
+                                {parcent && 
+                                    <>
+                                        <input 
+                                            className={styles.input}
+                                            value={c.ratio}
+                                            onChange={(e) => handleRatioChange(c.id, Number(e.target.value)) }
+                                        />
+                                        <span className={styles.unit}>%</span>
+                                    </>
+                                }
                                 <ColorChangeButton
                                     displayName={displayName}
                                     styles={styles}

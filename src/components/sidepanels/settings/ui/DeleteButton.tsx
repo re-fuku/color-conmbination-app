@@ -1,4 +1,4 @@
-import type { ColorStop } from "../../../../../App"
+import type { ColorStop } from "../../../../App"
 
 type Props = {
     colors: ColorStop[]

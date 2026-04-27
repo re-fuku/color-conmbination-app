@@ -1,14 +1,10 @@
-import type { ColorStop } from '../../App'
+import type { PreviewCanvasProps } from '../../App'
 import LinearBase from './LinearBase'
 import LinearGradation from './LinearGradation'
+import Circles from './Circles'
 
-type Props = {
-    selectedLayout: string
-    colors: ColorStop[]
-    angle: number
-}
-
-export default function PreviewCanvas({ selectedLayout, colors, angle }: Props) {
+export default function PreviewCanvas(props: PreviewCanvasProps) {
+    const {colors, angle,wSize,hSize, selectedLayout} = props
 
     const renderPreview = () => {
 
@@ -25,6 +21,15 @@ export default function PreviewCanvas({ selectedLayout, colors, angle }: Props) 
             case selectedLayout.includes('linear-gratiation'):
                 return (
                     < LinearGradation/>
+                )
+
+            // 円並び
+            case selectedLayout.includes('circles'):
+                return (
+                    <Circles
+                        size={wSize}
+                        colors={colors}
+                    />
                 )
             default:
                 break

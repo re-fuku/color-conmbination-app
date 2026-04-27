@@ -8,6 +8,28 @@ export type ColorStop = {
   ratio: number
 }
 
+export type SidePanelProps = {
+  angle: number
+  setAngle: (angle: number) => void
+  wSize: number
+  setWSize: (wSize: number) => void
+  hSize: number
+  setHSize: (hSize: number) => void
+  colors: ColorStop[]
+  setColors: (colors: ColorStop[]) => void
+  selectedLayout: string
+  setSelectedLayout: (selectedLayout: string) => void
+  layoutIcons: string[]
+}
+
+export type PreviewCanvasProps = {
+  angle: number
+  wSize: number
+  hSize: number
+  colors: ColorStop[]
+  selectedLayout: string
+}
+
 // レイアウトのアイコンのパスを定義
 const layoutIcons = Object.values(
   import.meta.glob<{ default: string }>(
@@ -15,7 +37,6 @@ const layoutIcons = Object.values(
       { eager: true}
   )
 ).map((mod) => mod.default)
-
 
 function App() {
   const [angle, setAngle] = useState<number>(0) // レイアウトの角度
@@ -35,7 +56,7 @@ function App() {
     angle: angle,
     setAngle: setAngle,
     wSize: wSize,
-    setWsize: setWSize,
+    setWSize: setWSize,
     hSize: hSize,
     setHSize: setHSize,
     colors: colors,

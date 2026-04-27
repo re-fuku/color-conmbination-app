@@ -1,23 +1,45 @@
-import type { CommonStyles } from "./SettingPanel"
-import type { ColorStop } from "../../../App"
-import ChangeSize from "./listitems/ChangeSize"
+import type { SidePanelProps } from "../../../App"
+import type { AddProps } from "./SettingPanel"
+import AddItemButton from "./ui/AddItemButton"
+import ColorParcent from "./ui/ColorParcent"
+import SingleValue from "./ui/SingleValue"
 
-type Props = {
-    wSize: number
-    setWSize: (wSize: number) => void
-    colors: ColorStop[]
-    setColors: (colors: ColorStop[]) => void
-    activeSlideIndex: number | null
-    slideItem: (index: number) => void
-    commonStyles: CommonStyles
-}
+export default function CirclesSetting(props: SidePanelProps & AddProps) {
 
-export default function CirclesSetting({props}: Props) {
+    // propsの分割代入で必要なものを抽出する
+    const {
+        wSize,
+        setWSize,
+        colors,
+        setColors,
+        activeSlideIndex,
+        slideItem,
+        commonStyles,
+    } = props
 
     return (
-        <div className="flex flex-col">
-            <ChangeSize {...props} />
-                
+        <div>
+            <SingleValue 
+                label="サイズ"
+                value={wSize}
+                setValue={setWSize}
+                styles={commonStyles}
+            />
+
+            <ColorParcent
+                colors={colors}
+                setColors={setColors}
+                styles={commonStyles}
+                activeSlideIndex={activeSlideIndex}
+                slideItem={slideItem}
+                parcent={false}
+            />
+
+            <AddItemButton
+                colors={colors}
+                setColors={setColors}
+                styles={commonStyles}
+            />
         </div>
     )
 }
