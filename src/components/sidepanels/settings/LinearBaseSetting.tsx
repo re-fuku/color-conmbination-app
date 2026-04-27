@@ -18,7 +18,7 @@ export default function LinearBaseSetting(props: SidePanelProps & AddProps) {
     } = props
 
     return (
-        <div>
+        <>
             <SingleValue
                 label="角度"
                 value={angle}
@@ -40,6 +40,6 @@ export default function LinearBaseSetting(props: SidePanelProps & AddProps) {
                 setColors={setColors}
                 styles={commonStyles}
             />
-        </div>
+        </>
     )
 }

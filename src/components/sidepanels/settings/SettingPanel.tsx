@@ -81,8 +81,10 @@ export default function SettingPanel(props : SidePanelProps) {
     }
 
     return (
-        <div className="h-1/2 gap-3 flex flex-col rounded-3x">
-            {renderItemList()}
+        <div className="h-1/2 flex flex-col rounded-3x">
+            <div className="flex flex-col gap-3">
+                {renderItemList()}
+            </div>
         </div>
     )
 }

@@ -8,9 +8,9 @@ type Props = {
 export default function Circles({size, colors}: Props) {
     return (
         <div
-            className="h-full w-full rounded-2xl flex items-center justify-center bg-white"
+            className="h-full w-full pl-2 pr-2 rounded-2xl flex items-center justify-center bg-white"
             style={{
-                gap: `${size / 2}%`
+                gap: `${size / 3}%`
             }}
         >
             {colors.map((color, index) => (

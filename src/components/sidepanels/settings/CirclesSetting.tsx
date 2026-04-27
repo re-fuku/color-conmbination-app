@@ -18,7 +18,7 @@ export default function CirclesSetting(props: SidePanelProps & AddProps) {
     } = props
 
     return (
-        <div>
+        <>
             <SingleValue 
                 label="サイズ"
                 value={wSize}
@@ -40,6 +40,6 @@ export default function CirclesSetting(props: SidePanelProps & AddProps) {
                 setColors={setColors}
                 styles={commonStyles}
             />
-        </div>
+        </>
     )
 }
