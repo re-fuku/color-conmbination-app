@@ -6,17 +6,14 @@ type Props = {
     xAspect: number
     yAspect: number
     colors: ColorStop[]
+    previewBG: string
 }
 
-export default function RoundedRect({wSize, hSize, xAspect, yAspect, colors}: Props) {
+export default function RoundedRect({wSize, hSize, xAspect, yAspect, colors, previewBG}: Props) {
 
     return (
         <div
-            className="
-                h-full w-full pl-5 pr-5 rounded-2xl 
-                flex flex-wrap shrink-0 grow-0 items-center content-center justify-evenly
-                 bg-white overflow-hidden
-            "
+            className={`${previewBG} justify-evenly`}
             style={{
                 gap: `${wSize / 3}%`
             }} 

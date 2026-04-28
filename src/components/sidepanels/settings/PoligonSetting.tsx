@@ -2,6 +2,7 @@ import type { SidePanelProps } from "../../../App"
 import type { AddProps } from "./SettingPanel"
 import SingleValue from "./ui/SingleValue"
 import ColorPersent from "./ui/ColorParcent"
+import AddItemButton from "./ui/AddItemButton"
 
 export default function PoligonSetting(props: SidePanelProps & AddProps) {
 
@@ -41,6 +42,12 @@ export default function PoligonSetting(props: SidePanelProps & AddProps) {
             slideItem={slideItem}
             styles={commonStyles}
             parcent={false}
+          />
+
+          <AddItemButton
+            colors={colors}
+            setColors={setColors}
+            styles={commonStyles}
           />
         
         </>

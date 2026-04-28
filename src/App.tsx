@@ -32,6 +32,7 @@ export type PreviewCanvasProps = {
   angle: number
   wSize: number
   hSize: number
+  gon: number
   xAspect: number
   yAspect: number
   colors: ColorStop[]
