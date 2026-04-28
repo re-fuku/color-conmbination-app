@@ -24,7 +24,7 @@ export default function RoundedRect({wSize, hSize, xAspect, yAspect, colors}: Pr
             {colors.map((color, index) => (
                 <div
                     key={index}
-                    className="aspect-square rounded-full"
+                    className="rounded-full"
                     style={{
                         width: `${wSize}%`,
                         height: `${hSize}px`,
