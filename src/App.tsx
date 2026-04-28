@@ -15,6 +15,8 @@ export type SidePanelProps = {
   setWSize: (wSize: number) => void
   hSize: number
   setHSize: (hSize: number) => void
+  gon: number
+  setGon: (gon:number) => void
   xAspect: number
   setXAspect: (xAspect: number) => void
   yAspect: number
@@ -48,6 +50,7 @@ function App() {
   const [angle, setAngle] = useState<number>(0) // レイアウトの角度
   const [wSize, setWSize] = useState<number>(20) // 横幅サイズ
   const [hSize, setHSize] = useState<number>(10) // 縦のサイズ
+  const [gon, setGon] = useState<number>(3) // 多角形の角の数
   const [xAspect, setXAspect] = useState<number>(1) // x軸のアスペクト比
   const [yAspect, setYAspect] = useState<number>(1) // y軸のアスペクト比
   const [colors, setColors] = useState<ColorStop[]>([ // 色の設定値
@@ -67,6 +70,8 @@ function App() {
     setWSize: setWSize,
     hSize: hSize,
     setHSize: setHSize,
+    gon: gon,
+    setGon: setGon,
     xAspect: xAspect,
     setXAspect: setXAspect,
     yAspect: yAspect,
@@ -85,6 +90,7 @@ function App() {
     angle: angle,
     wSize: wSize,
     hSize: hSize,
+    gon: gon,
     xAspect: xAspect,
     yAspect: yAspect,
   }
