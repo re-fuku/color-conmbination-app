@@ -3,6 +3,7 @@ import LinearBase from './LinearBase'
 import LinearGradation from './LinearGradation'
 import Circles from './Circles'
 import RoundedRect from './RoundedRect'
+import Poligons from './Poligons'
 
 export default function PreviewCanvas(props: PreviewCanvasProps) {
     // 必要なpropsを分割代入で抽出する
@@ -11,10 +12,13 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
         angle, // 角度
         wSize, // 横幅のサイズ(%)
         hSize, // 縦のサイズ(px)
+        gon, // 多角形の角の数
         xAspect, // x軸のアスペクト比
         yAspect, // y軸のアスペクト比
         selectedLayout // 選択されているレイアウト
     } = props
+
+    const previewBG = "h-full w-full pl-5 pr-5 rounded-2xl flex flex-wrap shrink-0 grow-0 items-center content-center bg-white overflow-hidden"
 
     const renderPreview = () => {
 
@@ -39,6 +43,7 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
                     <Circles
                         size={wSize}
                         colors={colors}
+                        previewBG={previewBG}
                     />
                 )
             // ➅角丸四角形並び
@@ -50,8 +55,20 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
                         xAspect={xAspect}
                         yAspect={yAspect}
                         colors={colors}
+                        previewBG={previewBG}
                     />
                 )
+            // ➆多角形並び
+            case selectedLayout.includes('poligon-tiles'):
+                return (
+                    <Poligons 
+                        gon={gon}
+                        size={wSize}
+                        colors={colors}
+                        previewBG={previewBG}
+                    />
+                )
+
             default:
                 break
         }

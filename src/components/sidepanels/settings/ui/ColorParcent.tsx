@@ -60,14 +60,14 @@ export default function ColorPersent({colors, setColors, styles, activeSlideInde
                             <span className={styles.label}>{displayName}</span>
                             <div className="flex items-center gap-1">
                                 {parcent && 
-                                    <>
+                                    <div className="relative">
                                         <input 
                                             className={styles.input}
                                             value={c.ratio}
                                             onChange={(e) => handleRatioChange(c.id, Number(e.target.value)) }
                                         />
                                         <span className={styles.unit}>%</span>
-                                    </>
+                                    </div>
                                 }
                                 <ColorChangeButton
                                     displayName={displayName}
