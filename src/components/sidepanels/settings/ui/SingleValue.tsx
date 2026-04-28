@@ -22,7 +22,7 @@ export default function SingleValue({label, value, setValue, styles}: Props) {
     return (
         <div className={styles.card}>
             <span className={styles.label}>{label}</span>
-            <div className="flex items-center">
+            <div className="relative">
                 <input
                     type="number"
                     inputMode="numeric"

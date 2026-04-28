@@ -15,6 +15,10 @@ export type SidePanelProps = {
   setWSize: (wSize: number) => void
   hSize: number
   setHSize: (hSize: number) => void
+  xAspect: number
+  setXAspect: (xAspect: number) => void
+  yAspect: number
+  setYAspect: (yAspect: number) => void
   colors: ColorStop[]
   setColors: (colors: ColorStop[]) => void
   selectedLayout: string
@@ -26,6 +30,8 @@ export type PreviewCanvasProps = {
   angle: number
   wSize: number
   hSize: number
+  xAspect: number
+  yAspect: number
   colors: ColorStop[]
   selectedLayout: string
 }
@@ -42,6 +48,8 @@ function App() {
   const [angle, setAngle] = useState<number>(0) // レイアウトの角度
   const [wSize, setWSize] = useState<number>(20) // 横幅サイズ
   const [hSize, setHSize] = useState<number>(10) // 縦のサイズ
+  const [xAspect, setXAspect] = useState<number>(1) // x軸のアスペクト比
+  const [yAspect, setYAspect] = useState<number>(1) // y軸のアスペクト比
   const [colors, setColors] = useState<ColorStop[]>([ // 色の設定値
     // 仮の初期値
     { id: "1", color: '#66c2b2', ratio: 50 },
@@ -59,6 +67,10 @@ function App() {
     setWSize: setWSize,
     hSize: hSize,
     setHSize: setHSize,
+    xAspect: xAspect,
+    setXAspect: setXAspect,
+    yAspect: yAspect,
+    setYAspect: setYAspect,
     colors: colors,
     setColors: setColors,
     selectedLayout: selectedLayout,
@@ -73,6 +85,8 @@ function App() {
     angle: angle,
     wSize: wSize,
     hSize: hSize,
+    xAspect: xAspect,
+    yAspect: yAspect,
   }
 
   return (

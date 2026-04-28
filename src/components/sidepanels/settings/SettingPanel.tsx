@@ -5,6 +5,7 @@ import type { SidePanelProps } from "../../../App";
 // 各アイテムリスト
 import LinearBaseSetting from "./LinearBaseSetting"
 import CirclesSetting from "./CirclesSetting";
+import RoundedRectSetting from "./RoudedRectSetting";
 
 export type CommonStyles = {
   card: string
@@ -30,7 +31,7 @@ export default function SettingPanel(props : SidePanelProps) {
         card: "bg-item-bg-color p-3 rounded-xl relative flex justify-between items-center transition-transform duration-300 ease-in-out",
         label: "text-sm text-text-color cursor-default",
         input: "bt-transparent bg-input-bg-color text-right w-10 outline-none font-mono rounded-lg text-text-color",
-        unit: "text-xs text-text-color font-mono",
+        unit: "absolute -bottom-0 -right-0 text-xs text-text-color font-mono",
         clip: "absolute -top-0 -left-0 h-5 w-5 bg-clip-color rounded-tl-xl [clip-path:polygon(0%_0%,100%_0%,0%_100%)]",
     }
 
@@ -75,8 +76,13 @@ export default function SettingPanel(props : SidePanelProps) {
                     />
                 )
             // ➅角丸四角形並び
-            case selectedLayout.includes('rounded-tiles'):
-                return ''
+            case selectedLayout.includes('rounded-rect'):
+                return (
+                    <RoundedRectSetting
+                        {...props}
+                        {...addProps}
+                    />
+                )
         }
     }
 
