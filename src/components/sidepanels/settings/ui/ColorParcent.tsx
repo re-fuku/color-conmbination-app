@@ -42,10 +42,10 @@ export default function ColorPersent({colors, setColors, styles, activeSlideInde
                     >
                         {/* 削除ボタン裏に隠れている */}
                         <DeleteButton
-                        colors={colors}
-                        setColors={setColors}
-                        slideItem={slideItem}
-                        index={i}
+                            colors={colors}
+                            setColors={setColors}
+                            slideItem={slideItem}
+                            index={i}
                         />
 
                         <div

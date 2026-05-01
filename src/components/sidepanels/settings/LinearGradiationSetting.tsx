@@ -1,12 +1,11 @@
-import SingleValue from "./ui/SingleValue"
-import ColorParcent from "./ui/ColorParcent"
-import AddItemButton from "./ui/AddItemButton"
 import type { SidePanelProps } from "../../../App"
 import type { AddProps } from "./SettingPanel"
+import AddItemButton from "./ui/AddItemButton"
+import ColorStartEnd from "./ui/ColorStartEnd"
+import SingleValue from "./ui/SingleValue"
 
-export default function LinearBaseSetting(props: SidePanelProps & AddProps) {
+export default function LinearGradiationSetting(props: SidePanelProps & AddProps) {
 
-    // propsの分割代入で必要なものを抽出する
     const {
         angle,
         setAngle,
@@ -14,7 +13,7 @@ export default function LinearBaseSetting(props: SidePanelProps & AddProps) {
         colors,
         setColors,
         activeSlideIndex,
-        slideItem,
+        slideItem
     } = props
 
     return (
@@ -26,13 +25,12 @@ export default function LinearBaseSetting(props: SidePanelProps & AddProps) {
                 styles={commonStyles}
             />
 
-            <ColorParcent
+            <ColorStartEnd
                 colors={colors}
                 setColors={setColors}
-                styles={commonStyles}
                 activeSlideIndex={activeSlideIndex}
                 slideItem={slideItem}
-                parcent={true}
+                styles={commonStyles}
             />
 
             <AddItemButton

@@ -6,6 +6,8 @@ export type ColorStop = {
   id: string
   color: string
   ratio: number
+  start: number
+  end: number
 }
 
 export type SidePanelProps = {
@@ -13,8 +15,8 @@ export type SidePanelProps = {
   setAngle: (angle: number) => void
   wSize: number
   setWSize: (wSize: number) => void
-  hSize: number
-  setHSize: (hSize: number) => void
+  borderSize: number
+  setBorderSize: (borderSize: number) => void
   gon: number
   setGon: (gon:number) => void
   xAspect: number
@@ -31,7 +33,7 @@ export type SidePanelProps = {
 export type PreviewCanvasProps = {
   angle: number
   wSize: number
-  hSize: number
+  borderSize: number
   gon: number
   xAspect: number
   yAspect: number
@@ -50,15 +52,15 @@ const layoutIcons = Object.values(
 function App() {
   const [angle, setAngle] = useState<number>(0) // レイアウトの角度
   const [wSize, setWSize] = useState<number>(20) // 横幅サイズ
-  const [hSize, setHSize] = useState<number>(10) // 縦のサイズ
+  const [borderSize, setBorderSize] = useState<number>(100) // 縦のサイズ
   const [gon, setGon] = useState<number>(3) // 多角形の角の数
   const [xAspect, setXAspect] = useState<number>(1) // x軸のアスペクト比
-  const [yAspect, setYAspect] = useState<number>(1) // y軸のアスペクト比
+  const [yAspect, setYAspect] = useState<number>(2) // y軸のアスペクト比
   const [colors, setColors] = useState<ColorStop[]>([ // 色の設定値
     // 仮の初期値
-    { id: "1", color: '#66c2b2', ratio: 50 },
-    { id: "2", color: '#4d8dbd', ratio: 30 },
-    { id: "3", color: '#c984c0', ratio: 20 },
+    { id: "1", color: '#66c2b2', ratio: 50, start: 0, end: 10 },
+    { id: "2", color: '#4d8dbd', ratio: 30, start: 0, end: 10 },
+    { id: "3", color: '#c984c0', ratio: 20, start: 0, end: 10 },
   ])
 
   const [selectedLayout, setSelectedLayout] = useState<string>('src\assets\layouts\linear-base.svg') // 選択されているレイアウト
@@ -69,8 +71,8 @@ function App() {
     setAngle: setAngle,
     wSize: wSize,
     setWSize: setWSize,
-    hSize: hSize,
-    setHSize: setHSize,
+    borderSize: borderSize,
+    setBorderSize: setBorderSize,
     gon: gon,
     setGon: setGon,
     xAspect: xAspect,
@@ -90,7 +92,7 @@ function App() {
     colors: colors,
     angle: angle,
     wSize: wSize,
-    hSize: hSize,
+    borderSize: borderSize,
     gon: gon,
     xAspect: xAspect,
     yAspect: yAspect,

@@ -1,9 +1,23 @@
+import type { ColorStop } from "../../App"
 
+type Props = {
+    colors: ColorStop[]
+    angle: number
+}
 
-export default function LinearGradation() {
+export default function LinearGradation({ colors, angle }: Props) {
+    const gradientStr = colors.map((color, index) => {
+        const mid = (color.start + color.end) / 2
+
+        return `${color.color} ${mid}%`
+    }).join(',')
+
     return (
-        <div className="w-full h-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-lg">
-            {/* 線形グラデーションのプレビュー */}
-        </div>
+        <div
+            className="w-full h-full bg-white"
+            style={{
+                background: `linear-gradient(${angle + 180}deg, ${gradientStr})`
+            }}
+        />
     )
 }

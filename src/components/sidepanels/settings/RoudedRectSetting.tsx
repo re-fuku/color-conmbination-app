@@ -11,8 +11,8 @@ export default function RoundedRectSetting(props : SidePanelProps & AddProps) {
     const {
         wSize,
         setWSize,
-        hSize,
-        setHSize,
+        borderSize,
+        setBorderSize,
         xAspect,
         setXAspect,
         yAspect,
@@ -28,8 +28,8 @@ export default function RoundedRectSetting(props : SidePanelProps & AddProps) {
         <>
             <SingleValue
                 label="角丸サイズ"
-                value={hSize}
-                setValue={setHSize}
+                value={borderSize}
+                setValue={setBorderSize}
                 styles={commonStyles}
             />
 

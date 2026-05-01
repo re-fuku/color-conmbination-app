@@ -7,6 +7,7 @@ import LinearBaseSetting from "./LinearBaseSetting"
 import CirclesSetting from "./CirclesSetting";
 import RoundedRectSetting from "./RoudedRectSetting";
 import PoligonSetting from "./PoligonSetting";
+import LinearGradiationSetting from "./LinearGradiationSetting";
 
 export type CommonStyles = {
   card: string
@@ -29,7 +30,7 @@ export default function SettingPanel(props : SidePanelProps) {
 
     // 共通のスタイルを定義
     const commonStyles = {
-        card: "bg-item-bg-color p-3 rounded-xl relative flex justify-between items-center transition-transform duration-300 ease-in-out",
+        card: "h-10 bg-item-bg-color p-3 rounded-xl relative flex justify-between items-center transition-transform duration-300 ease-in-out",
         label: "text-sm text-text-color cursor-default",
         input: "bt-transparent bg-input-bg-color text-center w-10 outline-none font-mono rounded-lg text-text-color",
         unit: "absolute -bottom-0 -right-0 text-xs text-text-color font-mono",
@@ -61,7 +62,12 @@ export default function SettingPanel(props : SidePanelProps) {
                 )
             // ➁線形グラデーション
             case selectedLayout.includes('linear-gradation'):
-                return ''
+                return (
+                    <LinearGradiationSetting
+                        {...props}
+                        {...addProps}
+                    />
+                )
             // ➂放射グラデーション
             case selectedLayout.includes('radial-gradation'):
                 return ''

@@ -11,7 +11,7 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
         colors, // 各色の情報
         angle, // 角度
         wSize, // 横幅のサイズ(%)
-        hSize, // 縦のサイズ(px)
+        borderSize, // 縦のサイズ(px)
         gon, // 多角形の角の数
         xAspect, // x軸のアスペクト比
         yAspect, // y軸のアスペクト比
@@ -32,9 +32,12 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
                     />
                 )
             // ➁線形グラデーション
-            case selectedLayout.includes('linear-gratiation'):
+            case selectedLayout.includes('linear-gradation'):
                 return (
-                    < LinearGradation/>
+                    <LinearGradation
+                        colors={colors}
+                        angle={angle}
+                    />
                 )
 
             // ➄円並び
@@ -51,7 +54,7 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
                 return (
                     <RoundedRect
                         wSize={wSize}
-                        hSize={hSize}
+                        borderSize={borderSize}
                         xAspect={xAspect}
                         yAspect={yAspect}
                         colors={colors}

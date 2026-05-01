@@ -35,7 +35,7 @@ export default function Poligons({gon, size, colors, previewBG}: Props) {
                 return (
                     <div
                         key={index}
-                        className={`aspect-square flex ${reverse? "self-start":"self-end"}`}
+                        className={`aspect-square flex ${reverse? "self-start":"self-ratio"}`}
                         style={{
                             width: `${size}%`,
                             aspectRatio: 1 / 1,

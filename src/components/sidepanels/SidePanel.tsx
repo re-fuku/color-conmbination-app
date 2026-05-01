@@ -9,7 +9,7 @@ export default function SidePanel(props: SidePanelProps) {
     const hoverStyle = "hover:border-white hover:border-2"
 
     return (
-        <div className="w-100 h-full bg-panel-bg-color flex flex-col gap-3 border-none">
+        <div className="w-75 h-full bg-panel-bg-color flex flex-col border-none">
             <Group orientation="vertical" className="h-full">
                 <Panel className="relative scrollbar-hide rounded-2xl bg-panel-bg-color" defaultSize={50} minSize={20} collapsible={true}>
                     <SettingPanel 
