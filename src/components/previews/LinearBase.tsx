@@ -16,7 +16,7 @@ export default function LinearBase({colors, angle}: Props) {
 
     return (
         <div 
-            className="w-full h-full"
+            className="w-full h-full rounded-2xl"
             style={{
                 // angle 0だと順番が変わるためあらかじめ180度回転させておく
                 background: `linear-gradient(${angle + 180}deg, ${gradientStr})`

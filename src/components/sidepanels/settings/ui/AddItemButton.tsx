@@ -19,7 +19,9 @@ export default function AddItemButton({colors, setColors}: Props) {
         const newColor: ColorStop = {
             id: newId,
             color: "#ffffff",
-            ratio: 10
+            ratio: 10,
+            start: 0,
+            end: 0,
         }
 
         setColors([...colors, newColor])

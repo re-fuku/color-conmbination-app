@@ -6,7 +6,7 @@ type Props = {
 }
 
 export default function LinearGradation({ colors, angle }: Props) {
-    const gradientStr = colors.map((color, index) => {
+    const gradientStr = colors.map((color) => {
         const mid = (color.start + color.end) / 2
 
         return `${color.color} ${mid}%`
@@ -14,7 +14,7 @@ export default function LinearGradation({ colors, angle }: Props) {
 
     return (
         <div
-            className="w-full h-full bg-white"
+            className="w-full h-full rounded-2xl"
             style={{
                 background: `linear-gradient(${angle + 180}deg, ${gradientStr})`
             }}
