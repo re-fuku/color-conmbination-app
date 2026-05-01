@@ -5,7 +5,6 @@ type Props = {
     angle: number
 }
 
-
 export default function LinearBase({colors, angle}: Props) {
     const gradientStr = colors.map((color, index) => {
         const start = colors.slice(0, index).reduce((sum, c) => sum + c.ratio, 0)

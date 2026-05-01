@@ -8,7 +8,7 @@ const menuImages = import.meta.glob<{ default: string }>(
     { eager: true}
 )
 
-export default function MeenuPanel({ hoverStyle }: Props) {
+export default function MenuPanel({ hoverStyle }: Props) {
 
     // ファイル名から特定のアイコンを取り出す関数
     const getMenuIcon = (name: string) => {
@@ -20,7 +20,7 @@ export default function MeenuPanel({ hoverStyle }: Props) {
     const menuIconStyle = `w-15 h-15 rounded-sm ${hoverStyle}`
 
     return (
-        <nav className="sticky w-75 h-20 p-2.5 rounded-4xl bottom-0  flex gap-12 justify-center items-center bg-cyan-800">
+        <nav className="sticky w-75 h-20 p-2.5 rounded-4xl bottom-0 flex gap-12 justify-center items-center bg-cyan-800">
             {/* 設定呼び出しボタン */}
             <button>
                 <img
@@ -31,7 +31,7 @@ export default function MeenuPanel({ hoverStyle }: Props) {
             </button>
             
             {/* 背景色変更ボタン */}
-            <button className="">
+            <button>
                 <img
                     src={getMenuIcon('change-bg')}
                     className={menuIconStyle}

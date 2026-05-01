@@ -6,11 +6,10 @@ type Props = {
     hoverStyle: string
 }
 
-
 export default function LayoutPanel({selectedLayout, setSelectedLayout, layoutIcons, hoverStyle}: Props) {
 
     return (
-        <div className= "p-2 flex flex-col w-full h-hull bg-cyan-700 rounded-2xl rounded-tl-none overflow-auto">
+        <div className= "p-2 flex flex-col w-full h-full scrollbar-hide bg-cyan-700 rounded-2xl overflow-auto">
             {/* 3列のレイアウトのグリッド */}
             <div className="grid grid-cols-3 gap-5">
                 {layoutIcons.map((icon, index) => (
@@ -22,7 +21,7 @@ export default function LayoutPanel({selectedLayout, setSelectedLayout, layoutIc
                             `
                         }
                         onClick={() => setSelectedLayout(icon)}
-                    >   
+                    >
                         <img
                             src={icon}
                             alt={`Layout ${index + 1}`}
@@ -30,6 +29,7 @@ export default function LayoutPanel({selectedLayout, setSelectedLayout, layoutIc
                         />
                     </button>
                 ))}
+                <div/>
             </div>
         </div>
     )
