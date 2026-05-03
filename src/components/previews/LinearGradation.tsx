@@ -3,9 +3,10 @@ import type { ColorStop } from "../../App"
 type Props = {
     colors: ColorStop[]
     angle: number
+    previewBG: string
 }
 
-export default function LinearGradation({ colors, angle }: Props) {
+export default function LinearGradation({ colors, angle, previewBG }: Props) {
     const gradientStr = colors.map((color) => {
         const mid = (color.start + color.end) / 2
 
@@ -14,7 +15,7 @@ export default function LinearGradation({ colors, angle }: Props) {
 
     return (
         <div
-            className="w-full h-full rounded-2xl"
+            className={previewBG}
             style={{
                 background: `linear-gradient(${angle + 180}deg, ${gradientStr})`
             }}

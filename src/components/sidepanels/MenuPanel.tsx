@@ -20,7 +20,7 @@ export default function MenuPanel({ hoverStyle }: Props) {
     const menuIconStyle = `w-15 h-15 rounded-sm ${hoverStyle}`
 
     return (
-        <nav className="sticky w-75 h-20 p-2.5 rounded-4xl bottom-0 flex gap-12 justify-center items-center bg-cyan-800">
+        <nav className="sticky w-70 h-15 p-2.5 rounded-4xl bottom-0 flex gap-12 justify-center items-center bg-cyan-800">
             {/* 設定呼び出しボタン */}
             <button>
                 <img

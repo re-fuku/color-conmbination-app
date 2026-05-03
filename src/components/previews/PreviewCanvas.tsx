@@ -18,7 +18,7 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
         selectedLayout // 選択されているレイアウト
     } = props
 
-    const previewBG = "h-full w-full pl-5 pr-5 rounded-2xl flex flex-wrap shrink-0 grow-0 items-center content-center bg-white overflow-hidden"
+    const previewBG = "h-full w-full pl-5 pr-5 rounded-[20px] flex flex-wrap shrink-0 grow-0 items-center content-center bg-white overflow-hidden"
 
     const renderPreview = () => {
 
@@ -29,6 +29,7 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
                     <LinearBase
                         colors={colors}
                         angle={angle}
+                        previewBG={previewBG}
                     />
                 )
             // ➁線形グラデーション
@@ -37,6 +38,7 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
                     <LinearGradation
                         colors={colors}
                         angle={angle}
+                        previewBG={previewBG}
                     />
                 )
 
@@ -78,7 +80,7 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
     }      
 
     return (
-        <div className="w-full pl-7.5 p-2.5">
+        <div className="w-full pl-5 p-2.5">
             {renderPreview()}
         </div>
     )

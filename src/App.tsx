@@ -99,7 +99,7 @@ function App() {
   }
 
   return (
-    <div className="flex h-screen w-screen p-5 bg-app-bg-color text-text-color font-sans overflow-hidden">
+    <div className="flex h-screen w-screen p-2.5 bg-app-bg-color text-text-color font-sans overflow-hidden">
       <SidePanel
         {...sidePanelProps}
       />

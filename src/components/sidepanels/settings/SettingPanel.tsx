@@ -30,10 +30,10 @@ export default function SettingPanel(props : SidePanelProps) {
 
     // 共通のスタイルを定義
     const commonStyles = {
-        card: "h-10 bg-item-bg-color p-3 rounded-xl relative flex justify-between items-center transition-transform duration-300 ease-in-out",
+        card: "w-full h-10 bg-item-bg-color p-3 px-2 rounded-xl relative flex justify-between items-center transition-transform duration-300 ease-in-out",
         label: "text-sm text-text-color cursor-default",
-        input: "pr-2 bt-transparent bg-input-bg-color text-center w-10 outline-none font-mono rounded-lg text-text-color [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
-        unit: "absolute -bottom-0 -right-0 text-xs text-text-color font-mono",
+        input: "bt-transparent bg-input-bg-color text-center w-12 h-7.5 px-2 outline-none font-mono rounded-lg text-text-color [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
+        unit: "absolute -bottom-0 -right-0 text-[10px] text-text-color font-mono",
         clip: "absolute -top-0 -left-0 h-5 w-5 bg-clip-color rounded-tl-xl [clip-path:polygon(0%_0%,100%_0%,0%_100%)]",
     }
 
@@ -103,7 +103,7 @@ export default function SettingPanel(props : SidePanelProps) {
 
     return (
         <div className="h-1/2 flex flex-col rounded-3x">
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col p-2.5 gap-2.5">
                 {renderItemList()}
             </div>
         </div>
