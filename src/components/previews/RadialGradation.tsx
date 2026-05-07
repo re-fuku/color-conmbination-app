@@ -2,18 +2,19 @@ import type { ColorStop } from "../../App"
 
 type Props = {
     colors: ColorStop[]
-    angle: number
+    xPosition: number
+    yPosition: number
     gradientStr: (colors: ColorStop[]) => string
     previewBG: string
 }
 
-export default function LinearGradation({ colors, angle, gradientStr,previewBG }: Props) {
+export default function RadialGradation({colors, xPosition, yPosition, gradientStr, previewBG}: Props) {
 
     return (
         <div
             className={previewBG}
             style={{
-                background: `linear-gradient(${angle + 180}deg, ${gradientStr(colors)})`
+                background: `radial-gradient(circle at ${xPosition}% ${yPosition}%, ${gradientStr(colors)})`
             }}
         />
     )

@@ -8,7 +8,7 @@ type Props = {
     colors: ColorStop[]
     setColors: (c:ColorStop[]) => void
     styles: CommonStyles
-    activeSlideIndex: number | null
+    activeSlideIndex: number
     slideItem: (index: number) => void
     parcent: false | true 
 }
@@ -29,7 +29,7 @@ export default function ColorPersent({colors, setColors, styles, activeSlideInde
         // 新しい配列で状態を更新
         setColors(updatedColors)
     }
-
+    
     return (
         <>
             {colors.map((c, i) =>{

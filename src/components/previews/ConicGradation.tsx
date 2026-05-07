@@ -7,13 +7,13 @@ type Props = {
     previewBG: string
 }
 
-export default function LinearGradation({ colors, angle, gradientStr,previewBG }: Props) {
+export default function ConicGradation({colors, angle, gradientStr, previewBG}: Props) {
 
     return (
         <div
             className={previewBG}
             style={{
-                background: `linear-gradient(${angle + 180}deg, ${gradientStr(colors)})`
+                background: `conic-gradient(from ${angle}deg at center, ${gradientStr(colors)}, ${colors[0].color})`
             }}
         />
     )

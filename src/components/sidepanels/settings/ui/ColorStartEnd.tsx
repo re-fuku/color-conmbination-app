@@ -8,7 +8,7 @@ import DeleteButton from './DeleteButton'
 type Props = {
     colors: ColorStop[]
     setColors: (colors: ColorStop[]) => void
-    activeSlideIndex: number | null
+    activeSlideIndex: number
     slideItem: (index: number) => void
     styles: CommonStyles
 }
@@ -45,6 +45,7 @@ export default function ColorStartEnd({colors, setColors, styles, activeSlideInd
                             colors={colors}
                             setColors={setColors}
                             slideItem={slideItem}
+                            activeSlideIndex={activeSlideIndex}
                             index={index}
                         />
 

@@ -1,9 +1,11 @@
-import type { PreviewCanvasProps } from '../../App'
+import type { ColorStop, PreviewCanvasProps } from '../../App'
 import LinearBase from './LinearBase'
 import LinearGradation from './LinearGradation'
 import Circles from './Circles'
 import RoundedRect from './RoundedRect'
 import Poligons from './Poligons'
+import RadialGradation from './RadialGradation'
+import ConicGradation from './ConicGradation'
 
 export default function PreviewCanvas(props: PreviewCanvasProps) {
     // 必要なpropsを分割代入で抽出する
@@ -11,6 +13,8 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
         colors, // 各色の情報
         angle, // 角度
         wSize, // 横幅のサイズ(%)
+        xPosition, // 円の中心座標(x軸)
+        yPosition, // 円の中心座標(y軸)
         borderSize, // 縦のサイズ(px)
         gon, // 多角形の角の数
         xAspect, // x軸のアスペクト比
@@ -19,6 +23,12 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
     } = props
 
     const previewBG = "h-full w-full pl-5 pr-5 rounded-[20px] flex flex-wrap shrink-0 grow-0 items-center content-center bg-white overflow-hidden"
+
+    const gradientStr = (colors: ColorStop[]) => colors.map((color) => {
+        const mid = (color.start + color.end) / 2
+
+        return `${color.color} ${mid}%`
+    }).join(',')
 
     const renderPreview = () => {
 
@@ -38,10 +48,31 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
                     <LinearGradation
                         colors={colors}
                         angle={angle}
+                        gradientStr={gradientStr}
                         previewBG={previewBG}
                     />
                 )
-
+            // ➂円形グラデーション
+            case selectedLayout.includes('radial-gradation'):
+                return (
+                    <RadialGradation 
+                        colors={colors}
+                        xPosition={xPosition}
+                        yPosition={yPosition}
+                        gradientStr={gradientStr}
+                        previewBG={previewBG}
+                    />
+                )
+            // ➃扇形グラデーション
+            case selectedLayout.includes('conic-gradation'):
+                return (
+                    <ConicGradation 
+                        colors={colors}
+                        angle={angle}
+                        gradientStr={gradientStr}
+                        previewBG={previewBG}
+                    />
+                )
             // ➄円並び
             case selectedLayout.includes('circles'):
                 return (

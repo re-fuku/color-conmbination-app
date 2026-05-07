@@ -16,6 +16,8 @@ export default function SingleValue({label, value, setValue, styles}: Props) {
         'サイズ': '%',
         '角丸サイズ': 'px',
         '角数': 'gon',
+        'X位置': '%',
+        'Y位置': '%',
     }
 
     const displayUnit = unit[label] || '単位未設定'

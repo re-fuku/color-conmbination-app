@@ -8,6 +8,8 @@ import CirclesSetting from "./CirclesSetting";
 import RoundedRectSetting from "./RoudedRectSetting";
 import PoligonSetting from "./PoligonSetting";
 import LinearGradiationSetting from "./LinearGradiationSetting";
+import RadialGradationSetting from "./RadialGradationSetting";
+import ConicGradationSetting from "./ConicGradationSetting";
 
 export type CommonStyles = {
   card: string
@@ -19,7 +21,7 @@ export type CommonStyles = {
 
 // 子コンポーネントに渡す追加のpropsの型
 export type AddProps = {
-    activeSlideIndex: number | null
+    activeSlideIndex: number
     slideItem: (index: number) => void
     commonStyles: CommonStyles
 }
@@ -80,10 +82,20 @@ export default function SettingPanel(props : SidePanelProps) {
                 )
             // ➂放射グラデーション
             case selectedLayout.includes('radial-gradation'):
-                return ''
+                return (
+                    <RadialGradationSetting
+                        {...props}
+                        {...addProps}
+                    />
+                )
             // ➃扇形グラデーション
             case selectedLayout.includes('conic-gradation'):
-                return ''
+                return (
+                    <ConicGradationSetting
+                        {...props}
+                        {...addProps}
+                    />
+                )
             // ➄円並び
             case selectedLayout.includes('circles'):
                 return (
@@ -101,6 +113,14 @@ export default function SettingPanel(props : SidePanelProps) {
                     />
                 )
             // ➆多角形並び
+            case selectedLayout.includes('poligon-tiles'):
+                return (
+                    <PoligonSetting
+                        {...props}
+                        {...addProps}
+                    />
+                )
+            // ➇ヘッダー&フッター
             case selectedLayout.includes('poligon-tiles'):
                 return (
                     <PoligonSetting
