@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import type { SidePanelProps } from "../../../App";
 
@@ -48,6 +48,16 @@ export default function SettingPanel(props : SidePanelProps) {
         slideItem: slideItem,
         commonStyles: commonStyles,
     }
+
+    // ほかの場所をクリックしたときにリセットする処理
+    useEffect(() => {
+        const handleOutsideClick = () => {
+            if (activeSlideIndex !== null) {
+                slideItem(-1)
+            }
+        }
+        window.addEventListener("click", handleOutsideClick)
+    },[activeSlideIndex, slideItem])
 
     // アイテムリストを生成する
     const renderItemList = () => {

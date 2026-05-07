@@ -34,7 +34,10 @@ export default function AddItemButton({colors, setColors}: Props) {
                 className="w-10 bg-transparent font-text-color flex justify-center justify-items-center"
                 onClick={() => addColor()}
             >
-                <span className="leading-none bg-blue-500 w-10 h-10 rounded-full text-3xl font-bold flex justify-items-center justify-center hover:border-white hover:border-2">+</span>
+                <img
+                    src="src\assets\button\addButton.svg"
+                    className="hover:scale-95"
+                />
             </button>
         </div>
     )

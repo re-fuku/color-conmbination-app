@@ -45,6 +45,7 @@ export default function ColorPersent({colors, setColors, styles, activeSlideInde
                             colors={colors}
                             setColors={setColors}
                             slideItem={slideItem}
+                            activeSlideIndex={activeSlideIndex}
                             index={i}
                         />
 

@@ -3,28 +3,17 @@ type Props = {
     hoverStyle: string
 }
 
-const menuImages = import.meta.glob<{ default: string }>(
-    '../../assets/menus/*svg',
-    { eager: true}
-)
-
 export default function MenuPanel({ hoverStyle }: Props) {
 
-    // ファイル名から特定のアイコンを取り出す関数
-    const getMenuIcon = (name: string) => {
-        const key = Object.keys(menuImages).find(path => path.includes(name))
-        return key ? menuImages[key].default : ''
-    }
-
     // メニューアイコンのスタイル
-    const menuIconStyle = `w-15 h-15 rounded-sm ${hoverStyle}`
+    const menuIconStyle = `w-15 h-15 rounded-full ${hoverStyle}`
 
     return (
         <nav className="sticky w-70 h-15 p-2.5 rounded-4xl bottom-0 flex gap-12 justify-center items-center bg-cyan-800">
             {/* 設定呼び出しボタン */}
             <button>
                 <img
-                    src={getMenuIcon('call-settings')}
+                    src="src\assets\menus\callSettingButton.svg"
                     className={menuIconStyle}
                     onClick={() => alert('設定呼び出しボタンがクリックされました')}
                 />
@@ -33,7 +22,7 @@ export default function MenuPanel({ hoverStyle }: Props) {
             {/* 背景色変更ボタン */}
             <button>
                 <img
-                    src={getMenuIcon('change-bg')}
+                    src="src\assets\menus\changeBgButton.svg"
                     className={menuIconStyle}
                     onClick={() => alert('背景色変更ボタンがクリックされました')}
                 />
@@ -42,7 +31,7 @@ export default function MenuPanel({ hoverStyle }: Props) {
             {/* 設定保存ボタン */}
             <button>
                 <img
-                    src={getMenuIcon('save')}
+                    src="src\assets\menus\saveSettingButton.svg"
                     className={menuIconStyle}
                     onClick={() => alert('設定保存ボタンがクリックされました')}
                 />

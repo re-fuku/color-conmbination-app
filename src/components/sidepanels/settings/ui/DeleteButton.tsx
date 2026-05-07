@@ -5,9 +5,12 @@ type Props = {
     setColors: (c:ColorStop[]) => void
     index: number
     slideItem: (index: number) => void
+    activeSlideIndex: number
 }
 
-export default function DeleteButton({colors, setColors, slideItem, index}: Props) {
+export default function DeleteButton({colors, setColors, slideItem, activeSlideIndex, index}: Props) {
+
+    const buttonSize = activeSlideIndex === index? 24 : 8
 
     // アイテムリストを削除する
     const deleteList = (index: number) => {
@@ -19,10 +22,14 @@ export default function DeleteButton({colors, setColors, slideItem, index}: Prop
 
     return (
         <button
-            className="flex items-center absolute right-0 top-[5px] w-8 h-8 rounded-full bg-delete-color"
-            onClick={() => deleteList(index)}
+            className="flex items-center justify-center absolute right-[5px] top-[5px] h-7 w-7 rounded-full"
+            onClick={() => deleteList(index)}    
         >
-            <span className="leading-none w-full h-full rounded-full text-3xl font-bold flex justify-items-center justify-center hover:border-white hover:border-2">ー</span>
+            <img
+                src="src/assets/button/deleteButton.svg"
+                className="origin-center duration-600"
+                style={{height: buttonSize, width: buttonSize}}
+            />
         </button>
     )
 }
