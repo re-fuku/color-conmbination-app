@@ -14,6 +14,8 @@ export default function CirclesSetting(props: SidePanelProps & AddProps) {
         setColors,
         activeSlideIndex,
         slideItem,
+        isOpenColorPicker,
+        setIsOpenColorPicker,
         commonStyles,
     } = props
 
@@ -32,6 +34,7 @@ export default function CirclesSetting(props: SidePanelProps & AddProps) {
                 styles={commonStyles}
                 activeSlideIndex={activeSlideIndex}
                 slideItem={slideItem}
+                setIsOpenColorPicker={setIsOpenColorPicker}
                 parcent={false}
             />
 

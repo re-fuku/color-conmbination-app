@@ -18,6 +18,8 @@ export default function RadialGradationSetting(props: SidePanelProps & AddProps)
         setColors,
         activeSlideIndex,
         slideItem,
+        isOpenColorPicker,
+        setIsOpenColorPicker,
     } = props
 
     return (
@@ -43,6 +45,8 @@ export default function RadialGradationSetting(props: SidePanelProps & AddProps)
                 activeSlideIndex={activeSlideIndex}
                 slideItem={slideItem}
                 styles={commonStyles}
+                isOpenColorPicker={isOpenColorPicker}
+                setIsOpenColorPicker={setIsOpenColorPicker}
             />
 
             <AddItemButton

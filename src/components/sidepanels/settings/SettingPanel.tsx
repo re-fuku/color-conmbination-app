@@ -21,7 +21,7 @@ export type CommonStyles = {
 
 // 子コンポーネントに渡す追加のpropsの型
 export type AddProps = {
-    activeSlideIndex: number
+    activeSlideIndex: number | null
     slideItem: (index: number) => void
     commonStyles: CommonStyles
 }

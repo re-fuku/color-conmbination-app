@@ -13,7 +13,9 @@ export default function LinearGradiationSetting(props: SidePanelProps & AddProps
         colors,
         setColors,
         activeSlideIndex,
-        slideItem
+        slideItem,
+        isOpenColorPicker,
+        setIsOpenColorPicker,
     } = props
 
     return (
@@ -31,6 +33,8 @@ export default function LinearGradiationSetting(props: SidePanelProps & AddProps
                 activeSlideIndex={activeSlideIndex}
                 slideItem={slideItem}
                 styles={commonStyles}
+                isOpenColorPicker={isOpenColorPicker}
+                setIsOpenColorPicker={setIsOpenColorPicker}
             />
 
             <AddItemButton

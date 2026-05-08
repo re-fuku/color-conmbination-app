@@ -2,7 +2,7 @@ import type { CommonStyles } from "../SettingPanel"
 
 type Props = {
     label: string
-    value: number;
+    value: number
     setValue: (value: number) => void
     styles: CommonStyles
 }

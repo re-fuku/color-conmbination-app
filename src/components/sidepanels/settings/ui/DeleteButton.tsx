@@ -5,7 +5,7 @@ type Props = {
     setColors: (c:ColorStop[]) => void
     index: number
     slideItem: (index: number) => void
-    activeSlideIndex: number
+    activeSlideIndex: number | null
 }
 
 export default function DeleteButton({colors, setColors, slideItem, activeSlideIndex, index}: Props) {
@@ -27,7 +27,7 @@ export default function DeleteButton({colors, setColors, slideItem, activeSlideI
         >
             <img
                 src="src/assets/button/deleteButton.svg"
-                className="origin-center duration-600"
+                className="origin-center duration-300"
                 style={{height: buttonSize, width: buttonSize}}
             />
         </button>

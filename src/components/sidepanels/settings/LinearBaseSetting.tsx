@@ -15,6 +15,8 @@ export default function LinearBaseSetting(props: SidePanelProps & AddProps) {
         setColors,
         activeSlideIndex,
         slideItem,
+        isOpenColorPicker,
+        setIsOpenColorPicker
     } = props
 
     return (
@@ -32,6 +34,8 @@ export default function LinearBaseSetting(props: SidePanelProps & AddProps) {
                 styles={commonStyles}
                 activeSlideIndex={activeSlideIndex}
                 slideItem={slideItem}
+                isOpenColorPicker={isOpenColorPicker}
+                setIsOpenColorPicker={setIsOpenColorPicker}
                 parcent={true}
             />
 

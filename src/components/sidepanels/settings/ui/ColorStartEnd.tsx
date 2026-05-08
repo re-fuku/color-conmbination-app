@@ -8,12 +8,14 @@ import DeleteButton from './DeleteButton'
 type Props = {
     colors: ColorStop[]
     setColors: (colors: ColorStop[]) => void
-    activeSlideIndex: number
+    activeSlideIndex: number | null
     slideItem: (index: number) => void
     styles: CommonStyles
+    isOpenColorPicker: boolean
+    setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
 }
 
-export default function ColorStartEnd({colors, setColors, styles, activeSlideIndex, slideItem}: Props) {
+export default function ColorStartEnd({colors, setColors, styles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker}: Props) {
     const { getDisplayName } = ItemNameRegister("色")
 
 
@@ -53,7 +55,9 @@ export default function ColorStartEnd({colors, setColors, styles, activeSlideInd
                             className={`${styles.card} ${activeSlideIndex === index ? "-translate-x-10" : ""}`}
                             onContextMenu={(e) => {
                                 e.preventDefault()
-                                slideItem(index)
+                                if(!isOpenColorPicker) {
+                                    slideItem(index)
+                                }
                             }}
                         >
                             <div className={styles.clip}/>
@@ -95,6 +99,7 @@ export default function ColorStartEnd({colors, setColors, styles, activeSlideInd
                                     colors={colors}
                                     color={color}
                                     setColors={setColors}
+                                    setIsOpenColorPicker={setIsOpenColorPicker}
                                 />
                             </div>
                         

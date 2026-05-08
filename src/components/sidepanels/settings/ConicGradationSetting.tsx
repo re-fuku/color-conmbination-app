@@ -14,7 +14,9 @@ export default function ConicGradationSetting(props: SidePanelProps & AddProps) 
         colors,
         setColors,
         activeSlideIndex,
-        slideItem
+        slideItem,
+        isOpenColorPicker,
+        setIsOpenColorPicker,
     } = props
 
     return (
@@ -32,6 +34,8 @@ export default function ConicGradationSetting(props: SidePanelProps & AddProps) 
                 activeSlideIndex={activeSlideIndex}
                 slideItem={slideItem}
                 styles={commonStyles}
+                isOpenColorPicker={isOpenColorPicker}
+                setIsOpenColorPicker={setIsOpenColorPicker}
             />
 
             <AddItemButton

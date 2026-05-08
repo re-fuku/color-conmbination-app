@@ -43,6 +43,8 @@ export type SidePanelProps = {
   setXAspect: (xAspect: number) => void
   yAspect: number
   setYAspect: (yAspect: number) => void
+  isOpenColorPicker: boolean
+  setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
   layout: LayoutConfig
   setLayout: (layout: LayoutConfig) => void
   colors: ColorStop[]
@@ -85,6 +87,7 @@ function App() {
   const [yAspect, setYAspect] = useState<number>(2) // y軸のアスペクト比
   const [xPosition, setXPosition] = useState<number>(50) // 円の中心の座標(x軸)
   const [yPosition, setYPosition] = useState<number>(50) // 円の中心の座標(y軸)
+  const [isOpenColorPicker, setIsOpenColorPicker] = useState<boolean>(false) // カラーピッカーが開いているか
   const [layout, setLayout] = useState<LayoutConfig>({ // ヘッダーとフッターの情報
     header: {
       size: 10,
@@ -126,6 +129,8 @@ function App() {
     setXAspect: setXAspect,
     yAspect: yAspect,
     setYAspect: setYAspect,
+    isOpenColorPicker: isOpenColorPicker,
+    setIsOpenColorPicker: setIsOpenColorPicker,
     layout: layout,
     setLayout: setLayout,
     colors: colors,

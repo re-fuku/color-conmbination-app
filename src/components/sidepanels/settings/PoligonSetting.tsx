@@ -17,6 +17,8 @@ export default function PoligonSetting(props: SidePanelProps & AddProps) {
         activeSlideIndex: activeSlideIndex,
         slideItem: slideItem,
         commonStyles: commonStyles,
+        isOpenColorPicker,
+        setIsOpenColorPicker,
     } = props
 
     return (
@@ -41,6 +43,8 @@ export default function PoligonSetting(props: SidePanelProps & AddProps) {
             activeSlideIndex={activeSlideIndex}
             slideItem={slideItem}
             styles={commonStyles}
+            isOpenColorPicker={isOpenColorPicker}
+            setIsOpenColorPicker={setIsOpenColorPicker}
             parcent={false}
           />
 

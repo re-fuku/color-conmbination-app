@@ -22,6 +22,8 @@ export default function RoundedRectSetting(props : SidePanelProps & AddProps) {
         activeSlideIndex,
         slideItem,
         commonStyles,
+        isOpenColorPicker,
+        setIsOpenColorPicker,
     } = props
 
     return (
@@ -54,6 +56,8 @@ export default function RoundedRectSetting(props : SidePanelProps & AddProps) {
                 styles={commonStyles}
                 activeSlideIndex={activeSlideIndex}
                 slideItem={slideItem}
+                isOpenColorPicker={isOpenColorPicker}
+                setIsOpenColorPicker={setIsOpenColorPicker}
                 parcent={false}
              />
 

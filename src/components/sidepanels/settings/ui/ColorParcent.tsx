@@ -8,12 +8,14 @@ type Props = {
     colors: ColorStop[]
     setColors: (c:ColorStop[]) => void
     styles: CommonStyles
-    activeSlideIndex: number
+    activeSlideIndex: number | null
     slideItem: (index: number) => void
+    isOpenColorPicker: boolean
+    setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
     parcent: false | true 
 }
 
-export default function ColorPersent({colors, setColors, styles, activeSlideIndex, slideItem, parcent}: Props) {
+export default function ColorPersent({colors, setColors, styles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker, parcent}: Props) {
     const { getDisplayName } = ItemNameRegister("色")
     // ratioを変更した際の処理
     const handleRatioChange = (id: string, newRatio: number) => {
@@ -53,7 +55,9 @@ export default function ColorPersent({colors, setColors, styles, activeSlideInde
                             className={`${styles.card} ${activeSlideIndex === i ? "-translate-x-10" : ""}`}
                             onContextMenu={(e) => {
                                 e.preventDefault()
-                                slideItem(i)
+                                if(!isOpenColorPicker) {
+                                    slideItem(i)
+                                }
                             }}
                         >
                             
@@ -76,6 +80,7 @@ export default function ColorPersent({colors, setColors, styles, activeSlideInde
                                     colors={colors}
                                     color={c}
                                     setColors={setColors}
+                                    setIsOpenColorPicker={setIsOpenColorPicker}
                                 />
                             </div>
                         </div>
