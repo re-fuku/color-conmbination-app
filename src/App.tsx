@@ -11,17 +11,10 @@ export type ColorStop = {
 }
 
 // ヘッダーとフッターの情報の型を定義
-export type LayoutConfig = {
-  header: {
-    size: number
-    roundedRect: number
-    color: string
-  },
-  footer: {
-    size: number
-    roundedRect: number
-    color: string
-  }
+export type HeaderFooterConfig = {
+  size: number
+  roundedRect: number
+  color: string
 }
 
 export type SidePanelProps = {
@@ -43,10 +36,12 @@ export type SidePanelProps = {
   setXAspect: (xAspect: number) => void
   yAspect: number
   setYAspect: (yAspect: number) => void
+  header: HeaderFooterConfig
+  setHeader: (headr: HeaderFooterConfig) => void
+  footer: HeaderFooterConfig
+  setFooter: (footer: HeaderFooterConfig) => void
   isOpenColorPicker: boolean
   setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
-  layout: LayoutConfig
-  setLayout: (layout: LayoutConfig) => void
   colors: ColorStop[]
   setColors: (colors: ColorStop[]) => void
   selectedLayout: string
@@ -64,7 +59,7 @@ export type PreviewCanvasProps = {
   gon: number
   xAspect: number
   yAspect: number
-  layout: LayoutConfig
+  headerFooter: HeaderFooterConfig
   colors: ColorStop[]
   selectedLayout: string
 }
@@ -88,17 +83,15 @@ function App() {
   const [xPosition, setXPosition] = useState<number>(50) // 円の中心の座標(x軸)
   const [yPosition, setYPosition] = useState<number>(50) // 円の中心の座標(y軸)
   const [isOpenColorPicker, setIsOpenColorPicker] = useState<boolean>(false) // カラーピッカーが開いているか
-  const [layout, setLayout] = useState<LayoutConfig>({ // ヘッダーとフッターの情報
-    header: {
-      size: 10,
-      roundedRect: 10,
-      color: "#ffffff",
-    },
-    footer: {
-      size: 10,
-      roundedRect: 10,
-      color: "#ffffff",
-    }
+  const [header, setHeader] = useState<HeaderFooterConfig>({ // ヘッダーのパラメーター
+    size: 10,
+    roundedRect: 10,
+    color: "#ffffff",
+  })
+  const [footer, setFooter] = useState<HeaderFooterConfig>({ // フッターのパラメーター
+    size: 10,
+    roundedRect: 10,
+    color: "#ffffff",
   })
   const [colors, setColors] = useState<ColorStop[]>([ // 色の設定値
     // 仮の初期値
@@ -131,8 +124,10 @@ function App() {
     setYAspect: setYAspect,
     isOpenColorPicker: isOpenColorPicker,
     setIsOpenColorPicker: setIsOpenColorPicker,
-    layout: layout,
-    setLayout: setLayout,
+    header: header,
+    setHeader: setHeader,
+    footer: footer,
+    setFooter: setFooter,
     colors: colors,
     setColors: setColors,
     selectedLayout: selectedLayout,
@@ -153,7 +148,8 @@ function App() {
     gon: gon,
     xAspect: xAspect,
     yAspect: yAspect,
-    layout: layout,
+    header: header,
+    footer: footer,
   }
 
   return (

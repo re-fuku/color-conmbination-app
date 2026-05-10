@@ -18,6 +18,10 @@ export default function SingleValue({label, value, setValue, styles}: Props) {
         '角数': 'gon',
         'X位置': '%',
         'Y位置': '%',
+        'ヘッダサイズ': 'px',
+        'ヘッダ角丸サイズ': 'px',
+        'フッタサイズ': 'px',
+        'フッタ角丸サイズ': 'px',
     }
 
     const displayUnit = unit[label] || '単位未設定'

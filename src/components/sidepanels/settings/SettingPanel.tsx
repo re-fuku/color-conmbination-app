@@ -10,6 +10,7 @@ import PoligonSetting from "./PoligonSetting";
 import LinearGradiationSetting from "./LinearGradiationSetting";
 import RadialGradationSetting from "./RadialGradationSetting";
 import ConicGradationSetting from "./ConicGradationSetting";
+import HeaderFooterSetting from "../HeaderFooterSetting";
 
 export type CommonStyles = {
   card: string
@@ -121,9 +122,9 @@ export default function SettingPanel(props : SidePanelProps) {
                     />
                 )
             // ➇ヘッダー&フッター
-            case selectedLayout.includes('poligon-tiles'):
+            case selectedLayout.includes('header-footer'):
                 return (
-                    <PoligonSetting
+                    <HeaderFooterSetting
                         {...props}
                         {...addProps}
                     />

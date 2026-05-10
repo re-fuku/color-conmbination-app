@@ -67,20 +67,23 @@ export default function ColorChangeButton({displayName, styles, colors, color, s
                     sideOffset={20}
                     align="start"
                     alignOffset={-50}
-                    className="bg-item-bg-color"
+                    className="bg-item-bg-color rounded-2xl"
                     onInteractOutside={(e : any) => {
                     if (e.detail.originalEvent instanceof MouseEvent && e.detail.originalEvent.button === 2) {
                             e.preventDefault()
                         }
                     }}
                 >
-                    <span className={styles.label}>{displayName}_コード: </span>
-                    <input
-                        className={`${styles.input} w-22`}
-                        type="text"
-                        value={inputColorCode}
-                        onChange={handleTextInput}
-                    />   
+                    <div className="flex justify-start items-center p-1 gap-1">
+                        <span className={styles.label}>{displayName}_コード: </span>
+                        <input
+                            className={`${styles.input} w-20`}
+                            type="text"
+                            value={inputColorCode}
+                            onChange={handleTextInput}
+                        />   
+                    </div>
+
                     <HexColorPicker
                         color={color.color}
                         onChange={handleColorChange}
