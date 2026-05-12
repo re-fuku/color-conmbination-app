@@ -14,7 +14,7 @@ type Props = {
     parcent: false | true 
 }
 
-export default function ColorPersent({colors, setColors, styles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker, parcent}: Props) {
+export default function ColorPercent({colors, setColors, styles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker, parcent}: Props) {
     // ratioを変更した際の処理
     const handleRatioChange = (id: string, newRatio: number) => {
         const updatedColors = colors.map((c) => {
@@ -33,7 +33,7 @@ export default function ColorPersent({colors, setColors, styles, activeSlideInde
     return (
         <>
             {colors.map((c, i) =>{
-                const displayName = "色" + (i + 1)
+                const displayName = "色 " + (i + 1)
 
                 return (
                     <div

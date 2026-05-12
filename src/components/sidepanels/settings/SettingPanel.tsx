@@ -10,7 +10,7 @@ import PoligonSetting from "./PoligonSetting";
 import LinearGradiationSetting from "./LinearGradiationSetting";
 import RadialGradationSetting from "./RadialGradationSetting";
 import ConicGradationSetting from "./ConicGradationSetting";
-import HeaderFooterSetting from "../HeaderFooterSetting";
+import HeaderFooterSetting from "./HeaderFooterSetting";
 
 export type CommonStyles = {
   card: string

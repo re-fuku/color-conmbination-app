@@ -1,6 +1,5 @@
 import type { ColorStop } from '../../../../App'
 import type { CommonStyles } from '../SettingPanel'
-import { ItemNameRegister } from "../../../../hooks/useItemNameRegister"
 import ColorChangeButton from './ColorChangeButton'
 import DeleteButton from './DeleteButton'
 
@@ -16,7 +15,6 @@ type Props = {
 }
 
 export default function ColorStartEnd({colors, setColors, styles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker}: Props) {
-    const { getDisplayName } = ItemNameRegister("色")
 
 
     const handleChangeRatio = (id: string, target: string, newRatio: number) => {
@@ -36,7 +34,7 @@ export default function ColorStartEnd({colors, setColors, styles, activeSlideInd
     return (
         <>
             {colors.map((color, index) => {
-                const displayName = getDisplayName(color.id)
+                const displayName = "色 " + (index + 1)
                 return (
                     <div
                         key={index}
