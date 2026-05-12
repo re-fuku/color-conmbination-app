@@ -6,6 +6,7 @@ import RoundedRect from './RoundedRect'
 import Poligons from './Poligons'
 import RadialGradation from './RadialGradation'
 import ConicGradation from './ConicGradation'
+import HeaderFooter from './HeaderFooter'
 
 export default function PreviewCanvas(props: PreviewCanvasProps) {
     // 必要なpropsを分割代入で抽出する
@@ -19,6 +20,8 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
         gon, // 多角形の角の数
         xAspect, // x軸のアスペクト比
         yAspect, // y軸のアスペクト比
+        header, // ヘッダの情報(サイズ、角丸サイズ、色)
+        footer, // フッタの情報(サイズ、角丸サイズ、色)
         selectedLayout // 選択されているレイアウト
     } = props
 
@@ -101,6 +104,14 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
                         gon={gon}
                         size={wSize}
                         colors={colors}
+                        previewBG={previewBG}
+                    />
+                )
+            case selectedLayout.includes('header-footer'):
+                return (
+                    <HeaderFooter
+                        header={header}
+                        footer={footer}
                         previewBG={previewBG}
                     />
                 )

@@ -59,7 +59,8 @@ export type PreviewCanvasProps = {
   gon: number
   xAspect: number
   yAspect: number
-  headerFooter: HeaderFooterConfig
+  header: HeaderFooterConfig
+  footer: HeaderFooterConfig
   colors: ColorStop[]
   selectedLayout: string
 }
