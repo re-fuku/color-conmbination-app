@@ -1,7 +1,6 @@
 import type { ColorStop } from "../../../../App"
 import type { CommonStyles } from "../SettingPanel"
 import DeleteButton from "./DeleteButton"
-import { ItemNameRegister } from "../../../../hooks/useItemNameRegister"
 import ColorChangeButton from "./ColorChangeButton"
 
 type Props = {
@@ -16,7 +15,6 @@ type Props = {
 }
 
 export default function ColorPersent({colors, setColors, styles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker, parcent}: Props) {
-    const { getDisplayName } = ItemNameRegister("色")
     // ratioを変更した際の処理
     const handleRatioChange = (id: string, newRatio: number) => {
         const updatedColors = colors.map((c) => {
@@ -35,7 +33,7 @@ export default function ColorPersent({colors, setColors, styles, activeSlideInde
     return (
         <>
             {colors.map((c, i) =>{
-                const displayName = getDisplayName(c.id)
+                const displayName = "色" + (i + 1)
 
                 return (
                     <div
