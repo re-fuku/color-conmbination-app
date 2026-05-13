@@ -17,6 +17,11 @@ export type HeaderFooterConfig = {
   color: string
 }
 
+export type MaskConfig = {
+  bgColor: string
+  textColor: string
+}
+
 export type SidePanelProps = {
   angle: number
   setAngle: (angle: number) => void
@@ -47,6 +52,8 @@ export type SidePanelProps = {
   selectedLayout: string
   setSelectedLayout: (selectedLayout: string) => void
   layoutIcons: string[]
+  maskParam: MaskConfig
+  setMaskParam: (maskParam: MaskConfig) => void
 }
 
 export type PreviewCanvasProps = {
@@ -63,6 +70,7 @@ export type PreviewCanvasProps = {
   footer: HeaderFooterConfig
   colors: ColorStop[]
   selectedLayout: string
+  maskParam: MaskConfig
 }
 
 // レイアウトのアイコンのパスを定義
@@ -93,6 +101,10 @@ function App() {
     size: 10,
     roundedRect: 10,
     color: "#ffffff",
+  })
+  const [maskParam, setMaskParam] = useState({ // マスク画像を利用する際のパラメータ
+    bgColor: "#ffffff",
+    textColor: "#ffffff"
   })
   const [colors, setColors] = useState<ColorStop[]>([ // 色の設定値
     // 仮の初期値
@@ -134,6 +146,8 @@ function App() {
     selectedLayout: selectedLayout,
     setSelectedLayout: setSelectedLayout,
     layoutIcons: layoutIcons,
+    maskParam: maskParam,
+    setMaskParam: setMaskParam,
   }
 
   // プレビュー用のprops
@@ -151,6 +165,7 @@ function App() {
     yAspect: yAspect,
     header: header,
     footer: footer,
+    maskParam: maskParam,
   }
 
   return (

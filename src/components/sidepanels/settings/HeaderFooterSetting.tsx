@@ -40,7 +40,7 @@ export default function HeaderFooterSetting(props: SidePanelProps & AddProps) {
             />
 
             <ChangeColor
-                data={header}
+                color={header.color}
                 label='ヘッダ色'
                 setColor={(value) => changeObjValue('header', 'color', value)}
                 setIsOpenColorPicker={setIsOpenColorPicker}
@@ -62,7 +62,7 @@ export default function HeaderFooterSetting(props: SidePanelProps & AddProps) {
             />
 
             <ChangeColor
-                data={footer}
+                color={footer.color}
                 label='フッタ色'
                 setColor={(value) => changeObjValue('footer', 'color', value)}
                 setIsOpenColorPicker={setIsOpenColorPicker}

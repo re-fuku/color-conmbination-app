@@ -11,6 +11,7 @@ import LinearGradiationSetting from "./LinearGradiationSetting";
 import RadialGradationSetting from "./RadialGradationSetting";
 import ConicGradationSetting from "./ConicGradationSetting";
 import HeaderFooterSetting from "./HeaderFooterSetting";
+import BlockSetting from "./BlockSetting";
 
 export type CommonStyles = {
   card: string
@@ -125,6 +126,22 @@ export default function SettingPanel(props : SidePanelProps) {
             case selectedLayout.includes('header-footer'):
                 return (
                     <HeaderFooterSetting
+                        {...props}
+                        {...addProps}
+                    />
+                )
+            // ➈テキストブロック
+            case selectedLayout.includes('text-block'):
+                return (
+                    <BlockSetting 
+                        {...props}
+                        {...addProps}
+                    />
+                )
+            // ➉アイコンブロック
+            case selectedLayout.includes('icon-block'):
+                return (
+                    <BlockSetting 
                         {...props}
                         {...addProps}
                     />

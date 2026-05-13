@@ -1,20 +1,20 @@
 import * as Popover from "@radix-ui/react-popover"
 import { HexColorPicker } from "react-colorful"
 import type { CommonStyles } from "../SettingPanel"
-import type { HeaderFooterConfig } from "../../../../App"
+import type { HeaderFooterConfig, MaskConfig } from "../../../../App"
 import { useState } from "react"
 
 
 type Props = {
-    data: HeaderFooterConfig
+    color: string
     label: string
     setColor: (value: string) => void
     setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
     styles: CommonStyles
 }
 
-export default function ChangeColor({data, label, setColor, setIsOpenColorPicker,styles}: Props) {
-    const [headerfooterColorCode, setHeaderfooterColorCode] = useState(data.color)
+export default function ChangeColor({color, label, setColor, setIsOpenColorPicker,styles}: Props) {
+    const [colorCode, setColorCode] = useState(color)
 
     // 色を変更をテキストで行う場合の処理
     const handleTextInput = (e: React.ChangeEvent<HTMLInputElement>) =>{
@@ -25,7 +25,7 @@ export default function ChangeColor({data, label, setColor, setIsOpenColorPicker
             // 先頭に'#'を付ける
             const formatted = val.startsWith('#') ? val : `#${val}`
             
-            setHeaderfooterColorCode(formatted)
+            setColorCode(formatted)
 
             // 有効桁数になったら反映
             if (formatted.length === 4 || formatted.length == 7) {
@@ -47,7 +47,7 @@ export default function ChangeColor({data, label, setColor, setIsOpenColorPicker
                 <Popover.Trigger asChild>
                     <button
                         className="w-6 h-6 mr-2 rounded-full border-white border-2 cursor-pointer"
-                        style={{ backgroundColor: data.color }}
+                        style={{ backgroundColor: color }}
                     />
                 </Popover.Trigger>
 
@@ -70,16 +70,16 @@ export default function ChangeColor({data, label, setColor, setIsOpenColorPicker
                             <input
                                 className={`${styles.input} w-20`}
                                 type="text"
-                                value={headerfooterColorCode}
+                                value={color}
                                 onChange={handleTextInput}
                             />   
                         </div>
 
                         <HexColorPicker
-                            color={data.color}
-                            onChange={(color) => {
-                                setHeaderfooterColorCode(color)
-                                setColor(color)
+                            color={color}
+                            onChange={(colorCode) => {
+                                setColorCode(colorCode)
+                                setColor(colorCode)
                             }}
                         />
                     </Popover.Content>
