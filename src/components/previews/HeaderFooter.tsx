@@ -6,13 +6,14 @@ type Props = {
     previewBG: string
 }
 
-export default function HeaderFooter({header, footer, previewBG}: Props) {
+export default function HeaderFooter({header, footer}: Props) {
 
         return (
         <div
-            className="bg-white w-full h-full flex flex-col justify-between"
+            className="bg-white w-full h-full rounded-2xl flex flex-col justify-between"
         >
             <header
+                className="rounded-t-2xl"
                 style={{
                     width: "100%",
                     height: `${header.size}px`,
@@ -23,6 +24,7 @@ export default function HeaderFooter({header, footer, previewBG}: Props) {
             />
 
             <footer 
+                className="rounded-b-2xl"
                 style={{
                     width: "100%",
                     height: `${footer.size}px`,

@@ -7,6 +7,9 @@ import Poligons from './Poligons'
 import RadialGradation from './RadialGradation'
 import ConicGradation from './ConicGradation'
 import HeaderFooter from './HeaderFooter'
+import MaskPreview from './MaskPreview'
+import TextBlock from './TextBlock'
+import BorderOutLine from './BorderOutLine'
 
 export default function PreviewCanvas(props: PreviewCanvasProps) {
     // 必要なpropsを分割代入で抽出する
@@ -22,7 +25,9 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
         yAspect, // y軸のアスペクト比
         header, // ヘッダの情報(サイズ、角丸サイズ、色)
         footer, // フッタの情報(サイズ、角丸サイズ、色)
-        selectedLayout // 選択されているレイアウト
+        selectedLayout, // 選択されているレイアウト
+        maskParam, // アイコンとテキストで使用するパラメータ
+        brolParam, // ボーダー&アウトラインのパラメータ
     } = props
 
     const previewBG = "h-full w-full pl-5 pr-5 rounded-[20px] flex flex-wrap shrink-0 grow-0 items-center content-center bg-white overflow-hidden"
@@ -107,6 +112,7 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
                         previewBG={previewBG}
                     />
                 )
+            // ➇ヘッダフッタ
             case selectedLayout.includes('header-footer'):
                 return (
                     <HeaderFooter
@@ -115,7 +121,32 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
                         previewBG={previewBG}
                     />
                 )
-
+            // ➈テキストブロック
+            case selectedLayout.includes('text-block'):
+                return (
+                    <TextBlock
+                        selectedLayout={selectedLayout}
+                        maskParam={maskParam}
+                    />
+                )
+            // ➉アイコンブロック
+            case selectedLayout.includes('icon-block'):
+                return (
+                    <MaskPreview
+                        selectedLayout={selectedLayout}
+                        maskParam={maskParam}
+                    />
+                )
+            // ⑪ボーダー&アウトライン
+            case selectedLayout.includes('border-outline'):
+                return (
+                    <BorderOutLine
+                        brolParam={brolParam}
+                        xAspect={xAspect}
+                        yAspect={yAspect}
+                    />
+                )
+            
             default:
                 break
         }

@@ -22,6 +22,9 @@ export default function SingleValue({label, value, setValue, styles}: Props) {
         'ヘッダ角丸サイズ': 'px',
         'フッタサイズ': 'px',
         'フッタ角丸サイズ': 'px',
+        'ボーダーサイズ': 'px',
+        'アウトラインサイズ': 'px',
+        'アウトラインオフセット': 'px',
     }
 
     const displayUnit = unit[label] || '単位未設定'

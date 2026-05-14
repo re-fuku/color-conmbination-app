@@ -77,9 +77,9 @@ export default function ChangeColor({color, label, setColor, setIsOpenColorPicke
 
                         <HexColorPicker
                             color={color}
-                            onChange={(colorCode) => {
-                                setColorCode(colorCode)
-                                setColor(colorCode)
+                            onChange={(c) => {
+                                setColorCode(c)
+                                setColor(c)
                             }}
                         />
                     </Popover.Content>

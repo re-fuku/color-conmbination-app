@@ -12,6 +12,7 @@ import RadialGradationSetting from "./RadialGradationSetting";
 import ConicGradationSetting from "./ConicGradationSetting";
 import HeaderFooterSetting from "./HeaderFooterSetting";
 import BlockSetting from "./BlockSetting";
+import BorderOutlineSetting from "./BorderOutlineSetting";
 
 export type CommonStyles = {
   card: string
@@ -142,6 +143,14 @@ export default function SettingPanel(props : SidePanelProps) {
             case selectedLayout.includes('icon-block'):
                 return (
                     <BlockSetting 
+                        {...props}
+                        {...addProps}
+                    />
+                )
+            // ⑪ボーダー&アウトライン
+            case selectedLayout.includes('border-outline'):
+                return(
+                    <BorderOutlineSetting
                         {...props}
                         {...addProps}
                     />

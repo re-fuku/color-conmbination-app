@@ -17,10 +17,24 @@ export type HeaderFooterConfig = {
   color: string
 }
 
+// マスクの情報を定義
 export type MaskConfig = {
   bgColor: string
   textColor: string
 }
+
+// ボーダー&アウトラインの情報の型を定義
+export type BorderOutlineConfig = {
+  size: number,
+  roundedRect: number,
+  bgColor: string,
+  borderSize: number,
+  borderColor: string,
+  outLineSize: number,
+  outLineOffset: number,
+  outLineColor: string,
+}
+
 
 export type SidePanelProps = {
   angle: number
@@ -54,6 +68,8 @@ export type SidePanelProps = {
   layoutIcons: string[]
   maskParam: MaskConfig
   setMaskParam: (maskParam: MaskConfig) => void
+  brolParam: BorderOutlineConfig
+  setBrOlParam: (brolParam: BorderOutlineConfig) => void
 }
 
 export type PreviewCanvasProps = {
@@ -71,6 +87,7 @@ export type PreviewCanvasProps = {
   colors: ColorStop[]
   selectedLayout: string
   maskParam: MaskConfig
+  brolParam: BorderOutlineConfig
 }
 
 // レイアウトのアイコンのパスを定義
@@ -85,7 +102,7 @@ function App() {
   const [angle, setAngle] = useState<number>(0) // レイアウトの角度
   const [wSize, setWSize] = useState<number>(20) // 横幅サイズ
   const [hSize, setHSize] = useState<number>(20) // 縦幅のサイズ
-  const [borderSize, setBorderSize] = useState<number>(100) // 縦のサイズ
+  const [borderSize, setBorderSize] = useState<number>(100) // 境界線のサイズ
   const [gon, setGon] = useState<number>(3) // 多角形の角の数
   const [xAspect, setXAspect] = useState<number>(1) // x軸のアスペクト比
   const [yAspect, setYAspect] = useState<number>(2) // y軸のアスペクト比
@@ -112,8 +129,18 @@ function App() {
     { id: "2", color: '#4d8dbd', ratio: 30, start: 0, end: 10 },
     { id: "3", color: '#c984c0', ratio: 20, start: 0, end: 10 },
   ])
-
+  const [brolParam, setBrOlParam] = useState<BorderOutlineConfig>({ // ボーダー&アウトラインの設定値
+    size: 50,
+    roundedRect: 10,
+    bgColor: '#ffffff',
+    borderSize: 2,
+    borderColor: '#ffffff',
+    outLineSize: 2,
+    outLineOffset: 0,
+    outLineColor: '#ffffff',
+  })
   const [selectedLayout, setSelectedLayout] = useState<string>('src\assets\layouts\linear-base.svg') // 選択されているレイアウト
+
 
   // サイドパネル用のprops
   const sidePanelProps = {
@@ -148,6 +175,8 @@ function App() {
     layoutIcons: layoutIcons,
     maskParam: maskParam,
     setMaskParam: setMaskParam,
+    brolParam: brolParam,
+    setBrOlParam: setBrOlParam,
   }
 
   // プレビュー用のprops
@@ -165,6 +194,7 @@ function App() {
     yAspect: yAspect,
     header: header,
     footer: footer,
+    brolParam: brolParam,
     maskParam: maskParam,
   }
 
