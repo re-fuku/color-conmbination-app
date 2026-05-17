@@ -2,7 +2,7 @@ import { useState } from 'react'
 import PreviewCanvas from './components/previews/PreviewCanvas'
 import SidePanel from './components/sidepanels/SidePanel'
 
-export type ColorStop = {
+export type ColorConfig = {
   id: string
   color: string
   ratio: number
@@ -10,14 +10,20 @@ export type ColorStop = {
   end: number
 }
 
-// ➉ヘッダーとフッターの情報の型を定義
+// ➀線形色表示の設定値の型
+export type BaseLinerConfig = {
+  angle: number
+  colors: ColorConfig[]
+}
+
+// ➇ヘッダーとフッターの情報の型を定義
 export type HeaderFooterConfig = {
   size: number
   roundedRect: number
   color: string
 }
 
-// マスクの情報を定義
+// ➈➉マスクの情報を定義
 export type MaskConfig = {
   bgColor: string
   textColor: string
@@ -35,7 +41,7 @@ export type BorderOutlineConfig = {
   outLineColor: string,
 }
 
-// 影落としの情報をの型を定義
+// ⑫影落としの情報をの型を定義
 export type DropShadowConfig = {
   size: number, // サイズ
   roundedRect: number, // 角丸サイズ
@@ -52,32 +58,11 @@ export type DropShadowConfig = {
 
 
 export type SidePanelProps = {
-  angle: number
-  setAngle: (angle: number) => void
-  wSize: number
-  setWSize: (wSize: number) => void
-  hSize: number
-  setHSize: (wSize: number) => void
-  xPosition: number
-  setXPosition: (xPosition: number) => void
-  yPosition: number
-  setYPosition: (yPosition: number) => void
-  borderSize: number
-  setBorderSize: (borderSize: number) => void
-  gon: number
-  setGon: (gon:number) => void
-  xAspect: number
-  setXAspect: (xAspect: number) => void
-  yAspect: number
-  setYAspect: (yAspect: number) => void
-  header: HeaderFooterConfig
-  setHeader: (headr: HeaderFooterConfig) => void
-  footer: HeaderFooterConfig
-  setFooter: (footer: HeaderFooterConfig) => void
+  baseLinerParam: BaseLinerConfig
+  setBaseLinerParam: (baseLinerParam: BaseLinerConfig) => void
+
   isOpenColorPicker: boolean
   setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
-  colors: ColorStop[]
-  setColors: (colors: ColorStop[]) => void
   selectedLayout: string
   setSelectedLayout: (selectedLayout: string) => void
   layoutIcons: string[]
@@ -90,18 +75,10 @@ export type SidePanelProps = {
 }
 
 export type PreviewCanvasProps = {
-  angle: number
-  wSize: number
-  hSize: number
-  xPosition: number
-  yPosition: number
-  borderSize: number
-  gon: number
-  xAspect: number
-  yAspect: number
+  baseLinerParam: BaseLinerConfig
+
   header: HeaderFooterConfig
   footer: HeaderFooterConfig
-  colors: ColorStop[]
   selectedLayout: string
   maskParam: MaskConfig
   borderOutlineParam: BorderOutlineConfig
@@ -127,6 +104,16 @@ function App() {
   const [xPosition, setXPosition] = useState<number>(50) // 円の中心の座標(x軸)
   const [yPosition, setYPosition] = useState<number>(50) // 円の中心の座標(y軸)
   const [isOpenColorPicker, setIsOpenColorPicker] = useState<boolean>(false) // カラーピッカーが開いているか
+
+  const [baseLinerParam, setBaseLinerParam] = useState<BaseLinerConfig>({
+      angle: 0,
+      colors: [
+        { id: "1", color: '#66c2b2', ratio: 50, start: 0, end: 10 },
+        { id: "2", color: '#4d8dbd', ratio: 30, start: 0, end: 10 },
+        { id: "3", color: '#c984c0', ratio: 20, start: 0, end: 10 },
+      ]
+  })
+
   const [header, setHeader] = useState<HeaderFooterConfig>({ // ヘッダーのパラメーター
     size: 10,
     roundedRect: 10,
@@ -141,13 +128,13 @@ function App() {
     bgColor: "#ffffff",
     textColor: "#ffffff"
   })
-  const [colors, setColors] = useState<ColorStop[]>([ // 色の設定値
+  const [colors, setColors] = useState<ColorConfig[]>([ // 色の設定値
     // 仮の初期値
     { id: "1", color: '#66c2b2', ratio: 50, start: 0, end: 10 },
     { id: "2", color: '#4d8dbd', ratio: 30, start: 0, end: 10 },
     { id: "3", color: '#c984c0', ratio: 20, start: 0, end: 10 },
   ])
-  const [borderOutlineParam, setBorderOutlineParam] = useState<BorderOutlineConfig>({ // ボーダー&アウトラインの設定値
+  const [borderOutlineParam, setBorderOutlineParam] = useState<BorderOutlineConfig>({ // ⑪ボーダー&アウトラインの設定値
     size: 50,
     roundedRect: 10,
     bgColor: '#ffffff',
@@ -157,7 +144,7 @@ function App() {
     outLineOffset: 0,
     outLineColor: '#ffffff',
   })
-  const [dropShadowParam, setDropShadowParam] = useState<DropShadowConfig>({ // 影落としの設定値
+  const [dropShadowParam, setDropShadowParam] = useState<DropShadowConfig>({ // ⑫影落としの設定値
       size: 50,
       roundedRect: 10,
       xAspect: 1,
@@ -193,6 +180,10 @@ function App() {
     setXAspect: setXAspect,
     yAspect: yAspect,
     setYAspect: setYAspect,
+    // リファクタリング
+    baseLinerParam: baseLinerParam,
+    setBaseLinerParam: setBaseLinerParam,
+
     isOpenColorPicker: isOpenColorPicker,
     setIsOpenColorPicker: setIsOpenColorPicker,
     header: header,
@@ -227,6 +218,9 @@ function App() {
     yAspect: yAspect,
     header: header,
     footer: footer,
+
+    baseLinerParam: baseLinerParam,
+
     borderOutlineParam: borderOutlineParam,
     dropShadowParam: dropShadowParam,
     maskParam: maskParam,

@@ -1,7 +1,7 @@
 import type { SidePanelProps } from "../../../App"
 import type { AddProps } from "./SettingPanel"
 import SingleValue from "./ui/SingleValue"
-import ColorPersent from "./ui/ColorParcent"
+import ColorPersent from "./ui/ColorParcentLists"
 import AddItemButton from "./ui/AddItemButton"
 
 export default function PoligonSetting(props: SidePanelProps & AddProps) {

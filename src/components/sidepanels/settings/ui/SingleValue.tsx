@@ -2,36 +2,33 @@ import type { CommonStyles } from "../SettingPanel"
 
 type Props = {
     label: string
-    value: number
-    setValue: (value: number) => void
+    unit: string
+    data: Record<string, any>
+    setData: (data: any) => void
+    objKey: string
+    max: number
+    min: number
     styles: CommonStyles
 }
 
 
 // 単一数値設定
-export default function SingleValue({label, value, setValue, styles}: Props) {
-    // labelに応じた単位
-    const unit: Record<string, string> = {
-        '角度': 'deg',
-        'サイズ': '%',
-        '角丸サイズ': 'px',
-        '角数': 'gon',
-        'X位置': '%',
-        'Y位置': '%',
-        'ヘッダサイズ': 'px',
-        'ヘッダ角丸サイズ': 'px',
-        'フッタサイズ': 'px',
-        'フッタ角丸サイズ': 'px',
-        'ボーダーサイズ': 'px',
-        'アウトラインサイズ': 'px',
-        'アウトラインオフセット': 'px',
-        '影X位置': 'px',
-        '影Y位置': 'px',
-        '影ぼかし量': 'px',
-        '影サイズ': 'px',
-    }
+export default function SingleValue({label, unit, data, setData, objKey, max, min, styles}: Props) {
 
-    const displayUnit = unit[label] || '単位未設定'
+    const updateObj = (value: number) => {
+        let newValue
+        
+        if(value < min) {
+            newValue = min
+        } else if (max < value) {
+            newValue = max
+        } else {
+            newValue = value
+        }
+
+        const newObj = {...data, [objKey]: newValue}
+        setData(newObj)
+    }
 
     return (
         <div className={styles.card}>
@@ -40,11 +37,11 @@ export default function SingleValue({label, value, setValue, styles}: Props) {
                 <input
                     type="number"
                     inputMode="numeric"
-                    value={value}
-                    onChange={(e) => setValue(Number(e.target.value))}
+                    value={data[objKey]}
+                    onChange={(e) => updateObj(Number(e.target.value))}
                     className={styles.input}
                 />
-                <span className={styles.unit}>{displayUnit}</span>
+                <span className={styles.unit}>{unit}</span>
             </div>
         </div>
     )

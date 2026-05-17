@@ -1,7 +1,7 @@
 import type { SidePanelProps } from "../../../App"
 import type { AddProps } from "./SettingPanel"
 import AddItemButton from "./ui/AddItemButton"
-import ColorParcent from "./ui/ColorParcent"
+import ColorParcent from "./ui/ColorParcentLists"
 import SingleValue from "./ui/SingleValue"
 
 export default function CirclesSetting(props: SidePanelProps & AddProps) {

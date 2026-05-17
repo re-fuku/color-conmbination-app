@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import type { SidePanelProps } from "../../../App";
 
 // 各アイテムリスト
-import LinearBaseSetting from "./LinearBaseSetting"
+import BaseLinearSetting from "./BaseLinearSetting"
 import CirclesSetting from "./CirclesSetting";
 import RoundedRectSetting from "./RoudedRectSetting";
 import PoligonSetting from "./PoligonSetting";
@@ -69,9 +69,9 @@ export default function SettingPanel(props : SidePanelProps) {
     const renderItemList = () => {
         switch (true) {
             // ➀線形色表示
-            case selectedLayout.includes('linear-base'):
+            case selectedLayout.includes('base-linear'):
                 return (
-                    <LinearBaseSetting
+                    <BaseLinearSetting
                         {...props}
                         {...addProps}
                     />

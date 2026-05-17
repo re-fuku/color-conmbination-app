@@ -1,8 +1,8 @@
-import type { ColorStop } from "../../../../App"
+import type { ColorConfig } from "../../../../App"
 
 type Props = {
-    colors: ColorStop[]
-    setColors: (c:ColorStop[]) => void
+    colors: ColorConfig[]
+    setColors: (c:ColorConfig[]) => void
     index: number
     slideItem: (index: number) => void
     activeSlideIndex: number | null

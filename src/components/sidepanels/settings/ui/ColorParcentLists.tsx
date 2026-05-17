@@ -1,11 +1,11 @@
-import type { ColorStop } from "../../../../App"
+import type { ColorConfig } from "../../../../App"
 import type { CommonStyles } from "../SettingPanel"
 import DeleteButton from "./DeleteButton"
 import ColorChangeButton from "./ColorChangeButton"
 
 type Props = {
-    colors: ColorStop[]
-    setColors: (c:ColorStop[]) => void
+    colors: ColorConfig[]
+    setColors: (c:ColorConfig[]) => void
     styles: CommonStyles
     activeSlideIndex: number | null
     slideItem: (index: number) => void
@@ -14,10 +14,24 @@ type Props = {
     parcent: false | true 
 }
 
-export default function ColorPercent({colors, setColors, styles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker, parcent}: Props) {
+export default function ColorPercentLists({colors, setColors, styles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker, parcent}: Props) {
+    // 最小値と最大値
+    const min = 0
+    const max = 100
+
     // ratioを変更した際の処理
-    const handleRatioChange = (id: string, newRatio: number) => {
-        const updatedColors = colors.map((c) => {
+    const handleRatioChange = (id: string, ratio: number) => {
+        let newRatio
+
+        if (ratio < min) {
+            newRatio = min
+        } else if (max < ratio) {
+            newRatio = max
+        } else {
+            newRatio = ratio
+        }
+
+        const newColors = colors.map((c) => {
             if (c.id == id) {
                 // IDが一致する要素のratioを書き換えて返す
                 return { ...c, ratio: newRatio}
@@ -25,10 +39,11 @@ export default function ColorPercent({colors, setColors, styles, activeSlideInde
             // それ以外の要素はそのまま返す
             return c
         })
-
         // 新しい配列で状態を更新
-        setColors(updatedColors)
+        setColors(newColors)
     }
+
+    console.log(colors[0].ratio)
     
     return (
         <>
@@ -66,6 +81,7 @@ export default function ColorPercent({colors, setColors, styles, activeSlideInde
                                     <div className="relative">
                                         <input 
                                             className={styles.input}
+                                            type='number'
                                             value={c.ratio}
                                             onChange={(e) => handleRatioChange(c.id, Number(e.target.value)) }
                                         />
