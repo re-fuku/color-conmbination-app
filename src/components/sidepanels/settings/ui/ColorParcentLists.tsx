@@ -4,8 +4,8 @@ import DeleteButton from "./DeleteButton"
 import ColorChangeButton from "./ColorChangeButton"
 
 type Props = {
-    colors: ColorConfig[]
-    setColors: (c:ColorConfig[]) => void
+    data: any
+    setData: (data: any) => void
     styles: CommonStyles
     activeSlideIndex: number | null
     slideItem: (index: number) => void
@@ -14,40 +14,45 @@ type Props = {
     parcent: false | true 
 }
 
-export default function ColorPercentLists({colors, setColors, styles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker, parcent}: Props) {
+export default function ColorPercentLists({data, setData, styles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker, parcent}: Props) {
     // 最小値と最大値
     const min = 0
     const max = 100
 
-    // ratioを変更した際の処理
-    const handleRatioChange = (id: string, ratio: number) => {
-        let newRatio
+    // color内を変更する際の処理
+    const changeColorValue = (id: string, key: string, value: any) => {
+        let newValue
 
-        if (ratio < min) {
-            newRatio = min
-        } else if (max < ratio) {
-            newRatio = max
+        if (value < min) {
+            newValue = min
+        } else if (max < value) {
+            newValue = max
         } else {
-            newRatio = ratio
+            newValue = value
         }
 
-        const newColors = colors.map((c) => {
+        const newColors = data.colors.map((c: ColorConfig) => {
             if (c.id == id) {
                 // IDが一致する要素のratioを書き換えて返す
-                return { ...c, ratio: newRatio}
+                return { ...c, [key]: newValue}
             }
             // それ以外の要素はそのまま返す
             return c
         })
         // 新しい配列で状態を更新
-        setColors(newColors)
+        const newObj = {...data, colors: newColors}
+        setData(newObj)
     }
 
-    console.log(colors[0].ratio)
+    const deleteColor = (newColors: ColorConfig[]) => {
+        const newObj = {...data, colors: newColors}
+
+        setData(newObj)
+    }
     
     return (
         <>
-            {colors.map((c, i) =>{
+            {data.colors.map((c: ColorConfig, i: number) =>{
                 const displayName = "色 " + (i + 1)
 
                 return (
@@ -57,8 +62,8 @@ export default function ColorPercentLists({colors, setColors, styles, activeSlid
                     >
                         {/* 削除ボタン裏に隠れている */}
                         <DeleteButton
-                            colors={colors}
-                            setColors={setColors}
+                            colors={data.colors}
+                            setColors={(colors) => deleteColor(colors)}
                             slideItem={slideItem}
                             activeSlideIndex={activeSlideIndex}
                             index={i}
@@ -83,7 +88,7 @@ export default function ColorPercentLists({colors, setColors, styles, activeSlid
                                             className={styles.input}
                                             type='number'
                                             value={c.ratio}
-                                            onChange={(e) => handleRatioChange(c.id, Number(e.target.value)) }
+                                            onChange={(e) => changeColorValue(c.id, 'ratio', Number(e.target.value)) }
                                         />
                                         <span className={styles.unit}>%</span>
                                     </div>
@@ -91,9 +96,9 @@ export default function ColorPercentLists({colors, setColors, styles, activeSlid
                                 <ColorChangeButton
                                     displayName={displayName}
                                     styles={styles}
-                                    colors={colors}
+                                    colors={data.colors}
                                     color={c}
-                                    setColors={setColors}
+                                    setColors={(value) => changeColorValue(c.id,'color', value)}
                                     setIsOpenColorPicker={setIsOpenColorPicker}
                                 />
                             </div>

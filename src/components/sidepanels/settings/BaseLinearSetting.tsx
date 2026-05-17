@@ -36,8 +36,8 @@ export default function BaseLinerSetting({baseLinerParam, setBaseLinerParam, com
             />
 
             <ColorParcentLists
-                colors={baseLinerParam.colors}
-                setColors={(newColors) => updateColors(newColors)}
+                data={baseLinerParam}
+                setData={setBaseLinerParam}
                 styles={commonStyles}
                 activeSlideIndex={activeSlideIndex}
                 slideItem={slideItem}

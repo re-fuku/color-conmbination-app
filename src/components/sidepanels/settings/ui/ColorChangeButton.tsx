@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { HexColorPicker } from "react-colorful"
 import * as Popover from '@radix-ui/react-popover'
-import type { ColorStop } from "../../../../App";
+import type { ColorConfig } from "../../../../App";
 import type { CommonStyles } from "../SettingPanel";
 
 type Props = {
     displayName: string | undefined
     styles: CommonStyles
-    colors: ColorStop[]
-    color: ColorStop
-    setColors: (c:ColorStop[]) => void
+    colors: ColorConfig[]
+    color: ColorConfig
+    setColors: (c:string) => void
     setIsOpenColorPicker: (isOpenColorPikcer: boolean) => void
 }
 
@@ -36,15 +36,8 @@ export default function ColorChangeButton({displayName, styles, colors, color, s
 
     // 色を変更する処理
     const handleColorChange = (newColor: string) => {
-        const newColors = colors.map((c) => {
-            if (c.id === color.id) {
-                return {...c, color: newColor}
-            }
-            return c
-        })
-
         setInputColorCode(newColor)
-        setColors(newColors)
+        setColors(newColor)
     }
 
     return (

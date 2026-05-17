@@ -1,9 +1,9 @@
-import type { ColorStop } from "../../../../App"
+import type { ColorConfig } from "../../../../App"
 import type { CommonStyles } from "../SettingPanel"
 
 type Props = {
-    colors: ColorStop[]
-    setColors: (c:ColorStop[]) => void
+    colors: ColorConfig[]
+    setColors: (c:ColorConfig[]) => void
     styles: CommonStyles
 }
 
@@ -16,7 +16,7 @@ export default function AddItemButton({colors, setColors}: Props) {
 
         const newId = (maxId + 1).toString()
 
-        const newColor: ColorStop = {
+        const newColor: ColorConfig = {
             id: newId,
             color: "#ffffff",
             ratio: 10,
