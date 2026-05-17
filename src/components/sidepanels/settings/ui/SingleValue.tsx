@@ -25,6 +25,10 @@ export default function SingleValue({label, value, setValue, styles}: Props) {
         'ボーダーサイズ': 'px',
         'アウトラインサイズ': 'px',
         'アウトラインオフセット': 'px',
+        '影X位置': 'px',
+        '影Y位置': 'px',
+        '影ぼかし量': 'px',
+        '影サイズ': 'px',
     }
 
     const displayUnit = unit[label] || '単位未設定'

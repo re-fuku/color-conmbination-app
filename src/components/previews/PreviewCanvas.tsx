@@ -10,6 +10,7 @@ import HeaderFooter from './HeaderFooter'
 import MaskPreview from './MaskPreview'
 import TextBlock from './TextBlock'
 import BorderOutLine from './BorderOutLine'
+import DropShadow from './DropShadow'
 
 export default function PreviewCanvas(props: PreviewCanvasProps) {
     // 必要なpropsを分割代入で抽出する
@@ -27,7 +28,8 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
         footer, // フッタの情報(サイズ、角丸サイズ、色)
         selectedLayout, // 選択されているレイアウト
         maskParam, // アイコンとテキストで使用するパラメータ
-        brolParam, // ボーダー&アウトラインのパラメータ
+        borderOutlineParam, // ボーダー&アウトラインのパラメータ
+        dropShadowParam, // 影落としのパラメータ
     } = props
 
     const previewBG = "h-full w-full pl-5 pr-5 rounded-[20px] flex flex-wrap shrink-0 grow-0 items-center content-center bg-white overflow-hidden"
@@ -141,12 +143,21 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
             case selectedLayout.includes('border-outline'):
                 return (
                     <BorderOutLine
-                        brolParam={brolParam}
+                        borderOutlineParam={borderOutlineParam}
                         xAspect={xAspect}
                         yAspect={yAspect}
                     />
                 )
-            
+            // ⑫影落とし
+            case selectedLayout.includes('drop-shadow'):
+                return (
+                    <DropShadow
+                        dropShadowParam={dropShadowParam}
+                        xAspect={xAspect}
+                        yAspect={yAspect}
+                        previewBg={previewBG}
+                    />
+                )
             default:
                 break
         }

@@ -5,8 +5,8 @@ import DoubleValue from "./ui/DoubleValue"
 import SingleValue from "./ui/SingleValue"
 
 type Props = {
-    brolParam: BorderOutlineConfig
-    setBrOlParam: (brolParam: BorderOutlineConfig) => void
+    borderOutlineParam: BorderOutlineConfig
+    setBorderOutlineParam: (borderOutlineParam: BorderOutlineConfig) => void
     xAspect: number
     setXAspect: (xAspect:number) => void
     yAspect: number
@@ -15,24 +15,24 @@ type Props = {
     setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
 }
 
-export default function BorderOutlineSetting({brolParam, setBrOlParam,xAspect, setXAspect, yAspect, setYAspect, commonStyles, setIsOpenColorPicker}: Props) {
+export default function BorderOutlineSetting({borderOutlineParam, setBorderOutlineParam,xAspect, setXAspect, yAspect, setYAspect, commonStyles, setIsOpenColorPicker}: Props) {
     const changeObjValue = (key: keyof BorderOutlineConfig, value: any) => {
-        const newObj = {...brolParam, [key]: value}
+        const newObj = {...borderOutlineParam, [key]: value}
 
-        setBrOlParam(newObj)
+        setBorderOutlineParam(newObj)
     }
     return (
         <>
             <SingleValue
                 label="サイズ"
-                value={brolParam.size}
+                value={borderOutlineParam.size}
                 setValue={(value) => changeObjValue('size', value)}
                 styles={commonStyles}
             />
 
             <SingleValue
                 label="角丸サイズ"
-                value={brolParam.roundedRect}
+                value={borderOutlineParam.roundedRect}
                 setValue={(value) => changeObjValue('roundedRect', value)}
                 styles={commonStyles}
             />
@@ -46,7 +46,7 @@ export default function BorderOutlineSetting({brolParam, setBrOlParam,xAspect, s
             />
 
             <ChangeColor
-                color={brolParam.bgColor}
+                color={borderOutlineParam.bgColor}
                 label='背景色'
                 setColor={(value) => changeObjValue('bgColor', value)}
                 setIsOpenColorPicker={setIsOpenColorPicker}
@@ -55,13 +55,13 @@ export default function BorderOutlineSetting({brolParam, setBrOlParam,xAspect, s
 
             <SingleValue
                 label="ボーダーサイズ"
-                value={brolParam.borderSize}
+                value={borderOutlineParam.borderSize}
                 setValue={(value) => changeObjValue('borderSize', value)}
                 styles={commonStyles}
             />
 
             <ChangeColor
-                color={brolParam.borderColor}
+                color={borderOutlineParam.borderColor}
                 label='ボーダー色'
                 setColor={(value) => changeObjValue('borderColor', value)}
                 setIsOpenColorPicker={setIsOpenColorPicker}
@@ -70,20 +70,20 @@ export default function BorderOutlineSetting({brolParam, setBrOlParam,xAspect, s
 
             <SingleValue
                 label="アウトラインサイズ"
-                value={brolParam.outLineSize}
+                value={borderOutlineParam.outLineSize}
                 setValue={(value) => changeObjValue('outLineSize', value)}
                 styles={commonStyles}
             />
 
             <SingleValue
                 label="アウトラインオフセット"
-                value={brolParam.outLineOffset}
+                value={borderOutlineParam.outLineOffset}
                 setValue={(value) => changeObjValue('outLineOffset', value)}
                 styles={commonStyles}
             />
             
             <ChangeColor
-                color={brolParam.outLineColor}
+                color={borderOutlineParam.outLineColor}
                 label='アウトライン色'
                 setColor={(value) => changeObjValue('outLineColor', value)}
                 setIsOpenColorPicker={setIsOpenColorPicker}

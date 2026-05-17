@@ -10,7 +10,7 @@ export type ColorStop = {
   end: number
 }
 
-// ヘッダーとフッターの情報の型を定義
+// ➉ヘッダーとフッターの情報の型を定義
 export type HeaderFooterConfig = {
   size: number
   roundedRect: number
@@ -23,7 +23,7 @@ export type MaskConfig = {
   textColor: string
 }
 
-// ボーダー&アウトラインの情報の型を定義
+// ⑪ボーダー&アウトラインの情報の型を定義
 export type BorderOutlineConfig = {
   size: number,
   roundedRect: number,
@@ -33,6 +33,21 @@ export type BorderOutlineConfig = {
   outLineSize: number,
   outLineOffset: number,
   outLineColor: string,
+}
+
+// 影落としの情報をの型を定義
+export type DropShadowConfig = {
+  size: number, // サイズ
+  roundedRect: number, // 角丸サイズ
+  xAspect: number, // アスペクト比(横)
+  yAxpect: number, // アスペクト比(縦)
+  bgColor: string, // 背景色
+  xShadowPosition: number, // 影の位置(X座標)
+  yShadowPosition: number, // 影の位置(y座標)
+  shadowBlur: number, // 影のぼかし量
+  shadowSize: number, // 影のサイズ
+  shadowColor: string, // 影の色
+  mode: '' | 'inset', // insetと切り替え
 }
 
 
@@ -68,8 +83,10 @@ export type SidePanelProps = {
   layoutIcons: string[]
   maskParam: MaskConfig
   setMaskParam: (maskParam: MaskConfig) => void
-  brolParam: BorderOutlineConfig
-  setBrOlParam: (brolParam: BorderOutlineConfig) => void
+  borderOutlineParam: BorderOutlineConfig
+  setBorderOutlineParam: (borderOutlineParam: BorderOutlineConfig) => void
+  dropShadowParam: DropShadowConfig
+  setDropShadowParam: (dorpShadowParam: DropShadowConfig) => void
 }
 
 export type PreviewCanvasProps = {
@@ -87,7 +104,8 @@ export type PreviewCanvasProps = {
   colors: ColorStop[]
   selectedLayout: string
   maskParam: MaskConfig
-  brolParam: BorderOutlineConfig
+  borderOutlineParam: BorderOutlineConfig
+  dropShadowParam: DropShadowConfig
 }
 
 // レイアウトのアイコンのパスを定義
@@ -129,7 +147,7 @@ function App() {
     { id: "2", color: '#4d8dbd', ratio: 30, start: 0, end: 10 },
     { id: "3", color: '#c984c0', ratio: 20, start: 0, end: 10 },
   ])
-  const [brolParam, setBrOlParam] = useState<BorderOutlineConfig>({ // ボーダー&アウトラインの設定値
+  const [borderOutlineParam, setBorderOutlineParam] = useState<BorderOutlineConfig>({ // ボーダー&アウトラインの設定値
     size: 50,
     roundedRect: 10,
     bgColor: '#ffffff',
@@ -138,6 +156,19 @@ function App() {
     outLineSize: 2,
     outLineOffset: 0,
     outLineColor: '#ffffff',
+  })
+  const [dropShadowParam, setDropShadowParam] = useState<DropShadowConfig>({ // 影落としの設定値
+      size: 50,
+      roundedRect: 10,
+      xAspect: 1,
+      yAxpect: 1,
+      bgColor: '#ffffff',
+      xShadowPosition: 0,
+      yShadowPosition: 0,
+      shadowBlur: 0,
+      shadowSize: 0,
+      shadowColor: '#000000',
+      mode: '',
   })
   const [selectedLayout, setSelectedLayout] = useState<string>('src\assets\layouts\linear-base.svg') // 選択されているレイアウト
 
@@ -175,8 +206,10 @@ function App() {
     layoutIcons: layoutIcons,
     maskParam: maskParam,
     setMaskParam: setMaskParam,
-    brolParam: brolParam,
-    setBrOlParam: setBrOlParam,
+    borderOutlineParam: borderOutlineParam,
+    setBorderOutlineParam: setBorderOutlineParam,
+    dropShadowParam: dropShadowParam,
+    setDropShadowParam: setDropShadowParam,
   }
 
   // プレビュー用のprops
@@ -194,7 +227,8 @@ function App() {
     yAspect: yAspect,
     header: header,
     footer: footer,
-    brolParam: brolParam,
+    borderOutlineParam: borderOutlineParam,
+    dropShadowParam: dropShadowParam,
     maskParam: maskParam,
   }
 

@@ -13,6 +13,7 @@ import ConicGradationSetting from "./ConicGradationSetting";
 import HeaderFooterSetting from "./HeaderFooterSetting";
 import BlockSetting from "./BlockSetting";
 import BorderOutlineSetting from "./BorderOutlineSetting";
+import DropShadowSetting from "./DropShadowSetting";
 
 export type CommonStyles = {
   card: string
@@ -151,6 +152,13 @@ export default function SettingPanel(props : SidePanelProps) {
             case selectedLayout.includes('border-outline'):
                 return(
                     <BorderOutlineSetting
+                        {...props}
+                        {...addProps}
+                    />
+                )
+            case selectedLayout.includes('drop-shadow'):
+                return(
+                    <DropShadowSetting
                         {...props}
                         {...addProps}
                     />
