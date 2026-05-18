@@ -122,6 +122,8 @@ export type SidePanelProps = {
   setRoundedRectParam: (roundedRectParam: RoundedRectConfig) => void
   poligonParam: PoligonConfig
   setPoligonParam: (poligonParam: PoligonConfig) => void
+  headerFooter: HeaderFooterConfig
+  setHeaderFooter: (headerFooter: HeaderFooterConfig) => void
 
 
   isOpenColorPicker: boolean
@@ -145,9 +147,8 @@ export type PreviewCanvasProps = {
   circlesParam: CirclesConfig
   roundedRectParam: RoundedRectConfig
   poligonParam: PoligonConfig
+  headerFooter: HeaderFooterConfig
 
-  header: HeaderFooterConfig
-  footer: HeaderFooterConfig
   selectedLayout: string
   maskParam: MaskConfig
   borderOutlineParam: BorderOutlineConfig
@@ -293,7 +294,7 @@ function App() {
     setXAspect: setXAspect,
     yAspect: yAspect,
     setYAspect: setYAspect,
-    
+
     // リファクタリング
     baseLinearParam: baseLinearParam,
     setBaseLinearParam: setBaseLinearParam,

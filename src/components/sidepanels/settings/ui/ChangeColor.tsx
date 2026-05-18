@@ -70,13 +70,13 @@ export default function ChangeColor({color, label, setColor, setIsOpenColorPicke
                             <input
                                 className={`${styles.input} w-20`}
                                 type="text"
-                                value={color}
+                                value={colorCode}
                                 onChange={handleTextInput}
                             />   
                         </div>
 
                         <HexColorPicker
-                            color={color}
+                            color={colorCode}
                             onChange={(c) => {
                                 setColorCode(c)
                                 setColor(c)

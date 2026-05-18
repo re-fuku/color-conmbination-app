@@ -30,7 +30,7 @@ export default function RoundedRectSetting({roundedRectParam, setRoundedRectPara
         <>
             <SingleValue
                 label="角丸サイズ"
-                unit='%'
+                unit='px'
                 data={roundedRectParam}
                 setData={setRoundedRectParam}
                 objKey={'roundedRect'}

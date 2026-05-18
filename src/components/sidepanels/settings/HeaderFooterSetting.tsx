@@ -1,22 +1,26 @@
-import type { HeaderFooterConfig, SidePanelProps } from "../../../App";
+import type { HeaderFooterConfig } from "../../../App";
 import ChangeColor from "./ui/ChangeColor";
-import type { AddProps, CommonStyles } from "./SettingPanel";
+import type { CommonStyles } from "./SettingPanel";
 import SingleValue from "./ui/SingleValue";
 
 type Props = {
     headerFooter: HeaderFooterConfig
     setHeaderFooter: (headerFooter: HeaderFooterConfig) => void
-    setIsOpenColorPicker: boolean
+    setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
     commonStyles: CommonStyles
 }
 
 
 export default function HeaderFooterSetting({headerFooter, setHeaderFooter, setIsOpenColorPicker, commonStyles}: Props) {
 
-    const changeObjValue = (type:'header' | 'footer' ,key: string, value: any) => {
-        const currentData = type === 'header'? headerFooter.header: headerFooter.footer
-        const newObj = {...currentData, [key]: value}
-        const newHeaderFooter = {...headerFooter, [type]: newObj}
+    const changeObjValue = (key: 'header' | 'footer', obj: Record<string, any>) => {
+        const newHeaderFooter = {...headerFooter, [key]: obj}
+        setHeaderFooter(newHeaderFooter)
+    }
+
+    const changeColorCode = (key: 'header' | 'footer', colorCode: string) => {
+        const newObj = {...headerFooter[key], 'color': colorCode}
+        const newHeaderFooter = {...headerFooter, [key]: newObj}
 
         setHeaderFooter(newHeaderFooter)
     }
@@ -27,53 +31,61 @@ export default function HeaderFooterSetting({headerFooter, setHeaderFooter, setI
                 label="ヘッダサイズ"
                 unit='px'
                 data={headerFooter.header}
-                setData={(value) => changeObjValue('header','size', value)}
-                objKey={'size'}
-                max={360}
-                min={0}
-                styles={commonStyles}
-            />
-
-            <SingleValue
-                label="角丸サイズ"
-                unit='px'
-                data={headerFooter.header}
-                setData={(value) => changeObjValue('header','size', value)}
+                setData={(obj) => changeObjValue('header', obj)}
                 objKey={'size'}
                 max={999}
                 min={0}
                 styles={commonStyles}
             />
 
-            {/* <ChangeColor
+            <SingleValue
+                label="ヘッダ角丸サイズ"
+                unit='px'
+                data={headerFooter.header}
+                setData={(obj) => changeObjValue('header', obj)}
+                objKey={'roundedRect'}
+                max={999}
+                min={0}
+                styles={commonStyles}
+            />
+
+            <ChangeColor
                 color={headerFooter.header.color}
                 label='ヘッダ色'
-                setColor={(value) => changeObjValue('header', 'color', value)}
+                setColor={(colorCode) => changeColorCode('header', colorCode)}
                 setIsOpenColorPicker={setIsOpenColorPicker}
                 styles={commonStyles}
             />
 
             <SingleValue
                 label="フッタサイズ"
-                value={footer.size}
-                setValue={(value) => changeObjValue('footer', 'size', value)}
+                unit='px'
+                data={headerFooter.footer}
+                setData={(obj) => changeObjValue('footer', obj)}
+                objKey={'size'}
+                max={999}
+                min={0}
                 styles={commonStyles}
             />
 
             <SingleValue
                 label="フッタ角丸サイズ"
-                value={footer.roundedRect}
-                setValue={(value) => changeObjValue('footer', 'roundedRect', value)}
+                unit='px'
+                data={headerFooter.footer}
+                setData={(obj) => changeObjValue('footer', obj)}
+                objKey={'roundedRect'}
+                max={999}
+                min={0}
                 styles={commonStyles}
             />
 
             <ChangeColor
-                color={footer.color}
+                color={headerFooter.footer.color}
                 label='フッタ色'
-                setColor={(value) => changeObjValue('footer', 'color', value)}
+                setColor={(colorCode) => changeColorCode('footer', colorCode)}
                 setIsOpenColorPicker={setIsOpenColorPicker}
                 styles={commonStyles}
-            /> */}
+            />
         </>
     )
     

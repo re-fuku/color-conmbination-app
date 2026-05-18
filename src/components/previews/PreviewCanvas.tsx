@@ -22,19 +22,8 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
         circlesParam, // ➄円並びの設定値
         roundedRectParam, // ➅角丸並びの設定値
         poligonParam, //  ➆多角形並びの設定値
-
-
-        colors, // 各色の情報
-        angle, // 角度
-        wSize, // 横幅のサイズ(%)
-        xPosition, // 円の中心座標(x軸)
-        yPosition, // 円の中心座標(y軸)
-        borderSize, // 縦のサイズ(px)
-        gon, // 多角形の角の数
-        xAspect, // x軸のアスペクト比
-        yAspect, // y軸のアスペクト比
-        header, // ヘッダの情報(サイズ、角丸サイズ、色)
-        footer, // フッタの情報(サイズ、角丸サイズ、色)
+        headerFooter, // ➇ヘッダ&フッタの設定値
+        
         selectedLayout, // 選択されているレイアウト
         maskParam, // アイコンとテキストで使用するパラメータ
         borderOutlineParam, // ボーダー&アウトラインのパラメータ
@@ -127,8 +116,8 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
             case selectedLayout.includes('header-footer'):
                 return (
                     <HeaderFooter
-                        header={header}
-                        footer={footer}
+                        header={headerFooter.header}
+                        footer={headerFooter.footer}
                         previewBG={previewBG}
                     />
                 )

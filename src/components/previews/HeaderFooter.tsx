@@ -1,8 +1,8 @@
 import type { HeaderFooterConfig } from "../../App"
 
 type Props = {
-    header: HeaderFooterConfig
-    footer: HeaderFooterConfig
+    header: Record<string, any>
+    footer: Record<string, any>
     previewBG: string
 }
 
