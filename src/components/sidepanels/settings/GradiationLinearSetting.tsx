@@ -1,13 +1,12 @@
-import SingleValue from "./ui/SingleValue"
-import ColorParcentLists from "./ui/ColorParcentLists"
-import AddItemButton from "./ui/AddItemButton"
-import type { BaseLinearConfig, ColorConfig } from "../../../App"
+import type { ColorConfig, GradationLinearConfig} from "../../../App"
 import type { CommonStyles } from "./SettingPanel"
-
+import AddItemButton from "./ui/AddItemButton"
+import ColorStartEnd from "./ui/ColorStartEnd"
+import SingleValue from "./ui/SingleValue"
 
 type Props = {
-    baseLinearParam: BaseLinearConfig
-    setBaseLinearParam: (baseLinearParam: BaseLinearConfig) => void
+    gradationLinearParam: GradationLinearConfig
+    setGradationLinearParam: (gradationLinearParam: GradationLinearConfig) => void
     commonStyles: CommonStyles
     activeSlideIndex: number | null
     slideItem: (index: number) => void
@@ -15,11 +14,11 @@ type Props = {
     setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
 }
 
-export default function BaseLinearSetting({baseLinearParam, setBaseLinearParam, commonStyles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker}: Props) {
+export default function GradiationLinearSetting({gradationLinearParam, setGradationLinearParam, commonStyles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker}: Props) {
 
     const updateColors = (newColors: ColorConfig[]) => {
-        const newObj = {...baseLinearParam, colors: newColors}
-        setBaseLinearParam(newObj)
+        const newObj = {...gradationLinearParam, colors: newColors}
+        setGradationLinearParam(newObj)
     }
 
     return (
@@ -27,27 +26,26 @@ export default function BaseLinearSetting({baseLinearParam, setBaseLinearParam, 
             <SingleValue
                 label="角度"
                 unit='deg'
-                data={baseLinearParam}
-                setData={setBaseLinearParam}
+                data={gradationLinearParam}
+                setData={setGradationLinearParam}
                 objKey={'angle'}
                 max={360}
                 min={0}
                 styles={commonStyles}
             />
 
-            <ColorParcentLists
-                data={baseLinearParam}
-                setData={setBaseLinearParam}
-                styles={commonStyles}
+            <ColorStartEnd
+                data={gradationLinearParam}
+                setData={setGradationLinearParam}
                 activeSlideIndex={activeSlideIndex}
                 slideItem={slideItem}
+                styles={commonStyles}
                 isOpenColorPicker={isOpenColorPicker}
                 setIsOpenColorPicker={setIsOpenColorPicker}
-                parcent={true}
             />
 
             <AddItemButton
-                colors={baseLinearParam.colors}
+                colors={gradationLinearParam.colors}
                 setColors={(newColors) => updateColors(newColors)}
                 styles={commonStyles}
             />

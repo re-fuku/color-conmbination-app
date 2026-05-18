@@ -4,10 +4,10 @@ import type { SidePanelProps } from "../../../App";
 
 // 各アイテムリスト
 import BaseLinearSetting from "./BaseLinearSetting"
+import GradiationLinearSetting from "./GradiationLinearSetting";
 import CirclesSetting from "./CirclesSetting";
 import RoundedRectSetting from "./RoudedRectSetting";
 import PoligonSetting from "./PoligonSetting";
-import LinearGradiationSetting from "./LinearGradiationSetting";
 import RadialGradationSetting from "./RadialGradationSetting";
 import ConicGradationSetting from "./ConicGradationSetting";
 import HeaderFooterSetting from "./HeaderFooterSetting";
@@ -77,9 +77,9 @@ export default function SettingPanel(props : SidePanelProps) {
                     />
                 )
             // ➁線形グラデーション
-            case selectedLayout.includes('linear-gradation'):
+            case selectedLayout.includes('gradation-linear'):
                 return (
-                    <LinearGradiationSetting
+                    <GradiationLinearSetting
                         {...props}
                         {...addProps}
                     />

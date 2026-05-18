@@ -11,7 +11,13 @@ export type ColorConfig = {
 }
 
 // ➀線形色表示の設定値の型
-export type BaseLinerConfig = {
+export type BaseLinearConfig = {
+  angle: number
+  colors: ColorConfig[]
+}
+
+// ➁線形グラデーションの設定値の型
+export type GradationLinearConfig = {
   angle: number
   colors: ColorConfig[]
 }
@@ -58,8 +64,11 @@ export type DropShadowConfig = {
 
 
 export type SidePanelProps = {
-  baseLinerParam: BaseLinerConfig
-  setBaseLinerParam: (baseLinerParam: BaseLinerConfig) => void
+  baseLinearParam: BaseLinearConfig
+  setbaseLinearParam: (baseLinearParam: BaseLinearConfig) => void
+  gradationLinearParam: GradationLinearConfig
+  setGradationLinearParam: (gradationLinearParam: GradationLinearConfig) => void
+
 
   isOpenColorPicker: boolean
   setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
@@ -75,7 +84,7 @@ export type SidePanelProps = {
 }
 
 export type PreviewCanvasProps = {
-  baseLinerParam: BaseLinerConfig
+  baseLinearParam: BaseLinearConfig
 
   header: HeaderFooterConfig
   footer: HeaderFooterConfig
@@ -105,13 +114,22 @@ function App() {
   const [yPosition, setYPosition] = useState<number>(50) // 円の中心の座標(y軸)
   const [isOpenColorPicker, setIsOpenColorPicker] = useState<boolean>(false) // カラーピッカーが開いているか
 
-  const [baseLinerParam, setBaseLinerParam] = useState<BaseLinerConfig>({
+  const [baseLinearParam, setBaseLinearParam] = useState<BaseLinearConfig>({ // ➀線形色表示の設定値
       angle: 0,
       colors: [
         { id: "1", color: '#66c2b2', ratio: 50, start: 0, end: 10 },
         { id: "2", color: '#4d8dbd', ratio: 30, start: 0, end: 10 },
         { id: "3", color: '#c984c0', ratio: 20, start: 0, end: 10 },
       ]
+  })
+
+  const [gradationLinearParam, setGradationLinearParam] = useState<GradationLinerConfig>({ // ➁線形グラデーションの設定値
+    angle: 0,
+    colors: [
+        { id: "1", color: '#66c2b2', ratio: 50, start: 0, end: 10 },
+        { id: "2", color: '#4d8dbd', ratio: 30, start: 0, end: 10 },
+        { id: "3", color: '#c984c0', ratio: 20, start: 0, end: 10 },
+    ]
   })
 
   const [header, setHeader] = useState<HeaderFooterConfig>({ // ヘッダーのパラメーター
@@ -181,8 +199,10 @@ function App() {
     yAspect: yAspect,
     setYAspect: setYAspect,
     // リファクタリング
-    baseLinerParam: baseLinerParam,
-    setBaseLinerParam: setBaseLinerParam,
+    baseLinearParam: baseLinearParam,
+    setBaseLinearParam: setBaseLinearParam,
+    gradationLinearParam: gradationLinearParam,
+    setGradationLinearParam: setGradationLinearParam,
 
     isOpenColorPicker: isOpenColorPicker,
     setIsOpenColorPicker: setIsOpenColorPicker,
@@ -219,7 +239,8 @@ function App() {
     header: header,
     footer: footer,
 
-    baseLinerParam: baseLinerParam,
+    baseLinearParam: baseLinearParam,
+    gradationLinearParam: gradationLinearParam,
 
     borderOutlineParam: borderOutlineParam,
     dropShadowParam: dropShadowParam,

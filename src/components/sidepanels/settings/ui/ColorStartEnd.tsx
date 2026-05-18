@@ -1,12 +1,12 @@
-import type { ColorStop } from '../../../../App'
+import type { ColorConfig, GradationLinearConfig } from '../../../../App'
 import type { CommonStyles } from '../SettingPanel'
 import ColorChangeButton from './ColorChangeButton'
 import DeleteButton from './DeleteButton'
 
 
 type Props = {
-    colors: ColorStop[]
-    setColors: (colors: ColorStop[]) => void
+    data: GradationLinearConfig
+    setData: (data: any) => void
     activeSlideIndex: number | null
     slideItem: (index: number) => void
     styles: CommonStyles
@@ -14,26 +14,43 @@ type Props = {
     setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
 }
 
-export default function ColorStartEnd({colors, setColors, styles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker}: Props) {
+export default function datatartEnd({data, setData, styles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker}: Props) {
+    const min = 0
+    const max = 100
 
+    const changeColorValue = (id: string, key: string, value: any) => {
+        let newValue
 
-    const handleChangeRatio = (id: string, target: string, newRatio: number) => {
-        const updatedColors = colors.map((c) => {
+        if (value < min) {
+            newValue = min
+        } else if (max < value) {
+            newValue = max
+        } else {
+            newValue = value
+        }
+
+        const newColors = data.colors.map((c: ColorConfig) => {
             if (c.id == id) {
                 // IDが一致する要素のratioを書き換えて返す
-                return { ...c, [target]: newRatio}
+                return { ...c, [key]: newValue}
             }
             // それ以外の要素はそのまま返す
             return c
         })
-
         // 新しい配列で状態を更新
-        setColors(updatedColors)
+        const newObj = {...data, colors: newColors}
+        setData(newObj)
+    }
+
+    const deleteColor = (newColors: ColorConfig[]) => {
+        const newObj = {...data, colors: newColors}
+
+        setData(newObj)
     }
 
     return (
         <>
-            {colors.map((color, index) => {
+            {data.colors.map((color, index) => {
                 const displayName = "色 " + (index + 1)
                 return (
                     <div
@@ -42,8 +59,8 @@ export default function ColorStartEnd({colors, setColors, styles, activeSlideInd
                     >
                         {/* 削除ボタン裏に隠れている */}
                         <DeleteButton
-                            colors={colors}
-                            setColors={setColors}
+                            colors={data.colors}
+                            setColors={(colors) => deleteColor(colors)}
                             slideItem={slideItem}
                             activeSlideIndex={activeSlideIndex}
                             index={index}
@@ -69,9 +86,7 @@ export default function ColorStartEnd({colors, setColors, styles, activeSlideInd
                                         type="number"
                                         inputMode="numeric"
                                         value={color.start}
-                                        onChange={(e) => handleChangeRatio(color.id, "start", Number(e.target.value))}
-                                        min={0}
-                                        max={100}
+                                        onChange={(e) => changeColorValue(color.id, "start", Number(e.target.value))}
                                         className={styles.input}
                                     />
                                     <span className={styles.unit}>%</span>
@@ -83,9 +98,7 @@ export default function ColorStartEnd({colors, setColors, styles, activeSlideInd
                                         type="number"
                                         inputMode="numeric"
                                         value={color.end}
-                                        onChange={(e) => handleChangeRatio(color.id, "end", Number(e.target.value))}
-                                        min={0}
-                                        max={100}
+                                        onChange={(e) => changeColorValue(color.id, "end", Number(e.target.value))}
                                         className={styles.input}
                                     />
                                     <span className={styles.unit}>%</span>
@@ -94,9 +107,9 @@ export default function ColorStartEnd({colors, setColors, styles, activeSlideInd
                                 <ColorChangeButton
                                     displayName={displayName}
                                     styles={styles}
-                                    colors={colors}
+                                    colors={data.colors}
                                     color={color}
-                                    setColors={setColors}
+                                    setColors={(value) => changeColorValue(color.id, 'color', value)}
                                     setIsOpenColorPicker={setIsOpenColorPicker}
                                 />
                             </div>
