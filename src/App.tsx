@@ -22,6 +22,20 @@ export type GradationLinearConfig = {
   colors: ColorConfig[]
 }
 
+// ➂放射線グラデーションの設定値の型
+export type RadialGradationConfig = {
+  xPosition: number,
+  yPosition: number,
+  colors: ColorConfig[]
+}
+
+// ➃扇形グラデーションの設定値の型
+export type ConicGradationConfig = {
+  angle: number
+  colors: ColorConfig[]
+}
+
+
 // ➇ヘッダーとフッターの情報の型を定義
 export type HeaderFooterConfig = {
   size: number
@@ -65,10 +79,13 @@ export type DropShadowConfig = {
 
 export type SidePanelProps = {
   baseLinearParam: BaseLinearConfig
-  setbaseLinearParam: (baseLinearParam: BaseLinearConfig) => void
+  setBaseLinearParam: (baseLinearParam: BaseLinearConfig) => void
   gradationLinearParam: GradationLinearConfig
   setGradationLinearParam: (gradationLinearParam: GradationLinearConfig) => void
-
+  radialGradationParam: RadialGradationConfig
+  setRadialGradationParam: (radialGradationParam: RadialGradationConfig) => void
+  conicGradationParam: ConicGradationConfig
+  setConicGradationParam: (conicGradationParam: ConicGradationConfig) => void
 
   isOpenColorPicker: boolean
   setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
@@ -85,6 +102,8 @@ export type SidePanelProps = {
 
 export type PreviewCanvasProps = {
   baseLinearParam: BaseLinearConfig
+  gradationLinearParam: GradationLinearConfig
+  radialGradationParam: RadialGradationConfig
 
   header: HeaderFooterConfig
   footer: HeaderFooterConfig
@@ -118,17 +137,28 @@ function App() {
       angle: 0,
       colors: [
         { id: "1", color: '#66c2b2', ratio: 50, start: 0, end: 10 },
-        { id: "2", color: '#4d8dbd', ratio: 30, start: 0, end: 10 },
-        { id: "3", color: '#c984c0', ratio: 20, start: 0, end: 10 },
       ]
   })
-
-  const [gradationLinearParam, setGradationLinearParam] = useState<GradationLinerConfig>({ // ➁線形グラデーションの設定値
+  const [gradationLinearParam, setGradationLinearParam] = useState<GradationLinearConfig>({ // ➁線形グラデーションの設定値
     angle: 0,
     colors: [
         { id: "1", color: '#66c2b2', ratio: 50, start: 0, end: 10 },
         { id: "2", color: '#4d8dbd', ratio: 30, start: 0, end: 10 },
-        { id: "3", color: '#c984c0', ratio: 20, start: 0, end: 10 },
+    ]
+  })
+  const [radialGradationParam, setRadialGradationParam] = useState<RadialGradationConfig>({ // ➂放射線グラデーションの設定値
+    xPosition: 50,
+    yPosition: 50,
+    colors: [
+      { id: "1", color: '#66c2b2', ratio: 50, start: 0, end: 10 },
+      { id: "2", color: '#4d8dbd', ratio: 30, start: 0, end: 10 },
+    ]
+  })
+  const [conicGradationParam, setConicGradationParam] = useState<ConicGradationConfig>({
+    angle: 0,
+    colors: [
+      { id: "1", color: '#66c2b2', ratio: 50, start: 0, end: 10 },
+      { id: "2", color: '#4d8dbd', ratio: 30, start: 0, end: 10 },
     ]
   })
 
@@ -175,7 +205,7 @@ function App() {
       shadowColor: '#000000',
       mode: '',
   })
-  const [selectedLayout, setSelectedLayout] = useState<string>('src\assets\layouts\linear-base.svg') // 選択されているレイアウト
+  const [selectedLayout, setSelectedLayout] = useState<string>('') // 選択されているレイアウト
 
 
   // サイドパネル用のprops
@@ -203,6 +233,8 @@ function App() {
     setBaseLinearParam: setBaseLinearParam,
     gradationLinearParam: gradationLinearParam,
     setGradationLinearParam: setGradationLinearParam,
+    radialGradationParam: radialGradationParam,
+    setRadialGradationParam: setRadialGradationParam,
 
     isOpenColorPicker: isOpenColorPicker,
     setIsOpenColorPicker: setIsOpenColorPicker,
@@ -241,6 +273,7 @@ function App() {
 
     baseLinearParam: baseLinearParam,
     gradationLinearParam: gradationLinearParam,
+    radialGradationParam: radialGradationParam,
 
     borderOutlineParam: borderOutlineParam,
     dropShadowParam: dropShadowParam,

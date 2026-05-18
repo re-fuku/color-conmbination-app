@@ -5,10 +5,10 @@ import type { SidePanelProps } from "../../../App";
 // 各アイテムリスト
 import BaseLinearSetting from "./BaseLinearSetting"
 import GradiationLinearSetting from "./GradiationLinearSetting";
+import RadialGradationSetting from "./RadialGradationSetting";
 import CirclesSetting from "./CirclesSetting";
 import RoundedRectSetting from "./RoudedRectSetting";
 import PoligonSetting from "./PoligonSetting";
-import RadialGradationSetting from "./RadialGradationSetting";
 import ConicGradationSetting from "./ConicGradationSetting";
 import HeaderFooterSetting from "./HeaderFooterSetting";
 import BlockSetting from "./BlockSetting";

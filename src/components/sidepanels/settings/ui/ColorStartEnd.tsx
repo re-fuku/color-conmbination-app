@@ -1,11 +1,11 @@
-import type { ColorConfig, GradationLinearConfig } from '../../../../App'
+import type { ColorConfig } from '../../../../App'
 import type { CommonStyles } from '../SettingPanel'
 import ColorChangeButton from './ColorChangeButton'
 import DeleteButton from './DeleteButton'
 
 
 type Props = {
-    data: GradationLinearConfig
+    data: any
     setData: (data: any) => void
     activeSlideIndex: number | null
     slideItem: (index: number) => void
@@ -14,7 +14,7 @@ type Props = {
     setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
 }
 
-export default function datatartEnd({data, setData, styles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker}: Props) {
+export default function ColorStartEnd({data, setData, styles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker}: Props) {
     const min = 0
     const max = 100
 
@@ -50,7 +50,7 @@ export default function datatartEnd({data, setData, styles, activeSlideIndex, sl
 
     return (
         <>
-            {data.colors.map((color, index) => {
+            {data.colors.map((c: ColorConfig, index: number) => {
                 const displayName = "色 " + (index + 1)
                 return (
                     <div
@@ -60,7 +60,7 @@ export default function datatartEnd({data, setData, styles, activeSlideIndex, sl
                         {/* 削除ボタン裏に隠れている */}
                         <DeleteButton
                             colors={data.colors}
-                            setColors={(colors) => deleteColor(colors)}
+                            setColors={(c) => deleteColor(c)}
                             slideItem={slideItem}
                             activeSlideIndex={activeSlideIndex}
                             index={index}
@@ -85,8 +85,8 @@ export default function datatartEnd({data, setData, styles, activeSlideIndex, sl
                                     <input
                                         type="number"
                                         inputMode="numeric"
-                                        value={color.start}
-                                        onChange={(e) => changeColorValue(color.id, "start", Number(e.target.value))}
+                                        value={c.start}
+                                        onChange={(e) => changeColorValue(c.id, "start", Number(e.target.value))}
                                         className={styles.input}
                                     />
                                     <span className={styles.unit}>%</span>
@@ -97,8 +97,8 @@ export default function datatartEnd({data, setData, styles, activeSlideIndex, sl
                                     <input
                                         type="number"
                                         inputMode="numeric"
-                                        value={color.end}
-                                        onChange={(e) => changeColorValue(color.id, "end", Number(e.target.value))}
+                                        value={c.end}
+                                        onChange={(e) => changeColorValue(c.id, "end", Number(e.target.value))}
                                         className={styles.input}
                                     />
                                     <span className={styles.unit}>%</span>
@@ -108,8 +108,8 @@ export default function datatartEnd({data, setData, styles, activeSlideIndex, sl
                                     displayName={displayName}
                                     styles={styles}
                                     colors={data.colors}
-                                    color={color}
-                                    setColors={(value) => changeColorValue(color.id, 'color', value)}
+                                    color={c}
+                                    setColors={(value) => changeColorValue(c.id, 'color', value)}
                                     setIsOpenColorPicker={setIsOpenColorPicker}
                                 />
                             </div>

@@ -1,5 +1,5 @@
-import type { ColorStop, PreviewCanvasProps } from '../../App'
-import LinearBase from './LinearBase'
+import type { ColorConfig, PreviewCanvasProps } from '../../App'
+import BaseLinear from './BaseLinear'
 import LinearGradation from './LinearGradation'
 import Circles from './Circles'
 import RoundedRect from './RoundedRect'
@@ -15,6 +15,11 @@ import DropShadow from './DropShadow'
 export default function PreviewCanvas(props: PreviewCanvasProps) {
     // 必要なpropsを分割代入で抽出する
     const {
+        baseLinearParam, // 線形表示の設定値
+        gradationLinearParam, // 線形グラデーションの設定値
+        radialGradationParam, // 放射線グラデーションの設定値
+
+
         colors, // 各色の情報
         angle, // 角度
         wSize, // 横幅のサイズ(%)
@@ -34,7 +39,7 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
 
     const previewBG = "h-full w-full pl-5 pr-5 rounded-[20px] flex flex-wrap shrink-0 grow-0 items-center content-center bg-white overflow-hidden"
 
-    const gradientStr = (colors: ColorStop[]) => colors.map((color) => {
+    const gradientStr = (colors: ColorConfig[]) => colors.map((color) => {
         const mid = (color.start + color.end) / 2
 
         return `${color.color} ${mid}%`
@@ -44,20 +49,20 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
 
         switch (true) {
             // ➀線形
-            case selectedLayout.includes('linear-base'):
+            case selectedLayout.includes('base-linear'):
                 return (
-                    <LinearBase
-                        colors={colors}
-                        angle={angle}
+                    <BaseLinear
+                        colors={baseLinearParam.colors}
+                        angle={baseLinearParam.angle}
                         previewBG={previewBG}
                     />
                 )
             // ➁線形グラデーション
-            case selectedLayout.includes('linear-gradation'):
+            case selectedLayout.includes('gradation-linear'):
                 return (
                     <LinearGradation
-                        colors={colors}
-                        angle={angle}
+                        colors={gradationLinearParam.colors}
+                        angle={gradationLinearParam.angle}
                         gradientStr={gradientStr}
                         previewBG={previewBG}
                     />
@@ -66,9 +71,9 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
             case selectedLayout.includes('radial-gradation'):
                 return (
                     <RadialGradation 
-                        colors={colors}
-                        xPosition={xPosition}
-                        yPosition={yPosition}
+                        colors={radialGradationParam.colors}
+                        xPosition={radialGradationParam.xPosition}
+                        yPosition={radialGradationParam.yPosition}
                         gradientStr={gradientStr}
                         previewBG={previewBG}
                     />

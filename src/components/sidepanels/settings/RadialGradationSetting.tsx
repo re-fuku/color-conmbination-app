@@ -1,47 +1,54 @@
-import type { SidePanelProps } from "../../../App";
-import type { AddProps } from "./SettingPanel";
+import type { ColorConfig, RadialGradationConfig} from "../../../App";
+import type { CommonStyles } from "./SettingPanel";
 import AddItemButton from "./ui/AddItemButton";
 import ColorStartEnd from "./ui/ColorStartEnd";
 import SingleValue from "./ui/SingleValue";
 
+type Props = {
+    radialGradationParam: RadialGradationConfig
+    setRadialGradationParam: (radialGradationParam: RadialGradationConfig) => void
+    commonStyles: CommonStyles
+    activeSlideIndex: number | null
+    slideItem: (index: number) => void
+    isOpenColorPicker: boolean
+    setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
 
-export default function RadialGradationSetting(props: SidePanelProps & AddProps) {
+}
 
-    // propsの分割代入で必要なものを抽出する
-    const {
-        xPosition,
-        setXPosition,
-        yPosition,
-        setYPosition,
-        commonStyles,
-        colors,
-        setColors,
-        activeSlideIndex,
-        slideItem,
-        isOpenColorPicker,
-        setIsOpenColorPicker,
-    } = props
+export default function RadialGradationSetting({radialGradationParam, setRadialGradationParam, commonStyles, activeSlideIndex,slideItem, isOpenColorPicker,setIsOpenColorPicker}: Props) {
+
+    const updateColors = (newColors: ColorConfig[]) => {
+        const newObj = {...radialGradationParam, colors: newColors}
+        setRadialGradationParam(newObj)
+    }
 
     return (
         <>
-
             <SingleValue
                 label="X位置"
-                value={xPosition}
-                setValue={setXPosition}
+                unit='px'
+                data={radialGradationParam}
+                setData={setRadialGradationParam}
+                objKey={'xPosition'}
+                max={100}
+                min={0}
                 styles={commonStyles}
             />
 
             <SingleValue
                 label="Y位置"
-                value={yPosition}
-                setValue={setYPosition}
+                unit='px'
+                data={radialGradationParam}
+                setData={setRadialGradationParam}
+                objKey={'yPosition'}
+                max={100}
+                min={0}
                 styles={commonStyles}
             />
 
             <ColorStartEnd
-                colors={colors}
-                setColors={setColors}
+                data={radialGradationParam}
+                setData={setRadialGradationParam}
                 activeSlideIndex={activeSlideIndex}
                 slideItem={slideItem}
                 styles={commonStyles}
@@ -50,8 +57,8 @@ export default function RadialGradationSetting(props: SidePanelProps & AddProps)
             />
 
             <AddItemButton
-                colors={colors}
-                setColors={setColors}
+                colors={radialGradationParam.colors}
+                setColors={(newColors) => updateColors(newColors)}
                 styles={commonStyles}
             />
         </>
