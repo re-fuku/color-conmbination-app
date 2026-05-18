@@ -1,71 +1,79 @@
-import type { SidePanelProps } from "../../../App"
-import type { AddProps } from "./SettingPanel"
+import type { ColorConfig, RoundedRectConfig } from "../../../App"
+import type { CommonStyles } from "./SettingPanel"
 import AddItemButton from "./ui/AddItemButton"
 import SingleValue from "./ui/SingleValue"
-import ColorParcent from "./ui/ColorParcentLists"
+import ColorParcentLists from "./ui/ColorParcentLists"
 import DoubleValue from "./ui/DoubleValue"
 
-export default function RoundedRectSetting(props : SidePanelProps & AddProps) {
+type Props = {
+    roundedRectParam: RoundedRectConfig
+    setRoundedRectParam: (roundedRectParam: RoundedRectConfig) => void
+    commonStyles: CommonStyles
+    activeSlideIndex: number | null
+    slideItem: (index: number) => void
+    isOpenColorPicker: boolean
+    setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
+}
 
-    // propsの分割代入で必要なものを抽出する
-    const {
-        wSize,
-        setWSize,
-        borderSize,
-        setBorderSize,
-        xAspect,
-        setXAspect,
-        yAspect,
-        setYAspect,
-        colors,
-        setColors,
-        activeSlideIndex,
-        slideItem,
-        commonStyles,
-        isOpenColorPicker,
-        setIsOpenColorPicker,
-    } = props
+export default function RoundedRectSetting({roundedRectParam, setRoundedRectParam, commonStyles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker}: Props) {
+    const updateColors = (newColors: ColorConfig[]) => {
+        const newObj = {...roundedRectParam, colors: newColors}
+        setRoundedRectParam(newObj)
+    }
+
+    const updateValue = (key: keyof RoundedRectConfig, value: any) => {
+        const newObj = {...roundedRectParam, [key]: value}
+        setRoundedRectParam(newObj)
+    }
 
     return (
         <>
             <SingleValue
                 label="角丸サイズ"
-                value={borderSize}
-                setValue={setBorderSize}
+                unit='%'
+                data={roundedRectParam}
+                setData={setRoundedRectParam}
+                objKey={'roundedRect'}
+                max={360}
+                min={0}
                 styles={commonStyles}
             />
 
             <SingleValue
                 label="サイズ"
-                value={wSize}
-                setValue={setWSize}
+                unit='%'
+                data={roundedRectParam}
+                setData={setRoundedRectParam}
+                objKey={'size'}
+                max={360}
+                min={0}
                 styles={commonStyles}
             />
 
             <DoubleValue
-                xValue={xAspect}
-                setXValue={setXAspect}
-                yValue={yAspect}
-                setYValue={setYAspect}
+                xValue={roundedRectParam.xAspect}
+                setXValue={(value) => updateValue('xAspect', value)}
+                yValue={roundedRectParam.yAspect}
+                setYValue={(value) => updateValue('yAspect', value)}
                 styles={commonStyles}
             />
             
-            <ColorParcent
-                colors={colors}
-                setColors={setColors}
+            <ColorParcentLists
+                data={roundedRectParam}
+                setData={setRoundedRectParam}
                 styles={commonStyles}
                 activeSlideIndex={activeSlideIndex}
                 slideItem={slideItem}
                 isOpenColorPicker={isOpenColorPicker}
                 setIsOpenColorPicker={setIsOpenColorPicker}
                 parcent={false}
-             />
+            />
 
-             <AddItemButton
-                colors={colors}
-                setColors={setColors}
+            <AddItemButton
+                colors={roundedRectParam.colors}
+                setColors={(newColors) => updateColors(newColors)}
                 styles={commonStyles}
-             />
+            />
         </>
     )
 }

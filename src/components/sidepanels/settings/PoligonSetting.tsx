@@ -1,56 +1,64 @@
-import type { SidePanelProps } from "../../../App"
-import type { AddProps } from "./SettingPanel"
+import type { ColorConfig, PoligonConfig } from "../../../App"
+import type { CommonStyles } from "./SettingPanel"
 import SingleValue from "./ui/SingleValue"
-import ColorPersent from "./ui/ColorParcentLists"
 import AddItemButton from "./ui/AddItemButton"
+import ColorParcentLists from "./ui/ColorParcentLists"
 
-export default function PoligonSetting(props: SidePanelProps & AddProps) {
+type Props = {
+  poligonParam: PoligonConfig
+  setPoligonParam: (poligonParams: PoligonConfig) => void
+  commonStyles: CommonStyles
+  activeSlideIndex: number | null
+  slideItem: (index: number) => void
+  isOpenColorPicker: boolean
+  setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
+}
 
-    // propsの分割代入で必要なものを抽出する
-    const {
-        gon: gon,
-        setGon: setGon,
-        wSize: wSize,
-        setWSize: setWSize,
-        colors: colors,
-        setColors: setColors,
-        activeSlideIndex: activeSlideIndex,
-        slideItem: slideItem,
-        commonStyles: commonStyles,
-        isOpenColorPicker,
-        setIsOpenColorPicker,
-    } = props
+export default function PoligonSetting({poligonParam, setPoligonParam, commonStyles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker}: Props) {
+
+    const updateColors = (newColors: ColorConfig[]) => {
+        const newObj = {...poligonParam, colors: newColors}
+        setPoligonParam(newObj)
+    }
 
     return (
         <>
           <SingleValue
-            label="角数"
-            value={gon}
-            setValue={setGon}
-            styles={commonStyles}
+              label="角数"
+              unit='gon'
+              data={poligonParam}
+              setData={setPoligonParam}
+              objKey={'gon'}
+              max={8}
+              min={3}
+              styles={commonStyles}
           />
 
           <SingleValue
-            label="サイズ"
-            value={wSize}
-            setValue={setWSize}
-            styles={commonStyles}
+              label="サイズ"
+              unit='%'
+              data={poligonParam}
+              setData={setPoligonParam}
+              objKey={'size'}
+              max={100}
+              min={0}
+              styles={commonStyles}
           />
 
-          <ColorPersent
-            colors={colors}
-            setColors={setColors}
-            activeSlideIndex={activeSlideIndex}
-            slideItem={slideItem}
-            styles={commonStyles}
-            isOpenColorPicker={isOpenColorPicker}
-            setIsOpenColorPicker={setIsOpenColorPicker}
-            parcent={false}
+          <ColorParcentLists
+              data={poligonParam}
+              setData={setPoligonParam}
+              styles={commonStyles}
+              activeSlideIndex={activeSlideIndex}
+              slideItem={slideItem}
+              isOpenColorPicker={isOpenColorPicker}
+              setIsOpenColorPicker={setIsOpenColorPicker}
+              parcent={false}
           />
 
           <AddItemButton
-            colors={colors}
-            setColors={setColors}
+            colors={poligonParam.colors}
+            setColors={(newColors) => updateColors(newColors)}
             styles={commonStyles}
           />
         

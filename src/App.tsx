@@ -35,12 +35,42 @@ export type ConicGradationConfig = {
   colors: ColorConfig[]
 }
 
+// ➄円並びの設定値の型
+export type CirclesConfig = {
+  size: number
+  colors: ColorConfig[]
+}
+
+// ➅角丸四角形並びの設定値の型
+export type RoundedRectConfig = {
+  roundedRect: number
+  size: number
+  xAspect: number
+  yAspect: number
+  colors: ColorConfig[]
+}
+
+// ➆多角形並びの設定値の型
+export type PoligonConfig = {
+  gon: number
+  size: number
+  colors: ColorConfig[]
+}
+
 
 // ➇ヘッダーとフッターの情報の型を定義
 export type HeaderFooterConfig = {
-  size: number
-  roundedRect: number
-  color: string
+  header: {
+    size: number
+    roundedRect: number
+    color: string
+  }
+
+  footer: {
+    size: number
+    roundedRect: number
+    color: string
+  }
 }
 
 // ➈➉マスクの情報を定義
@@ -86,6 +116,13 @@ export type SidePanelProps = {
   setRadialGradationParam: (radialGradationParam: RadialGradationConfig) => void
   conicGradationParam: ConicGradationConfig
   setConicGradationParam: (conicGradationParam: ConicGradationConfig) => void
+  circlesParam: CirclesConfig
+  setCirclesParam: (circlesParam: CirclesConfig) => void
+  roundedRectParam: RoundedRectConfig
+  setRoundedRectParam: (roundedRectParam: RoundedRectConfig) => void
+  poligonParam: PoligonConfig
+  setPoligonParam: (poligonParam: PoligonConfig) => void
+
 
   isOpenColorPicker: boolean
   setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
@@ -104,6 +141,10 @@ export type PreviewCanvasProps = {
   baseLinearParam: BaseLinearConfig
   gradationLinearParam: GradationLinearConfig
   radialGradationParam: RadialGradationConfig
+  conicGradationParam: ConicGradationConfig
+  circlesParam: CirclesConfig
+  roundedRectParam: RoundedRectConfig
+  poligonParam: PoligonConfig
 
   header: HeaderFooterConfig
   footer: HeaderFooterConfig
@@ -154,23 +195,46 @@ function App() {
       { id: "2", color: '#4d8dbd', ratio: 30, start: 0, end: 10 },
     ]
   })
-  const [conicGradationParam, setConicGradationParam] = useState<ConicGradationConfig>({
+  const [conicGradationParam, setConicGradationParam] = useState<ConicGradationConfig>({ // ➃扇形グラデーションの設定値
     angle: 0,
     colors: [
       { id: "1", color: '#66c2b2', ratio: 50, start: 0, end: 10 },
       { id: "2", color: '#4d8dbd', ratio: 30, start: 0, end: 10 },
     ]
   })
-
-  const [header, setHeader] = useState<HeaderFooterConfig>({ // ヘッダーのパラメーター
-    size: 10,
-    roundedRect: 10,
-    color: "#ffffff",
+  const [circlesParam, setCirclesParam] = useState<CirclesConfig>({ // ➄円形並びの設定値
+    size: 20,
+    colors: [
+      { id: "1", color: '#66c2b2', ratio: 50, start: 0, end: 10 },
+    ]
   })
-  const [footer, setFooter] = useState<HeaderFooterConfig>({ // フッターのパラメーター
-    size: 10,
+  const [roundedRectParam, setRoundedRectParam] = useState<RoundedRectConfig>({ // ➅角丸四角並びの設定値
     roundedRect: 10,
-    color: "#ffffff",
+    size: 20,
+    xAspect: 1,
+    yAspect: 1,
+    colors: [
+      { id: "1", color: '#66c2b2', ratio: 50, start: 0, end: 10 },
+    ]
+  })
+  const [poligonParam, setPoligonParam] = useState<PoligonConfig>({ // ➆多角形並びの設定値
+    gon: 3,
+    size: 20,
+    colors: [
+          { id: "1", color: '#66c2b2', ratio: 50, start: 0, end: 10 },
+    ]
+  })
+  const [headerFooter, setHeaderFooter] = useState<HeaderFooterConfig>({ // ➇ヘッダーフッターのパラメーター
+    header: {
+      size: 10,
+      roundedRect: 10,
+      color: "#ffffff",
+    },
+    footer: {
+      size: 10,
+      roundedRect: 10,
+      color: "#ffffff",
+    }
   })
   const [maskParam, setMaskParam] = useState({ // マスク画像を利用する際のパラメータ
     bgColor: "#ffffff",
@@ -182,6 +246,7 @@ function App() {
     { id: "2", color: '#4d8dbd', ratio: 30, start: 0, end: 10 },
     { id: "3", color: '#c984c0', ratio: 20, start: 0, end: 10 },
   ])
+
   const [borderOutlineParam, setBorderOutlineParam] = useState<BorderOutlineConfig>({ // ⑪ボーダー&アウトラインの設定値
     size: 50,
     roundedRect: 10,
@@ -228,6 +293,7 @@ function App() {
     setXAspect: setXAspect,
     yAspect: yAspect,
     setYAspect: setYAspect,
+    
     // リファクタリング
     baseLinearParam: baseLinearParam,
     setBaseLinearParam: setBaseLinearParam,
@@ -235,13 +301,20 @@ function App() {
     setGradationLinearParam: setGradationLinearParam,
     radialGradationParam: radialGradationParam,
     setRadialGradationParam: setRadialGradationParam,
+    conicGradationParam: conicGradationParam,
+    setConicGradationParam: setConicGradationParam,
+    circlesParam: circlesParam,
+    setCirclesParam: setCirclesParam,
+    roundedRectParam: roundedRectParam,
+    setRoundedRectParam: setRoundedRectParam,
+    poligonParam: poligonParam,
+    setPoligonParam: setPoligonParam,
+    headerFooter: headerFooter,
+    setHeaderFooter: setHeaderFooter,
 
     isOpenColorPicker: isOpenColorPicker,
     setIsOpenColorPicker: setIsOpenColorPicker,
-    header: header,
-    setHeader: setHeader,
-    footer: footer,
-    setFooter: setFooter,
+
     colors: colors,
     setColors: setColors,
     selectedLayout: selectedLayout,
@@ -268,12 +341,15 @@ function App() {
     gon: gon,
     xAspect: xAspect,
     yAspect: yAspect,
-    header: header,
-    footer: footer,
 
     baseLinearParam: baseLinearParam,
     gradationLinearParam: gradationLinearParam,
     radialGradationParam: radialGradationParam,
+    conicGradationParam: conicGradationParam,
+    circlesParam: circlesParam,
+    roundedRectParam: roundedRectParam,
+    poligonParam: poligonParam,
+    headerFooter: headerFooter,
 
     borderOutlineParam: borderOutlineParam,
     dropShadowParam: dropShadowParam,

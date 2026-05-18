@@ -1,46 +1,53 @@
-import type { SidePanelProps } from "../../../App"
-import type { AddProps } from "./SettingPanel"
+import type { CirclesConfig, ColorConfig } from "../../../App"
+import type { CommonStyles } from "./SettingPanel"
 import AddItemButton from "./ui/AddItemButton"
-import ColorParcent from "./ui/ColorParcentLists"
+import ColorParcentLists from "./ui/ColorParcentLists"
 import SingleValue from "./ui/SingleValue"
 
-export default function CirclesSetting(props: SidePanelProps & AddProps) {
+type Props = {
+    circlesParam: CirclesConfig
+    setCirclesParam: (cirlesParam: CirclesConfig) => void
+    commonStyles: CommonStyles
+    activeSlideIndex: number | null
+    slideItem: (index: number) => void
+    isOpenColorPicker: boolean
+    setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
+}
 
-    // propsの分割代入で必要なものを抽出する
-    const {
-        wSize,
-        setWSize,
-        colors,
-        setColors,
-        activeSlideIndex,
-        slideItem,
-        isOpenColorPicker,
-        setIsOpenColorPicker,
-        commonStyles,
-    } = props
+export default function CirclesSetting({circlesParam, setCirclesParam, commonStyles, activeSlideIndex, slideItem, isOpenColorPicker, setIsOpenColorPicker}: Props) {
+
+    const updateColors = (newColors: ColorConfig[]) => {
+        const newObj = {...circlesParam, colors: newColors}
+        setCirclesParam(newObj)
+    }
 
     return (
         <>
-            <SingleValue 
+            <SingleValue
                 label="サイズ"
-                value={wSize}
-                setValue={setWSize}
+                unit='%'
+                data={circlesParam}
+                setData={setCirclesParam}
+                objKey={'size'}
+                max={100}
+                min={0}
                 styles={commonStyles}
             />
 
-            <ColorParcent
-                colors={colors}
-                setColors={setColors}
+            <ColorParcentLists
+                data={circlesParam}
+                setData={setCirclesParam}
                 styles={commonStyles}
                 activeSlideIndex={activeSlideIndex}
                 slideItem={slideItem}
+                isOpenColorPicker={isOpenColorPicker}
                 setIsOpenColorPicker={setIsOpenColorPicker}
                 parcent={false}
             />
 
             <AddItemButton
-                colors={colors}
-                setColors={setColors}
+                colors={circlesParam.colors}
+                setColors={(newColors) => updateColors(newColors)}
                 styles={commonStyles}
             />
         </>

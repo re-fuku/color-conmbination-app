@@ -1,46 +1,52 @@
 import type { HeaderFooterConfig, SidePanelProps } from "../../../App";
 import ChangeColor from "./ui/ChangeColor";
-import type { AddProps } from "./SettingPanel";
+import type { AddProps, CommonStyles } from "./SettingPanel";
 import SingleValue from "./ui/SingleValue";
 
+type Props = {
+    headerFooter: HeaderFooterConfig
+    setHeaderFooter: (headerFooter: HeaderFooterConfig) => void
+    setIsOpenColorPicker: boolean
+    commonStyles: CommonStyles
+}
 
-export default function HeaderFooterSetting(props: SidePanelProps & AddProps) {
-    
-    const {
-        header,
-        setHeader,
-        footer,
-        setFooter,
-        setIsOpenColorPicker,
-        commonStyles,
-    } = props
 
-    const changeObjValue = (type:'header' | 'footer' ,key: keyof HeaderFooterConfig, value: any) => {
-        const currentData = type === 'header'? header:footer
-        const setter = type === 'header'? setHeader : setFooter
+export default function HeaderFooterSetting({headerFooter, setHeaderFooter, setIsOpenColorPicker, commonStyles}: Props) {
+
+    const changeObjValue = (type:'header' | 'footer' ,key: string, value: any) => {
+        const currentData = type === 'header'? headerFooter.header: headerFooter.footer
         const newObj = {...currentData, [key]: value}
+        const newHeaderFooter = {...headerFooter, [type]: newObj}
 
-        setter(newObj)
+        setHeaderFooter(newHeaderFooter)
     }
 
     return (
         <>
             <SingleValue
                 label="ヘッダサイズ"
-                value={header.size}
-                setValue={(value) => changeObjValue('header', 'size', value)}
+                unit='px'
+                data={headerFooter.header}
+                setData={(value) => changeObjValue('header','size', value)}
+                objKey={'size'}
+                max={360}
+                min={0}
                 styles={commonStyles}
             />
 
             <SingleValue
-                label="ヘッダ角丸サイズ"
-                value={header.roundedRect}
-                setValue={(value) => changeObjValue('header', 'roundedRect', value)}
+                label="角丸サイズ"
+                unit='px'
+                data={headerFooter.header}
+                setData={(value) => changeObjValue('header','size', value)}
+                objKey={'size'}
+                max={999}
+                min={0}
                 styles={commonStyles}
             />
 
-            <ChangeColor
-                color={header.color}
+            {/* <ChangeColor
+                color={headerFooter.header.color}
                 label='ヘッダ色'
                 setColor={(value) => changeObjValue('header', 'color', value)}
                 setIsOpenColorPicker={setIsOpenColorPicker}
@@ -67,7 +73,7 @@ export default function HeaderFooterSetting(props: SidePanelProps & AddProps) {
                 setColor={(value) => changeObjValue('footer', 'color', value)}
                 setIsOpenColorPicker={setIsOpenColorPicker}
                 styles={commonStyles}
-            />
+            /> */}
         </>
     )
     

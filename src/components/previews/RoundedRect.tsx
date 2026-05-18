@@ -1,15 +1,15 @@
-import type { ColorStop } from "../../App"
+import type { ColorConfig } from "../../App"
 
 type Props = {
     wSize: number
-    borderSize: number
+    roundedRect: number
     xAspect: number
     yAspect: number
-    colors: ColorStop[]
+    colors: ColorConfig[]
     previewBG: string
 }
 
-export default function RoundedRect({wSize, borderSize, xAspect, yAspect, colors, previewBG}: Props) {
+export default function RoundedRect({wSize, roundedRect, xAspect, yAspect, colors, previewBG}: Props) {
 
     return (
         <div
@@ -23,7 +23,7 @@ export default function RoundedRect({wSize, borderSize, xAspect, yAspect, colors
                     key={index}
                     style={{
                         width: `${wSize}%`,
-                        borderRadius: `${borderSize}px`,
+                        borderRadius: `${roundedRect}px`,
                         aspectRatio: `${xAspect} / ${yAspect}`,
                         backgroundColor: color.color
                     }}

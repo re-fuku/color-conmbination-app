@@ -15,9 +15,13 @@ import DropShadow from './DropShadow'
 export default function PreviewCanvas(props: PreviewCanvasProps) {
     // 必要なpropsを分割代入で抽出する
     const {
-        baseLinearParam, // 線形表示の設定値
-        gradationLinearParam, // 線形グラデーションの設定値
-        radialGradationParam, // 放射線グラデーションの設定値
+        baseLinearParam, // ➀線形表示の設定値
+        gradationLinearParam, // ➁線形グラデーションの設定値
+        radialGradationParam, // ➂放射線グラデーションの設定値
+        conicGradationParam, // ➃扇形グラデーションの設定値
+        circlesParam, // ➄円並びの設定値
+        roundedRectParam, // ➅角丸並びの設定値
+        poligonParam, //  ➆多角形並びの設定値
 
 
         colors, // 各色の情報
@@ -82,8 +86,8 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
             case selectedLayout.includes('conic-gradation'):
                 return (
                     <ConicGradation 
-                        colors={colors}
-                        angle={angle}
+                        colors={conicGradationParam.colors}
+                        angle={conicGradationParam.angle}
                         gradientStr={gradientStr}
                         previewBG={previewBG}
                     />
@@ -92,8 +96,8 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
             case selectedLayout.includes('circles'):
                 return (
                     <Circles
-                        size={wSize}
-                        colors={colors}
+                        size={circlesParam.size}
+                        colors={circlesParam.colors}
                         previewBG={previewBG}
                     />
                 )
@@ -101,11 +105,11 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
             case selectedLayout.includes('rounded-rect'):
                 return (
                     <RoundedRect
-                        wSize={wSize}
-                        borderSize={borderSize}
-                        xAspect={xAspect}
-                        yAspect={yAspect}
-                        colors={colors}
+                        wSize={roundedRectParam.size}
+                        roundedRect={roundedRectParam.roundedRect}
+                        xAspect={roundedRectParam.xAspect}
+                        yAspect={roundedRectParam.yAspect}
+                        colors={roundedRectParam.colors}
                         previewBG={previewBG}
                     />
                 )
@@ -113,9 +117,9 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
             case selectedLayout.includes('poligon-tiles'):
                 return (
                     <Poligons 
-                        gon={gon}
-                        size={wSize}
-                        colors={colors}
+                        gon={poligonParam.gon}
+                        size={poligonParam.size}
+                        colors={poligonParam.colors}
                         previewBG={previewBG}
                     />
                 )
