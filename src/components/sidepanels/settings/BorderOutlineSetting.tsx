@@ -7,15 +7,11 @@ import SingleValue from "./ui/SingleValue"
 type Props = {
     borderOutlineParam: BorderOutlineConfig
     setBorderOutlineParam: (borderOutlineParam: BorderOutlineConfig) => void
-    xAspect: number
-    setXAspect: (xAspect:number) => void
-    yAspect: number
-    setYAspect: (yAspect: number) => void
     commonStyles: CommonStyles
     setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
 }
 
-export default function BorderOutlineSetting({borderOutlineParam, setBorderOutlineParam,xAspect, setXAspect, yAspect, setYAspect, commonStyles, setIsOpenColorPicker}: Props) {
+export default function BorderOutlineSetting({borderOutlineParam, setBorderOutlineParam, commonStyles, setIsOpenColorPicker}: Props) {
     const changeObjValue = (key: keyof BorderOutlineConfig, value: any) => {
         const newObj = {...borderOutlineParam, [key]: value}
 
@@ -25,23 +21,31 @@ export default function BorderOutlineSetting({borderOutlineParam, setBorderOutli
         <>
             <SingleValue
                 label="サイズ"
-                value={borderOutlineParam.size}
-                setValue={(value) => changeObjValue('size', value)}
+                unit='%'
+                data={borderOutlineParam}
+                setData={setBorderOutlineParam}
+                objKey={'size'}
+                max={100}
+                min={0}
                 styles={commonStyles}
             />
 
             <SingleValue
                 label="角丸サイズ"
-                value={borderOutlineParam.roundedRect}
-                setValue={(value) => changeObjValue('roundedRect', value)}
+                unit='px'
+                data={borderOutlineParam}
+                setData={setBorderOutlineParam}
+                objKey={'roundedRect'}
+                max={999}
+                min={0}
                 styles={commonStyles}
             />
 
             <DoubleValue
-                xValue={xAspect}
-                setXValue={setXAspect}
-                yValue={yAspect}
-                setYValue={setYAspect}
+                xValue={borderOutlineParam.xAspect}
+                setXValue={(value) => changeObjValue('xAspect', value)}
+                yValue={borderOutlineParam.yAspect}
+                setYValue={(value) => changeObjValue('yAspect', value)}
                 styles={commonStyles}
             />
 
@@ -55,8 +59,12 @@ export default function BorderOutlineSetting({borderOutlineParam, setBorderOutli
 
             <SingleValue
                 label="ボーダーサイズ"
-                value={borderOutlineParam.borderSize}
-                setValue={(value) => changeObjValue('borderSize', value)}
+                unit='px'
+                data={borderOutlineParam}
+                setData={setBorderOutlineParam}
+                objKey={'borderSize'}
+                max={50}
+                min={0}
                 styles={commonStyles}
             />
 
@@ -70,15 +78,23 @@ export default function BorderOutlineSetting({borderOutlineParam, setBorderOutli
 
             <SingleValue
                 label="アウトラインサイズ"
-                value={borderOutlineParam.outLineSize}
-                setValue={(value) => changeObjValue('outLineSize', value)}
+                unit='px'
+                data={borderOutlineParam}
+                setData={setBorderOutlineParam}
+                objKey={'outLineSize'}
+                max={50}
+                min={0}
                 styles={commonStyles}
             />
 
             <SingleValue
                 label="アウトラインオフセット"
-                value={borderOutlineParam.outLineOffset}
-                setValue={(value) => changeObjValue('outLineOffset', value)}
+                unit='px'
+                data={borderOutlineParam}
+                setData={setBorderOutlineParam}
+                objKey={'outLineOffset'}
+                max={50}
+                min={-50}
                 styles={commonStyles}
             />
             

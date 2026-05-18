@@ -83,6 +83,8 @@ export type MaskConfig = {
 export type BorderOutlineConfig = {
   size: number,
   roundedRect: number,
+  xAspect: number,
+  yAspect: number,
   bgColor: string,
   borderSize: number,
   borderColor: string,
@@ -164,15 +166,6 @@ const layoutIcons = Object.values(
 ).map((mod) => mod.default)
 
 function App() {
-  const [angle, setAngle] = useState<number>(0) // レイアウトの角度
-  const [wSize, setWSize] = useState<number>(20) // 横幅サイズ
-  const [hSize, setHSize] = useState<number>(20) // 縦幅のサイズ
-  const [borderSize, setBorderSize] = useState<number>(100) // 境界線のサイズ
-  const [gon, setGon] = useState<number>(3) // 多角形の角の数
-  const [xAspect, setXAspect] = useState<number>(1) // x軸のアスペクト比
-  const [yAspect, setYAspect] = useState<number>(2) // y軸のアスペクト比
-  const [xPosition, setXPosition] = useState<number>(50) // 円の中心の座標(x軸)
-  const [yPosition, setYPosition] = useState<number>(50) // 円の中心の座標(y軸)
   const [isOpenColorPicker, setIsOpenColorPicker] = useState<boolean>(false) // カラーピッカーが開いているか
 
   const [baseLinearParam, setBaseLinearParam] = useState<BaseLinearConfig>({ // ➀線形色表示の設定値
@@ -241,16 +234,12 @@ function App() {
     bgColor: "#ffffff",
     textColor: "#ffffff"
   })
-  const [colors, setColors] = useState<ColorConfig[]>([ // 色の設定値
-    // 仮の初期値
-    { id: "1", color: '#66c2b2', ratio: 50, start: 0, end: 10 },
-    { id: "2", color: '#4d8dbd', ratio: 30, start: 0, end: 10 },
-    { id: "3", color: '#c984c0', ratio: 20, start: 0, end: 10 },
-  ])
 
   const [borderOutlineParam, setBorderOutlineParam] = useState<BorderOutlineConfig>({ // ⑪ボーダー&アウトラインの設定値
     size: 50,
     roundedRect: 10,
+    xAspect: 1,
+    yAspect: 1,
     bgColor: '#ffffff',
     borderSize: 2,
     borderColor: '#ffffff',
@@ -276,25 +265,6 @@ function App() {
 
   // サイドパネル用のprops
   const sidePanelProps = {
-    angle: angle,
-    setAngle: setAngle,
-    wSize: wSize,
-    setWSize: setWSize,
-    hSize: hSize,
-    setHSize: setHSize,
-    xPosition: xPosition,
-    setXPosition: setXPosition,
-    yPosition: yPosition,
-    setYPosition: setYPosition,
-    borderSize: borderSize,
-    setBorderSize: setBorderSize,
-    gon: gon,
-    setGon: setGon,
-    xAspect: xAspect,
-    setXAspect: setXAspect,
-    yAspect: yAspect,
-    setYAspect: setYAspect,
-
     // リファクタリング
     baseLinearParam: baseLinearParam,
     setBaseLinearParam: setBaseLinearParam,
@@ -315,9 +285,6 @@ function App() {
 
     isOpenColorPicker: isOpenColorPicker,
     setIsOpenColorPicker: setIsOpenColorPicker,
-
-    colors: colors,
-    setColors: setColors,
     selectedLayout: selectedLayout,
     setSelectedLayout: setSelectedLayout,
     layoutIcons: layoutIcons,
@@ -332,17 +299,6 @@ function App() {
   // プレビュー用のprops
   const previewCanvasProps = {
     selectedLayout: selectedLayout,
-    colors: colors,
-    angle: angle,
-    wSize: wSize,
-    hSize: hSize,
-    xPosition: xPosition,
-    yPosition: yPosition,
-    borderSize: borderSize,
-    gon: gon,
-    xAspect: xAspect,
-    yAspect: yAspect,
-
     baseLinearParam: baseLinearParam,
     gradationLinearParam: gradationLinearParam,
     radialGradationParam: radialGradationParam,
@@ -351,7 +307,6 @@ function App() {
     roundedRectParam: roundedRectParam,
     poligonParam: poligonParam,
     headerFooter: headerFooter,
-
     borderOutlineParam: borderOutlineParam,
     dropShadowParam: dropShadowParam,
     maskParam: maskParam,

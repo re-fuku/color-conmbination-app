@@ -3,11 +3,9 @@ import type { BorderOutlineConfig } from "../../App"
 
 type Props = {
     borderOutlineParam: BorderOutlineConfig
-    xAspect: number
-    yAspect: number
 }
 
-export default function BorderOutLine({borderOutlineParam, xAspect, yAspect}:Props){
+export default function BorderOutLine({borderOutlineParam}:Props){
 
     const canvasStyle = {
         background: borderOutlineParam.bgColor
@@ -15,7 +13,7 @@ export default function BorderOutLine({borderOutlineParam, xAspect, yAspect}:Pro
 
     return(
         <div 
-            className="w-full h-full flex justify-center items-center overflow-hidden"
+            className="h-full w-full flex justify-center items-center"
             style={canvasStyle}
         > 
 
@@ -27,7 +25,7 @@ export default function BorderOutLine({borderOutlineParam, xAspect, yAspect}:Pro
                     border: `${borderOutlineParam.borderSize}px solid ${borderOutlineParam.borderColor}`,
                     outline: `${borderOutlineParam.outLineSize}px solid ${borderOutlineParam.outLineColor}`,
                     outlineOffset: `${borderOutlineParam.outLineOffset}px`,
-                    aspectRatio: `${xAspect} / ${yAspect}`,
+                    aspectRatio: `${borderOutlineParam.xAspect} / ${borderOutlineParam.yAspect}`,
                 }}
             />
 

@@ -142,8 +142,6 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
                 return (
                     <BorderOutLine
                         borderOutlineParam={borderOutlineParam}
-                        xAspect={xAspect}
-                        yAspect={yAspect}
                     />
                 )
             // ⑫影落とし
