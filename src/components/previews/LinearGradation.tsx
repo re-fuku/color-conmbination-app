@@ -1,9 +1,9 @@
-import type { ColorStop } from "../../App"
+import type { ColorConfig } from "../../App"
 
 type Props = {
-    colors: ColorStop[]
+    colors: ColorConfig[]
     angle: number
-    gradientStr: (colors: ColorStop[]) => string
+    gradientStr: (colors: ColorConfig[]) => string
     previewBG: string
 }
 

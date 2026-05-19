@@ -1,7 +1,6 @@
 import * as Popover from "@radix-ui/react-popover"
 import { HexColorPicker } from "react-colorful"
 import type { CommonStyles } from "../SettingPanel"
-import type { HeaderFooterConfig, MaskConfig } from "../../../../App"
 import { useState } from "react"
 
 

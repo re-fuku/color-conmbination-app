@@ -13,7 +13,7 @@ type Props = {
     setIsOpenColorPicker: (isOpenColorPikcer: boolean) => void
 }
 
-export default function ColorChangeButton({displayName, styles, colors, color, setColors, setIsOpenColorPicker}: Props) {
+export default function ColorChangeButton({displayName, styles, color, setColors, setIsOpenColorPicker}: Props) {
     const [inputColorCode, setInputColorCode] = useState(color.color)
 
     // 色を変更をテキストで行う場合の処理

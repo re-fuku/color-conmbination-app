@@ -1,5 +1,3 @@
-import type { HeaderFooterConfig } from "../../App"
-
 type Props = {
     header: Record<string, any>
     footer: Record<string, any>

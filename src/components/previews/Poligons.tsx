@@ -1,9 +1,9 @@
-import type { ColorStop } from "../../App"
+import type { ColorConfig } from "../../App"
 
 type Props = {
     gon: number
     size: number
-    colors: ColorStop[]
+    colors: ColorConfig[]
     previewBG: string
 }
 
