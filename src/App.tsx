@@ -3,86 +3,86 @@ import PreviewCanvas from './components/previews/PreviewCanvas'
 import SidePanel from './components/sidepanels/SidePanel'
 
 export type ColorConfig = {
-  id: string
-  color: string
-  ratio: number
-  start: number
-  end: number
+  id: string // id
+  color: string // 色コード
+  ratio: number // 割合
+  start: number // 開始位置
+  end: number // 終了位置
 }
 
 // ➀線形色表示の設定値の型
 export type BaseLinearConfig = {
-  angle: number
-  colors: ColorConfig[]
+  angle: number // 角度
+  colors: ColorConfig[] // 色の情報
 }
 
 // ➁線形グラデーションの設定値の型
 export type GradationLinearConfig = {
-  angle: number
-  colors: ColorConfig[]
+  angle: number // 角度
+  colors: ColorConfig[] // 色の情報
 }
 
 // ➂放射線グラデーションの設定値の型
 export type RadialGradationConfig = {
-  xPosition: number,
-  yPosition: number,
-  colors: ColorConfig[]
+  xPosition: number, // X座標位置
+  yPosition: number, // Y座標位置
+  colors: ColorConfig[] // 色の情報
 }
 
 // ➃扇形グラデーションの設定値の型
 export type ConicGradationConfig = {
-  angle: number
-  colors: ColorConfig[]
+  angle: number // 角度
+  colors: ColorConfig[] // 色の情報
 }
 
 // ➄円並びの設定値の型
 export type CirclesConfig = {
-  size: number
-  colors: ColorConfig[]
+  size: number // サイズ
+  colors: ColorConfig[] // 色の情報
 }
 
 // ➅角丸四角形並びの設定値の型
 export type RoundedRectConfig = {
-  roundedRect: number
-  size: number
-  xAspect: number
-  yAspect: number
-  colors: ColorConfig[]
+  roundedRect: number // 角丸サイズ
+  size: number // サイズ
+  xAspect: number // アスペクト比(横)
+  yAspect: number // アスペクト比(縦)
+  colors: ColorConfig[] // 色の情報
 }
 
 // ➆多角形並びの設定値の型
 export type PoligonConfig = {
-  gon: number
-  size: number
-  colors: ColorConfig[]
+  gon: number // 角数
+  size: number // サイズ
+  colors: ColorConfig[] // 色の情報
 }
 
 
 // ➇ヘッダーとフッターの情報の型を定義
 export type HeaderFooterConfig = {
   header: {
-    size: number
-    roundedRect: number
-    color: string
+    size: number // サイズ
+    roundedRect: number // 角丸サイズ
+    color: string // 色
   }
 
   footer: {
-    size: number
-    roundedRect: number
-    color: string
+    size: number // サイズ
+    roundedRect: number // 角丸サイズ
+    color: string // 色
   }
 }
 
 // ➈テキストブロックの情報の型を定義
 export type TextBlockConfig = {
-  bgColor: string
-  textColor: string
+  bgColor: string // 背景色
+  textColor: string // 文字の色
 }
 
 // ➉アイコンブロックの情報の型を定義
 export type IconBlockConfig = {
-  bgColor: string
-  iconColor: string
+  bgColor: string // 背景色
+  iconColor: string // アイコンの色
 }
 
 
@@ -93,11 +93,11 @@ export type BorderOutlineConfig = {
   xAspect: number, // アスペクト比(横)
   yAspect: number, // アスペクト比(縦)
   bgColor: string, // 背景色
-  borderSize: number, // 
-  borderColor: string,
-  outLineSize: number,
-  outLineOffset: number,
-  outLineColor: string,
+  borderSize: number, // ボーダーのサイズ
+  borderColor: string, // ボーダーの色
+  outLineSize: number, // アウトラインのサイズ
+  outLineOffset: number, // アウトラインの位置
+  outLineColor: string, // アウトラインの色
 }
 
 // ⑫影落としの情報をの型を定義
@@ -115,7 +115,7 @@ export type DropShadowConfig = {
   mode: '' | 'inset', // insetと切り替え
 }
 
-
+// サイドパネルに渡すProps
 export type SidePanelProps = {
   baseLinearParam: BaseLinearConfig
   setBaseLinearParam: (baseLinearParam: BaseLinearConfig) => void
@@ -148,6 +148,7 @@ export type SidePanelProps = {
   layoutIcons: string[]
 }
 
+// PreviewCanvasに渡すProps
 export type PreviewCanvasProps = {
   baseLinearParam: BaseLinearConfig
   gradationLinearParam: GradationLinearConfig
@@ -165,7 +166,7 @@ export type PreviewCanvasProps = {
   selectedLayout: string
 }
 
-// レイアウトのアイコンのパスを定義
+// レイアウトのアイコンのパス
 const layoutIcons = Object.values(
   import.meta.glob<{ default: string }>(
       './assets/layouts/*.svg',
@@ -242,7 +243,7 @@ function App() {
     bgColor: '#ffffff',
     textColor: '#ffffff',
   })
-  const [iconBlockParam, setIconBlockParam] = useState<IconBlockConfig>({
+  const [iconBlockParam, setIconBlockParam] = useState<IconBlockConfig>({ // ➉アイコンブロックの設定値
     bgColor: '#ffffff',
     iconColor: '#ffffff'
   })

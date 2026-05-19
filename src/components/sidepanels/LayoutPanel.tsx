@@ -9,7 +9,7 @@ type Props = {
 export default function LayoutPanel({selectedLayout, setSelectedLayout, layoutIcons, hoverStyle}: Props) {
 
     return (
-        <div className= "p-2.5 flex flex-col w-full h-full scrollbar-hide bg-cyan-700 rounded-2xl overflow-auto">
+        <div className= "p-2.5 flex flex-col w-full h-full scrollbar-hide bg-cyan-700 rounded-tr-3xl overflow-auto">
             {/* 3列のレイアウトのグリッド */}
             <div className="grid grid-cols-3 gap-5">
                 {layoutIcons.map((icon, index) => (
@@ -25,11 +25,10 @@ export default function LayoutPanel({selectedLayout, setSelectedLayout, layoutIc
                         <img
                             src={icon}
                             alt={`Layout ${index + 1}`}
-                            className={`w-full h-full rounded-xl object-contain ${hoverStyle}`}
+                            className={`object-contain ${hoverStyle}`}
                         />
                     </button>
                 ))}
-                <div/>
             </div>
         </div>
     )
