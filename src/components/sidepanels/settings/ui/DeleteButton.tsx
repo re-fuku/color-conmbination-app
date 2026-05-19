@@ -1,4 +1,5 @@
 import type { ColorConfig } from "../../../../App"
+import DeleteIcon from '@/assets/button/deleteButton.svg'
 
 type Props = {
     colors: ColorConfig[]
@@ -26,7 +27,7 @@ export default function DeleteButton({colors, setColors, slideItem, activeSlideI
             onClick={() => deleteList(index)}    
         >
             <img
-                src="src/assets/button/deleteButton.svg"
+                src={DeleteIcon}
                 className="origin-center duration-300"
                 style={{height: buttonSize, width: buttonSize}}
             />

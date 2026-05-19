@@ -1,5 +1,6 @@
 import type { ColorConfig } from "../../../../App"
 import type { CommonStyles } from "../SettingPanel"
+import AddItemIcon from '@/assets/button/addButton.svg'
 
 type Props = {
     colors: ColorConfig[]
@@ -35,7 +36,7 @@ export default function AddItemButton({colors, setColors}: Props) {
                 onClick={() => addColor()}
             >
                 <img
-                    src="src\assets\button\addButton.svg"
+                    src={AddItemIcon}
                     className="hover:scale-95"
                 />
             </button>

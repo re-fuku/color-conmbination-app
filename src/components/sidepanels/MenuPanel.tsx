@@ -1,3 +1,6 @@
+import CallSettingIcon from '@/assets/menus/callSettingButton.svg'
+import ChangeBgIcon from '@/assets/menus/changeBgButton.svg'
+import SaveSettingIcon from '@/assets/menus/saveSettingButton.svg'
 
 type Props = {
     hoverStyle: string
@@ -13,7 +16,7 @@ export default function MenuPanel({ hoverStyle }: Props) {
             {/* 設定呼び出しボタン */}
             <button>
                 <img
-                    src="src\assets\menus\callSettingButton.svg"
+                    src={CallSettingIcon}
                     className={menuIconStyle}
                     onClick={() => alert('設定呼び出しボタンがクリックされました')}
                 />
@@ -22,7 +25,7 @@ export default function MenuPanel({ hoverStyle }: Props) {
             {/* 背景色変更ボタン */}
             <button>
                 <img
-                    src="src\assets\menus\changeBgButton.svg"
+                    src={ChangeBgIcon}
                     className={menuIconStyle}
                     onClick={() => alert('背景色変更ボタンがクリックされました')}
                 />
@@ -31,7 +34,7 @@ export default function MenuPanel({ hoverStyle }: Props) {
             {/* 設定保存ボタン */}
             <button>
                 <img
-                    src="src\assets\menus\saveSettingButton.svg"
+                    src={SaveSettingIcon}
                     className={menuIconStyle}
                     onClick={() => alert('設定保存ボタンがクリックされました')}
                 />
