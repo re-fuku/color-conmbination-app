@@ -16,7 +16,7 @@ export default function LayoutPanel({selectedLayout, setSelectedLayout, layoutIc
                     <button
                         key={index}
                         className={`
-                            flex items-start aspect-square bg-item-bg w-20 h-20
+                            flex items-start rounded-full aspect-square bg-item-bg w-20 h-20
                             ${selectedLayout === icon ? 'border-4 border-sky-600 rounded-xl': ''}
                             `
                         }
