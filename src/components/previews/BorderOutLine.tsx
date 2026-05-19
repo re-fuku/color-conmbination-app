@@ -13,7 +13,7 @@ export default function BorderOutLine({borderOutlineParam}:Props){
 
     return(
         <div 
-            className="h-full w-full flex justify-center items-center"
+            className="h-full w-full rounded-2xl flex justify-center items-center"
             style={canvasStyle}
         > 
 

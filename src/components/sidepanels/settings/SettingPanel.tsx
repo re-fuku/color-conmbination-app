@@ -11,7 +11,8 @@ import RoundedRectSetting from "./RoudedRectSetting";
 import PoligonSetting from "./PoligonSetting";
 import ConicGradationSetting from "./ConicGradationSetting";
 import HeaderFooterSetting from "./HeaderFooterSetting";
-import BlockSetting from "./BlockSetting";
+import TextBlockSetting from "./TextBlockSetting";
+import IconBlockSetting from "./IconBlockSetting";
 import BorderOutlineSetting from "./BorderOutlineSetting";
 import DropShadowSetting from "./DropShadowSetting";
 
@@ -135,7 +136,7 @@ export default function SettingPanel(props : SidePanelProps) {
             // ➈テキストブロック
             case selectedLayout.includes('text-block'):
                 return (
-                    <BlockSetting 
+                    <TextBlockSetting
                         {...props}
                         {...addProps}
                     />
@@ -143,7 +144,7 @@ export default function SettingPanel(props : SidePanelProps) {
             // ➉アイコンブロック
             case selectedLayout.includes('icon-block'):
                 return (
-                    <BlockSetting 
+                    <IconBlockSetting 
                         {...props}
                         {...addProps}
                     />

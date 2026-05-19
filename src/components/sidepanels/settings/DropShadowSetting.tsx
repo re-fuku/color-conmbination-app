@@ -8,15 +8,11 @@ import * as Switch from '@radix-ui/react-switch'
 type Props = {
     dropShadowParam: DropShadowConfig
     setDropShadowParam: (dropShadowParam: DropShadowConfig) => void
-    xAspect: number
-    setXAspect: (xAspect:number) => void
-    yAspect: number
-    setYAspect: (yAspect:number) => void
     commonStyles: CommonStyles
     setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
 }
 
-export default function DropShadowSetting({dropShadowParam, setDropShadowParam, xAspect, setXAspect, yAspect, setYAspect, commonStyles, setIsOpenColorPicker}: Props) {
+export default function DropShadowSetting({dropShadowParam, setDropShadowParam, commonStyles, setIsOpenColorPicker}: Props) {
     const changeObjValue = (key: keyof DropShadowConfig, value: any) => {
         const newObj = {...dropShadowParam, [key]: value}
 
@@ -33,23 +29,31 @@ export default function DropShadowSetting({dropShadowParam, setDropShadowParam, 
         <>
             <SingleValue
                 label="サイズ"
-                value={dropShadowParam.size}
-                setValue={(value) => changeObjValue('size', value)}
+                unit='%'
+                data={dropShadowParam}
+                setData={setDropShadowParam}
+                objKey={'size'}
+                max={100}
+                min={0}
                 styles={commonStyles}
             />
 
             <SingleValue
                 label="角丸サイズ"
-                value={dropShadowParam.roundedRect}
-                setValue={(value) => changeObjValue('roundedRect', value)}
+                unit='px'
+                data={dropShadowParam}
+                setData={setDropShadowParam}
+                objKey={'roundedRect'}
+                max={999}
+                min={0}
                 styles={commonStyles}
             />
 
             <DoubleValue
-                xValue={xAspect}
-                setXValue={setXAspect}
-                yValue={yAspect}
-                setYValue={setYAspect}
+                xValue={dropShadowParam.xAspect}
+                setXValue={(value) => changeObjValue('xAspect', value)}
+                yValue={dropShadowParam.yAspect}
+                setYValue={(value) => changeObjValue('yAspect', value)}
                 styles={commonStyles}
             />
 
@@ -61,33 +65,50 @@ export default function DropShadowSetting({dropShadowParam, setDropShadowParam, 
                 styles={commonStyles}
             />
 
-             <SingleValue
+            <SingleValue
                 label="影X位置"
-                value={dropShadowParam.xShadowPosition}
-                setValue={(value) => changeObjValue('xShadowPosition', value)}
+                unit='px'
+                data={dropShadowParam}
+                setData={setDropShadowParam}
+                objKey={'xShadowPosition'}
+                max={50}
+                min={-50}
                 styles={commonStyles}
             />
 
             <SingleValue
                 label="影Y位置"
-                value={dropShadowParam.yShadowPosition}
-                setValue={(value) => changeObjValue('yShadowPosition', value)}
+                unit='px'
+                data={dropShadowParam}
+                setData={setDropShadowParam}
+                objKey={'yShadowPosition'}
+                max={50}
+                min={-50}
                 styles={commonStyles}
             />
 
             <SingleValue
                 label="影ぼかし量"
-                value={dropShadowParam.shadowBlur}
-                setValue={(value) => changeObjValue('shadowBlur', value)}
+                unit='px'
+                data={dropShadowParam}
+                setData={setDropShadowParam}
+                objKey={'shadowBlur'}
+                max={50}
+                min={0}
                 styles={commonStyles}
             />
 
             <SingleValue
                 label="影サイズ"
-                value={dropShadowParam.shadowSize}
-                setValue={(value) => changeObjValue('shadowSize', value)}
+                unit='px'
+                data={dropShadowParam}
+                setData={setDropShadowParam}
+                objKey={'shadowSize'}
+                max={50}
+                min={-50}
                 styles={commonStyles}
             />
+
 
             <ChangeColor
                 color={dropShadowParam.shadowColor}

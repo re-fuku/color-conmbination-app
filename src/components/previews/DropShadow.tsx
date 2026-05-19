@@ -3,12 +3,10 @@ import type { DropShadowConfig } from "../../App"
 
 type Props = {
     dropShadowParam: DropShadowConfig
-    xAspect: number
-    yAspect: number
     previewBg: string
 }
 
-export default function DropShadow({dropShadowParam, xAspect, yAspect, previewBg}: Props) {
+export default function DropShadow({dropShadowParam, previewBg}: Props) {
     
 
     return (
@@ -20,7 +18,7 @@ export default function DropShadow({dropShadowParam, xAspect, yAspect, previewBg
                 style={{
                     width: `${dropShadowParam.size}%`,
                     borderRadius: `${dropShadowParam.roundedRect}px`,
-                    aspectRatio: `${xAspect} / ${yAspect}`,
+                    aspectRatio: `${dropShadowParam.xAspect} / ${dropShadowParam.yAspect}`,
                     backgroundColor: dropShadowParam.bgColor,
                     boxShadow: `${dropShadowParam.mode}
                                 ${dropShadowParam.xShadowPosition}px

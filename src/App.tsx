@@ -73,20 +73,27 @@ export type HeaderFooterConfig = {
   }
 }
 
-// ➈➉マスクの情報を定義
-export type MaskConfig = {
+// ➈テキストブロックの情報の型を定義
+export type TextBlockConfig = {
   bgColor: string
   textColor: string
 }
 
+// ➉アイコンブロックの情報の型を定義
+export type IconBlockConfig = {
+  bgColor: string
+  iconColor: string
+}
+
+
 // ⑪ボーダー&アウトラインの情報の型を定義
 export type BorderOutlineConfig = {
-  size: number,
-  roundedRect: number,
-  xAspect: number,
-  yAspect: number,
-  bgColor: string,
-  borderSize: number,
+  size: number, // サイズ
+  roundedRect: number, // 角丸サイズ
+  xAspect: number, // アスペクト比(横)
+  yAspect: number, // アスペクト比(縦)
+  bgColor: string, // 背景色
+  borderSize: number, // 
   borderColor: string,
   outLineSize: number,
   outLineOffset: number,
@@ -98,7 +105,7 @@ export type DropShadowConfig = {
   size: number, // サイズ
   roundedRect: number, // 角丸サイズ
   xAspect: number, // アスペクト比(横)
-  yAxpect: number, // アスペクト比(縦)
+  yAspect: number, // アスペクト比(縦)
   bgColor: string, // 背景色
   xShadowPosition: number, // 影の位置(X座標)
   yShadowPosition: number, // 影の位置(y座標)
@@ -126,19 +133,19 @@ export type SidePanelProps = {
   setPoligonParam: (poligonParam: PoligonConfig) => void
   headerFooter: HeaderFooterConfig
   setHeaderFooter: (headerFooter: HeaderFooterConfig) => void
-
-
+  textBlockParam: TextBlockConfig
+  setTextBlockParam: (textBlockParam: TextBlockConfig) => void
+  iconBlockParam: IconBlockConfig
+  setIconBlockParam: (iconBlockParam: IconBlockConfig) => void
+  borderOutlineParam: BorderOutlineConfig
+  setBorderOutlineParam: (borderOutlineParam: BorderOutlineConfig) => void
+  dropShadowParam: DropShadowConfig
+  setDropShadowParam: (dorpShadowParam: DropShadowConfig) => void
   isOpenColorPicker: boolean
   setIsOpenColorPicker: (isOpenColorPicker: boolean) => void
   selectedLayout: string
   setSelectedLayout: (selectedLayout: string) => void
   layoutIcons: string[]
-  maskParam: MaskConfig
-  setMaskParam: (maskParam: MaskConfig) => void
-  borderOutlineParam: BorderOutlineConfig
-  setBorderOutlineParam: (borderOutlineParam: BorderOutlineConfig) => void
-  dropShadowParam: DropShadowConfig
-  setDropShadowParam: (dorpShadowParam: DropShadowConfig) => void
 }
 
 export type PreviewCanvasProps = {
@@ -150,11 +157,12 @@ export type PreviewCanvasProps = {
   roundedRectParam: RoundedRectConfig
   poligonParam: PoligonConfig
   headerFooter: HeaderFooterConfig
-
-  selectedLayout: string
-  maskParam: MaskConfig
+  textBlockParam: TextBlockConfig
+  iconBlockParam: IconBlockConfig
   borderOutlineParam: BorderOutlineConfig
   dropShadowParam: DropShadowConfig
+
+  selectedLayout: string
 }
 
 // レイアウトのアイコンのパスを定義
@@ -218,7 +226,7 @@ function App() {
           { id: "1", color: '#66c2b2', ratio: 50, start: 0, end: 10 },
     ]
   })
-  const [headerFooter, setHeaderFooter] = useState<HeaderFooterConfig>({ // ➇ヘッダーフッターのパラメーター
+  const [headerFooter, setHeaderFooter] = useState<HeaderFooterConfig>({ // ➇ヘッダーフッターの設定値
     header: {
       size: 10,
       roundedRect: 10,
@@ -230,9 +238,13 @@ function App() {
       color: "#ffffff",
     }
   })
-  const [maskParam, setMaskParam] = useState({ // マスク画像を利用する際のパラメータ
-    bgColor: "#ffffff",
-    textColor: "#ffffff"
+  const [textBlockParam, setTextBlockParam] = useState<TextBlockConfig>({ // ➈テキストブロックの設定値
+    bgColor: '#ffffff',
+    textColor: '#ffffff',
+  })
+  const [iconBlockParam, setIconBlockParam] = useState<IconBlockConfig>({
+    bgColor: '#ffffff',
+    iconColor: '#ffffff'
   })
 
   const [borderOutlineParam, setBorderOutlineParam] = useState<BorderOutlineConfig>({ // ⑪ボーダー&アウトラインの設定値
@@ -251,7 +263,7 @@ function App() {
       size: 50,
       roundedRect: 10,
       xAspect: 1,
-      yAxpect: 1,
+      yAspect: 1,
       bgColor: '#ffffff',
       xShadowPosition: 0,
       yShadowPosition: 0,
@@ -265,7 +277,6 @@ function App() {
 
   // サイドパネル用のprops
   const sidePanelProps = {
-    // リファクタリング
     baseLinearParam: baseLinearParam,
     setBaseLinearParam: setBaseLinearParam,
     gradationLinearParam: gradationLinearParam,
@@ -282,18 +293,19 @@ function App() {
     setPoligonParam: setPoligonParam,
     headerFooter: headerFooter,
     setHeaderFooter: setHeaderFooter,
-
+    textBlockParam: textBlockParam,
+    setTextBlockParam: setTextBlockParam,
+    iconBlockParam: iconBlockParam,
+    setIconBlockParam: setIconBlockParam,
+    borderOutlineParam: borderOutlineParam,
+    setBorderOutlineParam: setBorderOutlineParam,
+    dropShadowParam: dropShadowParam,
+    setDropShadowParam: setDropShadowParam,
     isOpenColorPicker: isOpenColorPicker,
     setIsOpenColorPicker: setIsOpenColorPicker,
     selectedLayout: selectedLayout,
     setSelectedLayout: setSelectedLayout,
     layoutIcons: layoutIcons,
-    maskParam: maskParam,
-    setMaskParam: setMaskParam,
-    borderOutlineParam: borderOutlineParam,
-    setBorderOutlineParam: setBorderOutlineParam,
-    dropShadowParam: dropShadowParam,
-    setDropShadowParam: setDropShadowParam,
   }
 
   // プレビュー用のprops
@@ -307,9 +319,10 @@ function App() {
     roundedRectParam: roundedRectParam,
     poligonParam: poligonParam,
     headerFooter: headerFooter,
+    textBlockParam: textBlockParam,
+    iconBlockParam: iconBlockParam,
     borderOutlineParam: borderOutlineParam,
     dropShadowParam: dropShadowParam,
-    maskParam: maskParam,
   }
 
   return (

@@ -7,8 +7,8 @@ import Poligons from './Poligons'
 import RadialGradation from './RadialGradation'
 import ConicGradation from './ConicGradation'
 import HeaderFooter from './HeaderFooter'
-import MaskPreview from './MaskPreview'
 import TextBlock from './TextBlock'
+import IconBlock from './IconBlock'
 import BorderOutLine from './BorderOutLine'
 import DropShadow from './DropShadow'
 
@@ -23,14 +23,14 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
         roundedRectParam, // ➅角丸並びの設定値
         poligonParam, //  ➆多角形並びの設定値
         headerFooter, // ➇ヘッダ&フッタの設定値
-        
+        textBlockParam, // ➈テキストブロックの設定値
+        iconBlockParam, // ➉アイコンブロックの設定値
+        borderOutlineParam, // ボーダー&アウトラインの設定値
+        dropShadowParam, // 影落としの設定値
         selectedLayout, // 選択されているレイアウト
-        maskParam, // アイコンとテキストで使用するパラメータ
-        borderOutlineParam, // ボーダー&アウトラインのパラメータ
-        dropShadowParam, // 影落としのパラメータ
     } = props
 
-    const previewBG = "h-full w-full pl-5 pr-5 rounded-[20px] flex flex-wrap shrink-0 grow-0 items-center content-center bg-white overflow-hidden"
+    const previewBG = "h-full w-full pl-5 pr-5 rounded-2xl flex flex-wrap shrink-0 grow-0 items-center content-center bg-white overflow-hidden"
 
     const gradientStr = (colors: ColorConfig[]) => colors.map((color) => {
         const mid = (color.start + color.end) / 2
@@ -125,16 +125,16 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
             case selectedLayout.includes('text-block'):
                 return (
                     <TextBlock
-                        selectedLayout={selectedLayout}
-                        maskParam={maskParam}
+                        textBlockParam={textBlockParam}
+                        previewBg={previewBG}
                     />
                 )
             // ➉アイコンブロック
             case selectedLayout.includes('icon-block'):
                 return (
-                    <MaskPreview
-                        selectedLayout={selectedLayout}
-                        maskParam={maskParam}
+                    <IconBlock
+                        iconBlockParam={iconBlockParam}
+                        previewBg={previewBG}
                     />
                 )
             // ⑪ボーダー&アウトライン
@@ -149,8 +149,6 @@ export default function PreviewCanvas(props: PreviewCanvasProps) {
                 return (
                     <DropShadow
                         dropShadowParam={dropShadowParam}
-                        xAspect={xAspect}
-                        yAspect={yAspect}
                         previewBg={previewBG}
                     />
                 )
