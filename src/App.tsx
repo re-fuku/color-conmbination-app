@@ -273,7 +273,7 @@ function App() {
       shadowColor: '#000000',
       mode: '',
   })
-  const [selectedLayout, setSelectedLayout] = useState<string>('') // 選択されているレイアウト
+  const [selectedLayout, setSelectedLayout] = useState<string>("src/assets/layouts/01base-linear.svg") // 選択されているレイアウト
 
 
   // サイドパネル用のprops
